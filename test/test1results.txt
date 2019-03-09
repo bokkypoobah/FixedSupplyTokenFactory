@@ -20,14 +20,14 @@
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 User4
- 6 0x60c8e00dafb889136ebd2dc558d0d00a69b7a84b        0.000000000000000000           0.000000000000000000 TokenFactory
+ 6 0xee0ec07598ed3d84fc4ff0ad4a6d70300f79d812        0.000000000000000000           0.000000000000000000 TokenFactory
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
                                                                                     0.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
 PASS Deploy Group #1 - TokenFactory - TokenFactory
 
-factoryContractAddress=0x60c8e00dafb889136ebd2dc558d0d00a69b7a84b
+factoryContractAddress=0xee0ec07598ed3d84fc4ff0ad4a6d70300f79d812
 factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 factory.newOwner=0x0000000000000000000000000000000000000000
 factory.deploymentFee=0.1 ETH
@@ -35,9 +35,9 @@ factory.newContractAddress=0x0000000000000000000000000000000000000000
 factory.numberOfDeployedContracts=0
 
 ---------- Deploy Group #1 - Deploy Token ----------
-factoryContractAddress=0x60c8e00dafb889136ebd2dc558d0d00a69b7a84b
-get TokenContractDeployed 0 #11752 {"decimals":"18","name":"Test","ownerAddress":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","tokenAddress":"0x27eb87ee36d79937427f0f1d1bc0b23b45ab6245","totalSupply":"1e+24"}
-tokenContract=#1 ["0x27eb87ee36d79937427f0f1d1bc0b23b45ab6245"]
+factoryContractAddress=0xee0ec07598ed3d84fc4ff0ad4a6d70300f79d812
+get TokenContractDeployed 0 #11835 {"decimals":"18","name":"Test","ownerAddress":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","tokenAddress":"0xdde86b1a7ae00222a997bb8c0fce4339de341017","totalSupply":"1e+24"}
+tokenContract=#1 ["0xdde86b1a7ae00222a997bb8c0fce4339de341017"]
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.013279215000000000           0.000000000000000000 Miner
@@ -46,25 +46,25 @@ tokenContract=#1 ["0x27eb87ee36d79937427f0f1d1bc0b23b45ab6245"]
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 User4
- 6 0x60c8e00dafb889136ebd2dc558d0d00a69b7a84b        0.100000000000000000           0.000000000000000000 TokenFactory
- 7 0x27eb87ee36d79937427f0f1d1bc0b23b45ab6245        0.000000000000000000           0.000000000000000000 Token 'TEST' 'Test'
+ 6 0xee0ec07598ed3d84fc4ff0ad4a6d70300f79d812        0.100000000000000000           0.000000000000000000 TokenFactory
+ 7 0xdde86b1a7ae00222a997bb8c0fce4339de341017        0.000000000000000000           0.000000000000000000 Token 'TEST' 'Test'
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
                                                                               1000000.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
 
-factoryContractAddress=0x60c8e00dafb889136ebd2dc558d0d00a69b7a84b
+factoryContractAddress=0xee0ec07598ed3d84fc4ff0ad4a6d70300f79d812
 factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 factory.newOwner=0x0000000000000000000000000000000000000000
 factory.deploymentFee=0.1 ETH
 factory.newContractAddress=0x0000000000000000000000000000000000000000
 factory.numberOfDeployedContracts=1
-factory.deployedContracts(0)=0x27eb87ee36d79937427f0f1d1bc0b23b45ab6245
-TokenContractDeployed 0 #11752 {"decimals":"18","name":"Test","ownerAddress":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","tokenAddress":"0x27eb87ee36d79937427f0f1d1bc0b23b45ab6245","totalSupply":"1e+24"}
+factory.deployedContracts(0)=0xdde86b1a7ae00222a997bb8c0fce4339de341017
+TokenContractDeployed 0 #11835 {"decimals":"18","name":"Test","ownerAddress":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","tokenAddress":"0xdde86b1a7ae00222a997bb8c0fce4339de341017","totalSupply":"1e+24"}
 
-tokenContractAddress=Token 'TEST' 'Test':0x27eb
+tokenContractAddress=Token 'TEST' 'Test':0xdde8
 token.owner/new=Deployer:0xa11a/Null:0x0000
 token.details='TEST' 'Test' 18 dp
 token.totalSupply=1000000
-token.Transfer 0 #11752 from=Null:0x0000 to=Deployer:0xa11a tokens=1000000
+token.Transfer 0 #11835 from=Null:0x0000 to=Deployer:0xa11a tokens=1000000
 
