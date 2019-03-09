@@ -117,7 +117,6 @@ var tokenContract = getTokenContractDeployed();
 console.log("RESULT: tokenContract=#" + tokenContract.length + " " + JSON.stringify(tokenContract));
 tokenAddress = tokenContract[0];
 token = web3.eth.contract(tokenAbi).at(tokenAddress);
-// console.log("RESULT: token=" + JSON.stringify(token));
 addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'");
 addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
 

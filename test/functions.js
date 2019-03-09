@@ -9,7 +9,7 @@ var accounts = [];
 var accountNames = {};
 
 addAccount(eth.accounts[0], "Miner");
-addAccount(eth.accounts[1], "Deployer + Dividend Payer");
+addAccount(eth.accounts[1], "Deployer");
 addAccount(eth.accounts[2], "User1");
 addAccount(eth.accounts[3], "User2");
 addAccount(eth.accounts[4], "User3");
@@ -271,72 +271,48 @@ function waitUntilBlock(message, block, addBlocks) {
 //-----------------------------------------------------------------------------
 // Token Contract A
 //-----------------------------------------------------------------------------
-var tokenFromBlock = [0, 0, 0, 0];
-function printTokenContractDetails(j) {
-  if (tokenFromBlock[j] == 0) {
-    tokenFromBlock[j] = baseBlock;
+var tokenFromBlock = 0;
+function printTokenContractDetails() {
+  if (tokenFromBlock == 0) {
+    tokenFromBlock = baseBlock;
   }
-  console.log("RESULT: token" + j + "ContractAddress=" + getShortAddressName(_tokenContractAddresses[j]));
-  if (_tokenContractAddresses[j] != null) {
-    var contract = _tokens[j];
-    var decimals = _decimals[j];
-    console.log("RESULT: token" + j + ".owner/new=" + getShortAddressName(contract.owner()) + "/" + getShortAddressName(contract.newOwner()));
-    console.log("RESULT: token" + j + ".details='" + contract.symbol() + "' '" + contract.name() + "' " + decimals + " dp");
-    console.log("RESULT: token" + j + ".totalSupply=" + contract.totalSupply().shift(-decimals));
-    // Dividend paying token
-    if (j == 1) {
-      console.log("RESULT: token" + j + ".pointMultiplier=" + contract.pointMultiplier().shift(-decimals));
-      console.log("RESULT: token" + j + ".totalDividendPoints=" + contract.totalDividendPoints().shift(-decimals));
-      console.log("RESULT: token" + j + ".unclaimedDividends=" + contract.unclaimedDividends().shift(-decimals));
-      console.log("RESULT: token" + j + ".dividendsOwing(user1)=" + contract.dividendsOwing(user1).shift(-decimals));
-      console.log("RESULT: token" + j + ".dividendsOwing(user2)=" + contract.dividendsOwing(user2).shift(-decimals));
-      console.log("RESULT: token" + j + ".dividendsOwing(user3)=" + contract.dividendsOwing(user3).shift(-decimals));
-    }
+  console.log("RESULT: tokenContractAddress=" + getShortAddressName(tokenContractAddress));
+  if (tokenContractAddress != null) {
+    var contract = eth.contract(tokenContractAbi).at(tokenContractAddress);
+    var decimals = contract.decimals();
+    console.log("RESULT: token.owner/new=" + getShortAddressName(contract.owner()) + "/" + getShortAddressName(contract.newOwner()));
+    console.log("RESULT: token.details='" + contract.symbol() + "' '" + contract.name() + "' " + decimals + " dp");
+    console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
 
     var latestBlock = eth.blockNumber;
     var i;
 
-    var ownershipTransferredEvents = contract.OwnershipTransferred({}, { fromBlock: tokenFromBlock[j], toBlock: latestBlock });
+    var ownershipTransferredEvents = contract.OwnershipTransferred({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;
     ownershipTransferredEvents.watch(function (error, result) {
-      console.log("RESULT: token" + j + ".OwnershipTransferred " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+      console.log("RESULT: token.OwnershipTransferred " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
     });
     ownershipTransferredEvents.stopWatching();
 
-    var approvalEvents = contract.Approval({}, { fromBlock: tokenFromBlock[j], toBlock: latestBlock });
+    var approvalEvents = contract.Approval({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;
     approvalEvents.watch(function (error, result) {
       // console.log("RESULT: token" + j + ".Approval " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result));
-      console.log("RESULT: token" + j + ".Approval " + i++ + " #" + result.blockNumber +
+      console.log("RESULT: token.Approval " + i++ + " #" + result.blockNumber +
         " tokenOwner=" + getShortAddressName(result.args.tokenOwner) +
         " spender=" + getShortAddressName(result.args.spender) + " tokens=" + result.args.tokens.shift(-decimals));
     });
     approvalEvents.stopWatching();
 
-    var transferEvents = contract.Transfer({}, { fromBlock: tokenFromBlock[j], toBlock: latestBlock });
+    var transferEvents = contract.Transfer({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;
     transferEvents.watch(function (error, result) {
       // console.log("RESULT: token" + j + ".Transfer " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result));
-      console.log("RESULT: token" + j + ".Transfer " + i++ + " #" + result.blockNumber +
+      console.log("RESULT: token.Transfer " + i++ + " #" + result.blockNumber +
         " from=" + getShortAddressName(result.args.from) +
         " to=" + getShortAddressName(result.args.to) + " tokens=" + result.args.tokens.shift(-decimals));
     });
     transferEvents.stopWatching();
-
-    // Dividend paying token
-    if (j == 1) {
-      var logUintEvents = contract.LogInfo({}, { fromBlock: tokenFromBlock[j], toBlock: latestBlock });
-      i = 0;
-      logUintEvents.watch(function (error, result) {
-        var noteStr = (result.args.note != "") ? " " + result.args.note : "";
-        var addrStr = (result.args.addr != "0x0000000000000000000000000000000000000000") ? " " + getShortAddressName(result.args.addr) : "";
-        var numberStr = (Math.abs(result.args.number) < 10000000000) ? result.args.number : result.args.number.shift(-18);
-        var dataStr = result.args.data == "0x0000000000000000000000000000000000000000000000000000000000000000" ? "" : " " + result.args.data;
-        console.log("RESULT: LogInfo " + i++ + " #" + result.blockNumber + " " + result.args.topic +
-         " " + numberStr + dataStr + noteStr + addrStr);
-      });
-      logUintEvents.stopWatching();
-    }
 
     tokenFromBlock[j] = latestBlock + 1;
   }
@@ -421,200 +397,5 @@ function printFactoryContractDetails() {
     contractDeprecatedEvents.stopWatching();
 
     factoryFromBlock = latestBlock + 1;
-  }
-}
-
-
-
-// -----------------------------------------------------------------------------
-// DexOneExchange Contract
-// -----------------------------------------------------------------------------
-var dexOneExchangeContractAddress = null;
-var dexOneExchangeContractAbi = null;
-function addDexOneExchangeContractAddressAndAbi(address, abi) {
-  dexOneExchangeContractAddress = address;
-  dexOneExchangeContractAbi = abi;
-}
-function formatOrder(orderType, maker, baseTokenAddress, quoteTokenAddress, price, expiry, baseTokens, baseTokensFilled) {
-  var makerString = getShortAddressName(maker);
-  var baseToken = getAddressSymbol(baseTokenAddress);
-  var quoteToken = getAddressSymbol(quoteTokenAddress);
-  var minutes = (expiry - new Date() / 1000) / 60;
-  return makerString + " " + (orderType == 0 ? "Buy" : "Sell") +
-    " [filled " + baseTokensFilled.shift(-18) + " of] " + baseTokens.shift(-18) + " " +
-    baseToken + " @ " + price.shift(-18) + " " +
-    baseToken + "/" + quoteToken + " +" + minutes.toFixed(2) + "s";
-}
-var pairs = [];
-function formatOrderEvent(orderType, maker, baseTokenAddress, quoteTokenAddress, price, expiry, baseTokens) {
-  var makerString = getShortAddressName(maker);
-  var baseToken = getAddressSymbol(baseTokenAddress);
-  var quoteToken = getAddressSymbol(quoteTokenAddress);
-  var minutes = (expiry - new Date() / 1000) / 60;
-  return makerString + " " + (orderType == 0 ? "Buy" : "Sell") + " " + baseTokens.shift(-18) + " " +
-    baseToken + " @ " + price.shift(-18) + " " +
-    baseToken + "/" + quoteToken + " +" + minutes.toFixed(2) + "s";
-}
-var dexOneExchangeFromBlock = 0;
-function printDexOneExchangeContractDetails() {
-  if (dexOneExchangeFromBlock == 0) {
-    dexOneExchangeFromBlock = baseBlock;
-  }
-  console.log("RESULT: dexOneExchange.address=" + getShortAddressName(dexOneExchangeContractAddress));
-  if (dexOneExchangeContractAddress != null && dexOneExchangeContractAbi != null) {
-    var contract = eth.contract(dexOneExchangeContractAbi).at(dexOneExchangeContractAddress);
-    console.log("RESULT: dexOneExchange.owner/new=" + getShortAddressName(contract.owner()) + "/" + getShortAddressName(contract.newOwner()));
-    console.log("RESULT: dexOneExchange.deploymentBlockNumber=" + contract.deploymentBlockNumber());
-    console.log("RESULT: dexOneExchange.takerFeeInEthers=" + contract.takerFeeInEthers().shift(-18) + " ETH");
-    console.log("RESULT: dexOneExchange.takerFeeInTokens=" + contract.takerFeeInTokens().shift(-16) + "%");
-    console.log("RESULT: dexOneExchange.feeAccount=" + getShortAddressName(contract.feeAccount()));
-
-    var i;
-    var latestBlock = eth.blockNumber;
-
-    var ownershipTransferredEvents = contract.OwnershipTransferred({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    ownershipTransferredEvents.watch(function (error, result) {
-      console.log("RESULT: OwnershipTransferred " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-    });
-    ownershipTransferredEvents.stopWatching();
-
-    var tokenWhitelistUpdatedEvents = contract.TokenWhitelistUpdated({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    tokenWhitelistUpdatedEvents.watch(function (error, result) {
-      console.log("RESULT: TokenWhitelistUpdated " + i++ + " #" + result.blockNumber + " token=" + getShortAddressName(result.args.token) +
-        " status=" + result.args.status);
-    });
-    tokenWhitelistUpdatedEvents.stopWatching();
-
-    var takerFeeInEthersUpdatedEvents = contract.TakerFeeInEthersUpdated({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    takerFeeInEthersUpdatedEvents.watch(function (error, result) {
-      console.log("RESULT: TakerFeeInEthersUpdated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-    });
-    takerFeeInEthersUpdatedEvents.stopWatching();
-
-    var takerFeeInTokensUpdatedEvents = contract.TakerFeeInTokensUpdated({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    takerFeeInTokensUpdatedEvents.watch(function (error, result) {
-      console.log("RESULT: TakerFeeInTokensUpdated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-    });
-    takerFeeInTokensUpdatedEvents.stopWatching();
-
-    var feeAccountUpdatedEvents = contract.FeeAccountUpdated({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    feeAccountUpdatedEvents.watch(function (error, result) {
-      console.log("RESULT: FeeAccountUpdated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-    });
-    feeAccountUpdatedEvents.stopWatching();
-
-    var tokenAddedEvents = contract.TokenAdded({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    tokenAddedEvents.watch(function (error, result) {
-      console.log("RESULT: TokenAdded " + i++ + " #" + result.blockNumber + " token=" + getShortAddressName(result.args.token));
-    });
-    tokenAddedEvents.stopWatching();
-
-    var accountAddedEvents = contract.AccountAdded({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    accountAddedEvents.watch(function (error, result) {
-      console.log("RESULT: AccountAdded " + i++ + " #" + result.blockNumber + " account=" + getShortAddressName(result.args.account));
-    });
-    accountAddedEvents.stopWatching();
-
-    var pairAddedEvents = contract.PairAdded({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    pairAddedEvents.watch(function (error, result) {
-      pairs.push({pairKey: result.args.pairKey, baseToken: result.args.baseToken, quoteToken: result.args.quoteToken});
-      console.log("RESULT: PairAdded " + i++ + " #" + result.blockNumber + " pairKey=" + result.args.pairKey +
-        " baseToken=" + getShortAddressName(result.args.baseToken) + " quoteToken=" + getShortAddressName(result.args.quoteToken));
-    });
-    pairAddedEvents.stopWatching();
-
-    var orderAddedEvents = contract.OrderAdded({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    orderAddedEvents.watch(function (error, result) {
-      console.log("RESULT: OrderAdded " + i++ + " #" + result.blockNumber + " pairKey=" + result.args.pairKey + " key=" + result.args.key);
-      console.log("RESULT:   " + formatOrderEvent(result.args.orderType, result.args.maker, result.args.baseToken,
-        result.args.quoteToken, result.args.price, result.args.expiry, result.args.baseTokens));
-    });
-    orderAddedEvents.stopWatching();
-
-    var orderRemovedEvents = contract.OrderRemoved({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    orderRemovedEvents.watch(function (error, result) {
-      console.log("RESULT: OrderRemoved " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-    });
-    orderRemovedEvents.stopWatching();
-
-    var orderUpdatedEvents = contract.OrderUpdated({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    orderUpdatedEvents.watch(function (error, result) {
-      console.log("RESULT: OrderUpdated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-    });
-    orderUpdatedEvents.stopWatching();
-
-    var tradeEvents = contract.Trade({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    tradeEvents.watch(function (error, result) {
-      console.log("RESULT: Trade " + i++ + " #" + result.blockNumber + " key=" + result.args.key +
-        " orderType=" + (result.args.orderType == 0 ? "Buy" : "Sell") +
-        " taker=" + getShortAddressName(result.args.taker) + " maker=" + getShortAddressName(result.args.maker) +
-        " amount=" + result.args.amount.shift(-18) +
-        " baseToken=" + getAddressSymbol(result.args.baseToken) + " quoteToken=" + getAddressSymbol(result.args.quoteToken) +
-        " baseTokens=" + result.args.baseTokens.shift(-18) + " quoteTokens=" + result.args.quoteTokens.shift(-18) +
-        " feeBaseTokens=" + result.args.feeBaseTokens.shift(-18) + " feeQuoteTokens=" + result.args.feeQuoteTokens.shift(-18) +
-        " baseTokensFilled=" + result.args.baseTokensFilled.shift(-18));
-    });
-    tradeEvents.stopWatching();
-
-    var logUintEvents = contract.LogInfo({}, { fromBlock: dexOneExchangeFromBlock, toBlock: latestBlock });
-    i = 0;
-    logUintEvents.watch(function (error, result) {
-      var noteStr = (result.args.note != "") ? " " + result.args.note : "";
-      var addrStr = (result.args.addr != "0x0000000000000000000000000000000000000000") ? " " + getShortAddressName(result.args.addr) : "";
-      var numberStr = (Math.abs(result.args.number) < 10000000000) ? result.args.number : result.args.number.shift(-18);
-      var dataStr = result.args.data == "0x0000000000000000000000000000000000000000000000000000000000000000" ? "" : " " + result.args.data;
-      console.log("RESULT: LogInfo " + i++ + " #" + result.blockNumber + " " + result.args.topic +
-       " " + numberStr + dataStr + noteStr + addrStr);
-    });
-    logUintEvents.stopWatching();
-
-    pairs.forEach(function(e) {
-      console.log("RESULT: ----- Pair " + e.pairKey + " " + getAddressSymbol(e.baseToken) + "/" + getAddressSymbol(e.quoteToken) + " -----");
-      for (var buySell = 0; buySell < 2; buySell++) {
-        console.log("RESULT: --- " + (buySell == 0 ? "Buy" : "Sell") + " Orders ---");
-        var orderPriceKey = 0;
-        orderPriceKey = contract.getNextBestPrice(e.pairKey, buySell, orderPriceKey);
-        while (orderPriceKey != 0) {
-          var orderQueue = contract.getOrderQueue(e.pairKey, buySell, orderPriceKey);
-          console.log("RESULT:   Price: " + orderPriceKey.shift(-18) + " head=" + orderQueue[1].substring(0, 18) + " tail=" + orderQueue[2].substring(0, 18));
-          var orderKey = orderQueue[1];
-          while (orderKey != 0) {
-            var order = contract.getOrder(orderKey);
-            // console.log("RESULT:       Order '" + orderKey + ": " + JSON.stringify(order));
-            var minutes = (order[7] - new Date() / 1000) / 60;
-            console.log("RESULT:     Order key=" + orderKey.substring(0, 18) + " prev=" + order[0].substring(0, 18) + " next=" + order[1].substring(0, 18) +
-              (parseInt(order[2]) == 1 ? " Sell": " Buy") + " maker=" + getShortAddressName(order[3]) +
-              " base=" + getAddressSymbol(order[4]) + " quote=" + getAddressSymbol(order[5]) + " price=" + order[6].shift(-18) +
-              " expiry=" + minutes.toFixed(2) + "s baseTokens=" + order[8].shift(-18) + " baseTokensFilled=" + order[9].shift(-18));
-            orderKey = order[1];
-          }
-          orderPriceKey = contract.getNextBestPrice(e.pairKey, buySell, orderPriceKey);
-        }
-
-        // var first = contract.first(e.pairKey, buySell);
-        // console.log("RESULT: first=" + first);
-        // var last = contract.last(e.pairKey, buySell);
-        // console.log("RESULT: last=" + last);
-        // var k = contract.first(e.pairKey, buySell);
-        // while (k != 0) {
-        //   console.log("RESULT:   " + k);
-        //   k = contract.next(e.pairKey, buySell, k);
-        // }
-      }
-    });
-
-    dexOneExchangeFromBlock = latestBlock + 1;
   }
 }
