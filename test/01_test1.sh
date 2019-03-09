@@ -103,8 +103,8 @@ console.log("RESULT: ");
 
 // -----------------------------------------------------------------------------
 var deployGroup2Message = "Deploy Group #1 - Deploy Token";
-var symbol = "TOKEN";
-var name = "Token Name";
+var symbol = "TEST";
+var name = "Test";
 var decimals = 18;
 var totalSupply = new BigNumber("1000000").shift(decimals);
 var feeInEthers = new BigNumber(10).shift(18);
@@ -121,6 +121,8 @@ addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'"
 addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
 
 printBalances();
+console.log("RESULT: ");
+printFactoryContractDetails();
 console.log("RESULT: ");
 printTokenContractDetails();
 console.log("RESULT: ");
