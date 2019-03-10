@@ -2,6 +2,9 @@ pragma solidity ^0.5.0;
 
 // ----------------------------------------------------------------------------
 // BokkyPooBah's Fixed Supply Token + Factory 💪 v1.00
+// A factory that will deploy fixed supply token contracts
+//
+// https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
 // Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd 2019. The MIT Licence.
 // ----------------------------------------------------------------------------
@@ -88,10 +91,9 @@ contract TokenInterface is ERC20Interface {
 
 
 // ----------------------------------------------------------------------------
-// BokkyPooBahsFixedSupplyToken = ERC20 + symbol + name + decimals +
-//   approveAndCall
+// FixedSupplyToken = ERC20 + symbol + name + decimals + approveAndCall
 // ----------------------------------------------------------------------------
-contract BokkyPooBahsFixedSupplyToken is TokenInterface, Owned {
+contract FixedSupplyToken is TokenInterface, Owned {
     using SafeMath for uint;
 
     string _symbol;
@@ -164,21 +166,21 @@ contract BokkyPooBahsFixedSupplyToken is TokenInterface, Owned {
 // ----------------------------------------------------------------------------
 // BokkyPooBah's Fixed Supply Token Factory
 //
-// Execute `deployBokkyPooBahsFixedSupplyTokenContract(...)` with the following
-// parameters to deploy your very own BokkyPooBahsFixedSupplyToken contract:
+// Execute `deployFixedSupplyTokenContract(...)` with the following
+// parameters to deploy your very own FixedSupplyToken contract:
 //   symbol         symbol
 //   name           name
 //   decimals       number of decimal places for the token contract
 //   totalSupply    the fixed token total supply
 //
-// For example, deploying a BokkyPooBahsFixedSupplyToken contract with a
+// For example, deploying a FixedSupplyToken contract with a
 // `totalSupply` of 1,000.000000000000000000 tokens:
 //   symbol         "ME"
 //   name           "My Token"
 //   decimals       18
-//   initialSupply  10000000000000000000000 = 1,000.000000000000000000 tokens
+//   initialSupply  10000000000000000000000 (= 1,000.000000000000000000 tokens)
 //
-// The FixedSupplyTokenListing() event is logged with the following
+// The TokenContractDeployed() event is logged with the following
 // parameters:
 //   owner          the account that execute this transaction
 //   tokenAddress   the newly deployed FixedSupplyToken address
@@ -215,7 +217,7 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     }
     function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address tokenAddress) {
         require(msg.value >= deploymentFee);
-        tokenAddress = address(new BokkyPooBahsFixedSupplyToken(msg.sender, symbol, name, decimals, totalSupply));
+        tokenAddress = address(new FixedSupplyToken(msg.sender, symbol, name, decimals, totalSupply));
         isChild[tokenAddress] = true;
         deployedContracts.push(tokenAddress);
         uint refund = msg.value.sub(deploymentFee);

@@ -6,7 +6,7 @@ SOURCEDIR=../contracts/
 TOKENFACTORYNAME=BokkyPooBahsFixedSupplyTokenFactory
 TOKENFACTORYSOL=BokkyPooBahsFixedSupplyTokenFactory.sol
 TOKENFACTORYJS=BokkyPooBahsFixedSupplyTokenFactory.js
-TOKENNAME=BokkyPooBahsFixedSupplyToken
+TOKENNAME=FixedSupplyToken
 
 DEPLOYMENTDATA=deploymentData.js
 
