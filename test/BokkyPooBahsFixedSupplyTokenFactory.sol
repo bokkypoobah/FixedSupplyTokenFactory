@@ -6,6 +6,8 @@ pragma solidity ^0.5.0;
 // A factory to convieniently deploy your own source verified fixed supply
 // token contracts
 //
+// Factory deployment address: 0xfAEcE565D445e98Ea024f02FF06607B4654eEb56
+//
 // https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
 // Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd 2019. The MIT Licence.
@@ -216,23 +218,17 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
         // Initial contract for source code verification
         _deployTokenContract(msg.sender, "FIST", "Fixed Supply Token 👊 v1.00", 18, 10**24);
     }
+    function numberOfChildren() public view returns (uint) {
+        return children.length;
+    }
     function deprecateFactory(address _newAddress) public onlyOwner {
         require(newAddress == address(0));
         emit FactoryDeprecated(_newAddress);
         newAddress = _newAddress;
     }
-    function numberOfChildren() public view returns (uint) {
-        return children.length;
-    }
     function setMinimumFee(uint _minimumFee) public onlyOwner {
         emit MinimumFeeUpdated(minimumFee, _minimumFee);
         minimumFee = _minimumFee;
-    }
-    function _deployTokenContract(address owner, string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token) {
-        token = address(new FixedSupplyToken(owner, symbol, name, decimals, totalSupply));
-        isChild[token] = true;
-        children.push(token);
-        emit TokenDeployed(owner, token, symbol, name, decimals, totalSupply);
     }
     function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token) {
         require(msg.value >= minimumFee);
@@ -252,5 +248,11 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     }
     function () external payable {
         revert();
+    }
+    function _deployTokenContract(address owner, string memory symbol, string memory name, uint8 decimals, uint totalSupply) internal returns (address token) {
+        token = address(new FixedSupplyToken(owner, symbol, name, decimals, totalSupply));
+        isChild[token] = true;
+        children.push(token);
+        emit TokenDeployed(owner, token, symbol, name, decimals, totalSupply);
     }
 }
