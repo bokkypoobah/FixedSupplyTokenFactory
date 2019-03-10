@@ -9,15 +9,41 @@ Fixed Supply ERC20 Token Contract And Factory
 
 <br />
 
+<hr />
+
+## Table Of Contents
+
+* [History](#history)
+* [Factory Deployment Address](#factory-deployment-address)
+* [Factory Functions](#factory-functions)
+  * [deployTokenContract](#deployTokenContract)
+* [Fixed Supply Token 👊](#fixed-supply-token-)
+  * [Source Code](#source-code)
+
+<br />
+
+<hr />
+
+## History
+
+Version | Date         | Notes
+:------ |:------------ |:---------------------------------------
+v1.00   | Mar 11 2019  | First version deployed to mainnet, Ropsten, Kovan, Rinkeby and Görli
+
+
+<br />
+
+<hr />
+
 ## Factory Deployment Address
 
-BokkyPooBahsFixedSupplyTokenFactory has been deployed to the same address `0xfAEcE565D445e98Ea024f02FF06607B4654eEb56` on the following networks:
+[contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](contracts/BokkyPooBahsFixedSupplyTokenFactory.sol) has been deployed to the same address `0xfAEcE565D445e98Ea024f02FF06607B4654eEb56` on the following networks:
 
-* Mainnet [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56)
-* Ropsten [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://ropsten.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56)
-* Kovan [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://kovan.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56)
-* Rinkeby [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://rinkeby.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56) (Could not verify source for FixedSupplyToken)
-* Görli [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://goerli.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56)
+* Mainnet [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
+* Ropsten [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://ropsten.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
+* Kovan [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://kovan.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
+* Rinkeby [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://rinkeby.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code) (Source validation for FixedSupplyToken unsuccessful)
+* Görli [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://goerli.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
 
 <br />
 
@@ -71,6 +97,8 @@ Following is the screenshot of a newly deployed [Fixed Supply Token 👊 v1.00](
 <kbd><img src="images/EtherScan-FixedSupplyToken.png" /></kbd>
 
 <br />
+
+<hr />
 
 ### Source Code
 
@@ -247,6 +275,8 @@ contract FixedSupplyToken is TokenInterface, Owned {
     }
 }
 ```
+
+<br />
 
 ### Application Binary Interface
 
