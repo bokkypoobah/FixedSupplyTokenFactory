@@ -102,6 +102,8 @@ Following is the screenshot of a newly deployed [Fixed Supply Token 👊 v1.00](
 
 ### Source Code
 
+**FixedSupplyToken** source code, from [contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](contracts/BokkyPooBahsFixedSupplyTokenFactory.sol):
+
 ```javascript
 pragma solidity ^0.5.4;
 
