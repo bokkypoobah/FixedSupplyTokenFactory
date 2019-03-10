@@ -37,7 +37,7 @@ v1.00   | Mar 11 2019  | First version deployed to mainnet, Ropsten, Kovan, Rink
 
 ## Factory Deployment Address
 
-[contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](contracts/BokkyPooBahsFixedSupplyTokenFactory.sol) has been deployed to the same address `0xfAEcE565D445e98Ea024f02FF06607B4654eEb56` on the following networks:
+[contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](https://github.com/bokkypoobah/FixedSupplyTokenFactory/blob/3467f170b149465438c72a154c2b1b0771aa5a3e/contracts/BokkyPooBahsFixedSupplyTokenFactory.sol) has been deployed to the same address `0xfAEcE565D445e98Ea024f02FF06607B4654eEb56` on the following networks:
 
 * Mainnet [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
 * Ropsten [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://ropsten.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
@@ -102,7 +102,7 @@ Following is the screenshot of a newly deployed [Fixed Supply Token 👊 v1.00](
 
 ### Source Code
 
-**FixedSupplyToken** source code, from [contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](contracts/BokkyPooBahsFixedSupplyTokenFactory.sol):
+**FixedSupplyToken** source code, from [contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](https://github.com/bokkypoobah/FixedSupplyTokenFactory/blob/3467f170b149465438c72a154c2b1b0771aa5a3e/contracts/BokkyPooBahsFixedSupplyTokenFactory.sol):
 
 ```javascript
 pragma solidity ^0.5.4;
