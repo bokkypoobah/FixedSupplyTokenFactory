@@ -62,6 +62,10 @@ address newTokenContract = factory.deployTokenContract("MYT", "My Token", 18, "1
 
 Deploys a new token contract with 1,000,000.000000000000000000 MYT tokens minted to the transaction sending account.
 
+[Fixed Supply Token 👊 v1.00](https://etherscan.io/token/0xbd2ea74a74820c9b5750e40c2851bed7136292ed#balances) is an example token:
+
+<kbd><img src="images/EtherScan-FixedSupplyToken.png" /></kbd>
+
 <br />
 
 <br />
