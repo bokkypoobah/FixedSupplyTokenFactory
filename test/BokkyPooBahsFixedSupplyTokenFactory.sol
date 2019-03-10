@@ -1,8 +1,10 @@
 pragma solidity ^0.5.0;
 
 // ----------------------------------------------------------------------------
-// BokkyPooBah's Fixed Supply Token + Factory 💪 v1.00
-// A factory that will deploy fixed supply token contracts
+// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.00
+//
+// A factory to convieniently deploy your own source verified fixed supply
+// token contracts
 //
 // https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
@@ -91,7 +93,7 @@ contract TokenInterface is ERC20Interface {
 
 
 // ----------------------------------------------------------------------------
-// FixedSupplyToken = ERC20 + symbol + name + decimals + approveAndCall
+// FixedSupplyToken 👊 = ERC20 + symbol + name + decimals + approveAndCall
 // ----------------------------------------------------------------------------
 contract FixedSupplyToken is TokenInterface, Owned {
     using SafeMath for uint;
@@ -154,20 +156,29 @@ contract FixedSupplyToken is TokenInterface, Owned {
         ApproveAndCallFallback(spender).receiveApproval(msg.sender, tokens, address(this), data);
         return true;
     }
+    function recoverTokens(address token, uint tokens) public onlyOwner {
+        if (token == address(0)) {
+            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
+        } else {
+            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
+        }
+    }
     function () external payable {
         revert();
-    }
-    function transferAnyERC20Token(address tokenAddress, uint tokens) public onlyOwner returns (bool success) {
-        return ERC20Interface(tokenAddress).transfer(owner, tokens);
     }
 }
 
 
 // ----------------------------------------------------------------------------
-// BokkyPooBah's Fixed Supply Token Factory
+// BokkyPooBah's Fixed Supply Token 👊 Factory
 //
-// Execute `deployFixedSupplyTokenContract(...)` with the following
-// parameters to deploy your very own FixedSupplyToken contract:
+// Notes:
+//   * The `newContractAddress` deprecation is just advisory
+//   * The minimum fee must be sent with the `deployTokenContract(...)` call
+//   * Any excess over the fee will be refunded to the sending account
+//
+// Execute `deployTokenContract(...)` with the following parameters
+// to deploy your very own FixedSupplyToken contract:
 //   symbol         symbol
 //   name           name
 //   decimals       number of decimal places for the token contract
@@ -178,9 +189,9 @@ contract FixedSupplyToken is TokenInterface, Owned {
 //   symbol         "ME"
 //   name           "My Token"
 //   decimals       18
-//   initialSupply  10000000000000000000000 (= 1,000.000000000000000000 tokens)
+//   initialSupply  10000000000000000000000 = 1,000.000000000000000000 tokens
 //
-// The TokenContractDeployed() event is logged with the following
+// The FixedSupplyTokenListing() event is logged with the following
 // parameters:
 //   owner          the account that execute this transaction
 //   tokenAddress   the newly deployed FixedSupplyToken address
@@ -192,48 +203,55 @@ contract FixedSupplyToken is TokenInterface, Owned {
 contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     using SafeMath for uint;
 
-    address public newContractAddress;
+    address public newAddress;
+    uint public fee = 0.1 ether;
     mapping(address => bool) public isChild;
-    address[] public deployedContracts;
-    uint public deploymentFee = 0.1 ether;
+    address[] public children;
 
-    event TokenContractDeployed(address indexed ownerAddress, address indexed tokenAddress, string symbol, string name, uint8 decimals, uint totalSupply);
-    event DeploymentFeeUpdated(uint oldDeploymentFee, uint newDeploymentFee);
-    event ContractDeprecated(address _newContractAddress);
+    event FactoryDeprecated(address _newAddress);
+    event FeeUpdated(uint oldFee, uint newFee);
+    event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
 
     constructor() public Owned(msg.sender) {
+        _deployTokenContract(msg.sender, "FIST", "Fixed Supply Token 👊 v1.00", 18, 10**24);
     }
-    function numberOfDeployedContracts() public view returns (uint) {
-        return deployedContracts.length;
+    function deprecateFactory(address _newAddress) public onlyOwner {
+        require(newAddress == address(0));
+        emit FactoryDeprecated(_newAddress);
+        newAddress = _newAddress;
     }
-    function setFeePerDeployment(uint _deploymentFee) public onlyOwner {
-        emit DeploymentFeeUpdated(deploymentFee, _deploymentFee);
-        deploymentFee = _deploymentFee;
+    function numberOfChildren() public view returns (uint) {
+        return children.length;
     }
-    function deprecateContract(address _newContractAddress) public onlyOwner {
-        require(newContractAddress == address(0));
-        emit ContractDeprecated(newContractAddress);
-        newContractAddress = _newContractAddress;
+    function setFee(uint _fee) public onlyOwner {
+        emit FeeUpdated(fee, _fee);
+        fee = _fee;
     }
-    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address tokenAddress) {
-        require(msg.value >= deploymentFee);
-        tokenAddress = address(new FixedSupplyToken(msg.sender, symbol, name, decimals, totalSupply));
-        isChild[tokenAddress] = true;
-        deployedContracts.push(tokenAddress);
-        uint refund = msg.value.sub(deploymentFee);
+    function _deployTokenContract(address owner, string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token) {
+        token = address(new FixedSupplyToken(owner, symbol, name, decimals, totalSupply));
+        isChild[token] = true;
+        children.push(token);
+        emit TokenDeployed(msg.sender, token, symbol, name, decimals, totalSupply);
+    }
+    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token) {
+        require(msg.value >= fee);
+        token = _deployTokenContract(msg.sender, symbol, name, decimals, totalSupply);
+        uint refund = msg.value.sub(fee);
+        if (fee > 0) {
+            address(uint160(owner)).transfer(fee);
+        }
         if (refund > 0) {
             msg.sender.transfer(refund);
         }
-        emit TokenContractDeployed(msg.sender, tokenAddress, symbol, name, decimals, totalSupply);
     }
-    function transferAnyERC20Token(address tokenAddress, uint tokens) public onlyOwner returns (bool success) {
-        return ERC20Interface(tokenAddress).transfer(owner, tokens);
+    function recoverTokens(address token, uint tokens) public onlyOwner {
+        if (token == address(0)) {
+            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
+        } else {
+            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
+        }
     }
     function () external payable {
         revert();
-    }
-    // TODO Testing
-    function testIt() public payable returns (address tokenAddress) {
-        return deployTokenContract("ME", "MyToken", 18, 10**24);
     }
 }

@@ -12,59 +12,76 @@
 
 
 ---------- Deploy Group #1 - TokenFactory ----------
+factoryContractAddress=0x9fb3c6433aa45e3eb6df7d4f1ed943a8138a4923
+get TokenDeployed 0 #8492 {"decimals":"18","name":"Fixed Supply Token �� v1.00","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"FIST","token":"0x283df2a66598c65acfb7b326916376c938c50ddf","totalSupply":"1e+24"}
+tokenContract=#1 ["0x283df2a66598c65acfb7b326916376c938c50ddf"]
  # Account                                             EtherBalanceChange                          Token Name
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.008985360000000000           0.000000000000000000 Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.008985360000000000           0.000000000000000000 Deployer
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.016036805000000000           0.000000000000000000 Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.016036805000000000     1000000.000000000000000000 Deployer
  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 User1
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 User4
- 6 0x90d8927407c79c4a28ee879b821c76fc9bcc2688        0.000000000000000000           0.000000000000000000 TokenFactory
--- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-                                                                                    0.000000000000000000 Total Token Balances
--- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-
-PASS Deploy Group #1 - TokenFactory - TokenFactory
-
-factoryContractAddress=0x90d8927407c79c4a28ee879b821c76fc9bcc2688
-factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
-factory.newOwner=0x0000000000000000000000000000000000000000
-factory.deploymentFee=0.1 ETH
-factory.newContractAddress=0x0000000000000000000000000000000000000000
-factory.numberOfDeployedContracts=0
-
----------- Deploy Group #1 - Deploy Token ----------
-factoryContractAddress=0x90d8927407c79c4a28ee879b821c76fc9bcc2688
-get TokenContractDeployed 0 #29 {"decimals":"18","name":"Test","ownerAddress":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","tokenAddress":"0x766d58c8c163fcd9652ae1fed8b24fa54359542d","totalSupply":"1e+24"}
-tokenContract=#1 ["0x766d58c8c163fcd9652ae1fed8b24fa54359542d"]
- # Account                                             EtherBalanceChange                          Token Name
--- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.013279215000000000           0.000000000000000000 Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.113279215000000000     1000000.000000000000000000 Deployer
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 User1
- 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
- 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
- 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 User4
- 6 0x90d8927407c79c4a28ee879b821c76fc9bcc2688        0.100000000000000000           0.000000000000000000 TokenFactory
- 7 0x766d58c8c163fcd9652ae1fed8b24fa54359542d        0.000000000000000000           0.000000000000000000 Token 'TEST' 'Test'
+ 6 0x9fb3c6433aa45e3eb6df7d4f1ed943a8138a4923        0.000000000000000000           0.000000000000000000 TokenFactory
+ 7 0x283df2a66598c65acfb7b326916376c938c50ddf        0.000000000000000000           0.000000000000000000 Token 'FIST' 'Fixed Supply Token �� v1.00'
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
                                                                               1000000.000000000000000000 Total Token Balances
 -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 
+PASS Deploy Group #1 - TokenFactory - TokenFactory
+tokenFactoryTx status=0x1 Success gas=6400000 gasUsed=3207361 costETH=0.016036805 costUSD=2.17956216755 @ ETH/USD=135.91 gasPrice=5 gwei block=8492 txIx=0 txId=0x2d29bd907e2d0f2878e305560eaff8e9d12da49588a1747d74d7956b18fe501b @ 1552203002 Sun, 10 Mar 2019 07:30:02 UTC
 
-factoryContractAddress=0x90d8927407c79c4a28ee879b821c76fc9bcc2688
+factoryContractAddress=0x9fb3c6433aa45e3eb6df7d4f1ed943a8138a4923
 factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 factory.newOwner=0x0000000000000000000000000000000000000000
-factory.deploymentFee=0.1 ETH
-factory.newContractAddress=0x0000000000000000000000000000000000000000
-factory.numberOfDeployedContracts=1
-factory.deployedContracts(0)=0x766d58c8c163fcd9652ae1fed8b24fa54359542d
-TokenContractDeployed 0 #29 {"decimals":"18","name":"Test","ownerAddress":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","tokenAddress":"0x766d58c8c163fcd9652ae1fed8b24fa54359542d","totalSupply":"1e+24"}
+factory.fee=0.1 ETH
+factory.newAddress=0x0000000000000000000000000000000000000000
+factory.numberOfChildren=1
+factory.children(0)=0x283df2a66598c65acfb7b326916376c938c50ddf
+TokenDeployed 0 #8492 {"decimals":"18","name":"Fixed Supply Token �� v1.00","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"FIST","token":"0x283df2a66598c65acfb7b326916376c938c50ddf","totalSupply":"1e+24"}
 
-tokenContractAddress=Token 'TEST' 'Test':0x766d
+tokenContractAddress=Token 'FIST' 'Fixed Supply Token �� v1.00':0x283d
 token.owner/new=Deployer:0xa11a/Null:0x0000
-token.details='TEST' 'Test' 18 dp
+token.details='FIST' 'Fixed Supply Token �� v1.00' 18 dp
 token.totalSupply=1000000
-token.Transfer 0 #29 from=Null:0x0000 to=Deployer:0xa11a tokens=1000000
+token.Transfer 0 #8492 from=Null:0x0000 to=Deployer:0xa11a tokens=1000000
+
+---------- Deploy Group #1 - Deploy Second Token ----------
+factoryContractAddress=0x9fb3c6433aa45e3eb6df7d4f1ed943a8138a4923
+get TokenDeployed 0 #8495 {"decimals":"18","name":"Test","owner":"0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976","symbol":"TEST","token":"0x4a8591f2ae0da15e0ed6a24786c6bb84e39f9679","totalSupply":"1e+27"}
+tokenContract=#1 ["0x4a8591f2ae0da15e0ed6a24786c6bb84e39f9679"]
+ # Account                                             EtherBalanceChange                          Token Name
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.020555685000000000           0.000000000000000000 Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.083963195000000000           0.000000000000000000 Deployer
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -0.104518880000000000  1000000000.000000000000000000 User1
+ 3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
+ 4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
+ 5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 User4
+ 6 0x9fb3c6433aa45e3eb6df7d4f1ed943a8138a4923        0.000000000000000000           0.000000000000000000 TokenFactory
+ 7 0x283df2a66598c65acfb7b326916376c938c50ddf        0.000000000000000000           0.000000000000000000 Token 'FIST' 'Fixed Supply Token �� v1.00'
+ 8 0x4a8591f2ae0da15e0ed6a24786c6bb84e39f9679        0.000000000000000000           0.000000000000000000 Token 'TEST' 'Test'
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+                                                                           1000000000.000000000000000000 Total Token Balances
+-- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+
+PASS Deploy Group #1 - Deploy Second Token - Token
+deployToken_1Tx status=0x1 Success gas=2000000 gasUsed=903776 costETH=0.00451888 costUSD=0.6141609808 @ ETH/USD=135.91 gasPrice=5 gwei block=8495 txIx=0 txId=0xbb6aefbacb29fca917faf650b7cabdff6ff6389a08ac79ededb2196633167f12 @ 1552203005 Sun, 10 Mar 2019 07:30:05 UTC
+
+factoryContractAddress=0x9fb3c6433aa45e3eb6df7d4f1ed943a8138a4923
+factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
+factory.newOwner=0x0000000000000000000000000000000000000000
+factory.fee=0.1 ETH
+factory.newAddress=0x0000000000000000000000000000000000000000
+factory.numberOfChildren=2
+factory.children(0)=0x283df2a66598c65acfb7b326916376c938c50ddf
+factory.children(1)=0x4a8591f2ae0da15e0ed6a24786c6bb84e39f9679
+TokenDeployed 0 #8495 {"decimals":"18","name":"Test","owner":"0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976","symbol":"TEST","token":"0x4a8591f2ae0da15e0ed6a24786c6bb84e39f9679","totalSupply":"1e+27"}
+
+tokenContractAddress=Token 'TEST' 'Test':0x4a85
+token.owner/new=User1:0xa22a/Null:0x0000
+token.details='TEST' 'Test' 18 dp
+token.totalSupply=1000000000
+token.Transfer 0 #8495 from=Null:0x0000 to=User1:0xa22a tokens=1000000000
 

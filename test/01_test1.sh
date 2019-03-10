@@ -94,23 +94,33 @@ var tokenFactory = tokenFactoryContract.new({from: deployer, data: tokenFactoryB
 );
 while (txpool.status.pending > 0) {
 }
+var tokenContract = getTokenContractDeployed();
+console.log("RESULT: tokenContract=#" + tokenContract.length + " " + JSON.stringify(tokenContract));
+tokenAddress = tokenContract[0];
+token = web3.eth.contract(tokenAbi).at(tokenAddress);
+addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'");
+addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
+
 printBalances();
 failIfTxStatusError(tokenFactoryTx, deployGroup1Message + " - TokenFactory");
+printTxData("tokenFactoryTx", tokenFactoryTx);
 console.log("RESULT: ");
 printFactoryContractDetails();
 console.log("RESULT: ");
+printTokenContractDetails();
+console.log("RESULT: ");
 
 
 // -----------------------------------------------------------------------------
-var deployGroup2Message = "Deploy Group #1 - Deploy Token";
+var deployGroup2Message = "Deploy Group #1 - Deploy Second Token";
 var symbol = "TEST";
 var name = "Test";
 var decimals = 18;
-var totalSupply = new BigNumber("1000000").shift(decimals);
+var totalSupply = new BigNumber("1000000000").shift(decimals);
 var feeInEthers = new BigNumber(10).shift(18);
 // -----------------------------------------------------------------------------
 console.log("RESULT: ---------- " + deployGroup2Message + " ----------");
-var deployToken_1Tx = tokenFactory.deployTokenContract(symbol, name, decimals, totalSupply, {from: deployer, value: feeInEthers, gas: 2000000, gasPrice: defaultGasPrice});
+var deployToken_1Tx = tokenFactory.deployTokenContract(symbol, name, decimals, totalSupply, {from: user1, value: feeInEthers, gas: 2000000, gasPrice: defaultGasPrice});
 while (txpool.status.pending > 0) {
 }
 var tokenContract = getTokenContractDeployed();
@@ -121,6 +131,8 @@ addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'"
 addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
 
 printBalances();
+failIfTxStatusError(deployToken_1Tx, deployGroup2Message + " - Token");
+printTxData("deployToken_1Tx", deployToken_1Tx);
 console.log("RESULT: ");
 printFactoryContractDetails();
 console.log("RESULT: ");

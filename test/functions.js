@@ -314,7 +314,7 @@ function printTokenContractDetails() {
     });
     transferEvents.stopWatching();
 
-    tokenFromBlock[j] = latestBlock + 1;
+    tokenFromBlock = latestBlock + 1;
   }
 }
 
@@ -341,16 +341,17 @@ function getTokenContractDeployed() {
     var latestBlock = eth.blockNumber;
     var i;
 
-    var tokenContractDeployedEvents = contract.TokenContractDeployed({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
+    var tokenDeployedEvents = contract.TokenDeployed({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
     i = 0;
-    tokenContractDeployedEvents.watch(function (error, result) {
-      console.log("RESULT: get TokenContractDeployed " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-      addresses.push(result.args.tokenAddress);
+    tokenDeployedEvents.watch(function (error, result) {
+      console.log("RESULT: get TokenDeployed " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+      addresses.push(result.args.token);
     });
-    tokenContractDeployedEvents.stopWatching();
+    tokenDeployedEvents.stopWatching();
   }
   return addresses;
 }
+
 
 function printFactoryContractDetails() {
   console.log("RESULT: factoryContractAddress=" + factoryContractAddress);
@@ -358,12 +359,12 @@ function printFactoryContractDetails() {
     var contract = eth.contract(factoryContractAbi).at(factoryContractAddress);
     console.log("RESULT: factory.owner=" + contract.owner());
     console.log("RESULT: factory.newOwner=" + contract.newOwner());
-    console.log("RESULT: factory.deploymentFee=" + contract.deploymentFee().shift(-18) + " ETH");
-    console.log("RESULT: factory.newContractAddress=" + contract.newContractAddress());
-    console.log("RESULT: factory.numberOfDeployedContracts=" + contract.numberOfDeployedContracts());
+    console.log("RESULT: factory.fee=" + contract.fee().shift(-18) + " ETH");
+    console.log("RESULT: factory.newAddress=" + contract.newAddress());
+    console.log("RESULT: factory.numberOfChildren=" + contract.numberOfChildren());
     var i;
-    for (i = 0; i < contract.numberOfDeployedContracts(); i++) {
-        console.log("RESULT: factory.deployedContracts(" + i + ")=" + contract.deployedContracts(i));
+    for (i = 0; i < contract.numberOfChildren(); i++) {
+        console.log("RESULT: factory.children(" + i + ")=" + contract.children(i));
     }
 
     var latestBlock = eth.blockNumber;
@@ -375,26 +376,26 @@ function printFactoryContractDetails() {
     });
     ownershipTransferredEvents.stopWatching();
 
-    var tokenContractDeployedEvents = contract.TokenContractDeployed({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
+    var factoryDeprecatedEvents = contract.FactoryDeprecated({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
     i = 0;
-    tokenContractDeployedEvents.watch(function (error, result) {
-      console.log("RESULT: TokenContractDeployed " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+    factoryDeprecatedEvents.watch(function (error, result) {
+      console.log("RESULT: FactoryDeprecated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
     });
-    tokenContractDeployedEvents.stopWatching();
+    factoryDeprecatedEvents.stopWatching();
 
-    var deploymentFeeUpdatedEvents = contract.DeploymentFeeUpdated({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
+    var feeUpdatedEvents = contract.FeeUpdated({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
     i = 0;
-    deploymentFeeUpdatedEvents.watch(function (error, result) {
-      console.log("RESULT: DeploymentFeeUpdated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+    feeUpdatedEvents.watch(function (error, result) {
+      console.log("RESULT: FeeUpdated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
     });
-    deploymentFeeUpdatedEvents.stopWatching();
+    feeUpdatedEvents.stopWatching();
 
-    var contractDeprecatedEvents = contract.ContractDeprecated({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
+    var tokenDeployedEvents = contract.TokenDeployed({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
     i = 0;
-    contractDeprecatedEvents.watch(function (error, result) {
-      console.log("RESULT: ContractDeprecated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+    tokenDeployedEvents.watch(function (error, result) {
+      console.log("RESULT: TokenDeployed " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
     });
-    contractDeprecatedEvents.stopWatching();
+    tokenDeployedEvents.stopWatching();
 
     factoryFromBlock = latestBlock + 1;
   }
