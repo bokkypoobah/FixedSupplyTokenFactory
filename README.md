@@ -1,4 +1,4 @@
-<kbd><img src="images/PrincessLeiaPeachExpelsARainbowBigBang-WeenusTokenFaucet.png" /></kbd>
+<kbd><img src="images/PrincessLeiaPeachExpelsARainbowBigBang-FixedSupplyTokenFactory.png" /></kbd>
 
 <br />
 
