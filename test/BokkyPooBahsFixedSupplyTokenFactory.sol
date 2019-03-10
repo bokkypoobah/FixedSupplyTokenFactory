@@ -204,15 +204,16 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     using SafeMath for uint;
 
     address public newAddress;
-    uint public fee = 0.1 ether;
+    uint public minimumFee = 0.1 ether;
     mapping(address => bool) public isChild;
     address[] public children;
 
     event FactoryDeprecated(address _newAddress);
-    event FeeUpdated(uint oldFee, uint newFee);
+    event MinimumFeeUpdated(uint oldFee, uint newFee);
     event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
 
     constructor() public Owned(msg.sender) {
+        // Initial contract for source code verification
         _deployTokenContract(msg.sender, "FIST", "Fixed Supply Token 👊 v1.00", 18, 10**24);
     }
     function deprecateFactory(address _newAddress) public onlyOwner {
@@ -223,25 +224,23 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     function numberOfChildren() public view returns (uint) {
         return children.length;
     }
-    function setFee(uint _fee) public onlyOwner {
-        emit FeeUpdated(fee, _fee);
-        fee = _fee;
+    function setMinimumFee(uint _minimumFee) public onlyOwner {
+        emit MinimumFeeUpdated(minimumFee, _minimumFee);
+        minimumFee = _minimumFee;
     }
     function _deployTokenContract(address owner, string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token) {
         token = address(new FixedSupplyToken(owner, symbol, name, decimals, totalSupply));
         isChild[token] = true;
         children.push(token);
-        emit TokenDeployed(msg.sender, token, symbol, name, decimals, totalSupply);
+        emit TokenDeployed(owner, token, symbol, name, decimals, totalSupply);
     }
     function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token) {
-        require(msg.value >= fee);
+        require(msg.value >= minimumFee);
+        require(decimals <= 27);
+        require(totalSupply > 0);
         token = _deployTokenContract(msg.sender, symbol, name, decimals, totalSupply);
-        uint refund = msg.value.sub(fee);
-        if (fee > 0) {
-            address(uint160(owner)).transfer(fee);
-        }
-        if (refund > 0) {
-            msg.sender.transfer(refund);
+        if (msg.value > 0) {
+            address(uint160(owner)).transfer(msg.value);
         }
     }
     function recoverTokens(address token, uint tokens) public onlyOwner {

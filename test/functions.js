@@ -359,7 +359,7 @@ function printFactoryContractDetails() {
     var contract = eth.contract(factoryContractAbi).at(factoryContractAddress);
     console.log("RESULT: factory.owner=" + contract.owner());
     console.log("RESULT: factory.newOwner=" + contract.newOwner());
-    console.log("RESULT: factory.fee=" + contract.fee().shift(-18) + " ETH");
+    console.log("RESULT: factory.minimumFee=" + contract.minimumFee().shift(-18) + " ETH");
     console.log("RESULT: factory.newAddress=" + contract.newAddress());
     console.log("RESULT: factory.numberOfChildren=" + contract.numberOfChildren());
     var i;
@@ -383,12 +383,12 @@ function printFactoryContractDetails() {
     });
     factoryDeprecatedEvents.stopWatching();
 
-    var feeUpdatedEvents = contract.FeeUpdated({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
+    var minimumFeeUpdatedEvents = contract.MinimumFeeUpdated({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
     i = 0;
-    feeUpdatedEvents.watch(function (error, result) {
-      console.log("RESULT: FeeUpdated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+    minimumFeeUpdatedEvents.watch(function (error, result) {
+      console.log("RESULT: MinimumFeeUpdated " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
     });
-    feeUpdatedEvents.stopWatching();
+    minimumFeeUpdatedEvents.stopWatching();
 
     var tokenDeployedEvents = contract.TokenDeployed({}, { fromBlock: factoryFromBlock, toBlock: latestBlock });
     i = 0;
