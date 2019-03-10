@@ -33,6 +33,8 @@ function deployTokenContract(string memory symbol, string memory name, uint8 dec
 
 Deploy a new token contract. The account executing this function will be assigned as the owner of the new token contract. The entire `totalSupply` is minted for the token contract owner.
 
+A fee in ethers may also be payable for the successful execution of this function. See [minimumFee](#minimumFee).
+
 #### Parameters
 
 * `string symbol` - Symbol, e.g., 'MYT'
@@ -51,3 +53,19 @@ The following event is emitted on successful deployment of the new token contrac
 ```javascript
 event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
 ```
+
+#### Example
+
+```javascript
+address newTokenContract = factory.deployTokenContract("MYT", "My Token", 18, "1000000000000000000000000");
+```
+
+Deploys a new token contract with 1,000,000.000000000000000000 MYT tokens minted to the transaction sending account.
+
+<br />
+
+<br />
+
+Enjoy!
+
+(c) BokkyPooBah / Bok Consulting Pty Ltd - Mar 11 2019. The MIT Licence.
