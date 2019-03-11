@@ -54,6 +54,8 @@ Additionally, each function execution using the CloneFactory will incur a slight
 > * Creating the forwarding contract only costs <50000 gas, regardless of the length of the underlying call
 > * Each call to the contract thereafter will cost an additional ~1100 gas (700 DELEGATECALL + 400 memory expansion)
 
+Using the CloneFactory will save on the upfront cost of deployment, but this should be compared to the additional long term expense of the ~1,100 gas per call.
+
 <br />
 
 <hr />
