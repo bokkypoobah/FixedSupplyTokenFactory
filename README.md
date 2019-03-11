@@ -15,6 +15,7 @@ Fixed Supply ERC20 Token Contract And Factory
 
 * [History](#history)
 * [Factory Deployment Address](#factory-deployment-address)
+* [Questions And Answers](#questions-and-answers)
 * [Factory Functions](#factory-functions)
   * [deployTokenContract](#deployTokenContract)
 * [Fixed Supply Token 👊](#fixed-supply-token-)
@@ -30,6 +31,23 @@ Version | Date         | Notes
 :------ |:------------ |:---------------------------------------
 v1.00   | Mar 11 2019  | First version deployed to mainnet, Ropsten, Kovan, Rinkeby and Görli
 
+<br />
+
+<hr />
+
+## Questions And Answers
+
+### What is the cost of deploying my own token contract?
+
+For the network transaction fees, deploying a new token contracts costs [~ 900k gas](https://ropsten.etherscan.io/tx/0x7e70ff44232a52d30abcb5cb0b620c841e9b0ffc59044cf3d17be19f85169702). At 5 gwei gas price, the cost will amount to ~ 0.18 ethers.
+
+The is also a `minimumFee` (currently 0.1 ETH), that must be sent along with the factory's `deployTokenContract()` call.
+
+<br />
+
+### Why does this factory contract not use the EIP-1167 CloneFactory
+
+[EIP 1167: Minimal Proxy Contract](https://eips.ethereum.org/EIPS/eip-1167) will result in cheaper gas cost for deployments (e.g. ~ 100k vs 900k). At this time, EtherScan has not implemented the use of the [ContractProbe contract](https://github.com/optionality/clone-factory#contractprobe-contract) to link a cloned contract to the template contract.
 
 <br />
 
