@@ -39,9 +39,9 @@ v1.00   | Mar 11 2019  | First version deployed to mainnet, Ropsten, Kovan, Rink
 
 ### What is the cost of deploying my own token contract?
 
-For the network transaction fees, deploying a new token contracts costs [~ 900k gas](https://ropsten.etherscan.io/tx/0x7e70ff44232a52d30abcb5cb0b620c841e9b0ffc59044cf3d17be19f85169702). At 5 gwei gas price, the cost will amount to ~ 0.18 ethers.
+For the network transaction fees, deploying a new token contracts will cost [~ 900k gas](https://ropsten.etherscan.io/tx/0x7e70ff44232a52d30abcb5cb0b620c841e9b0ffc59044cf3d17be19f85169702). At a 5 gwei gas price, the network transaction fees will amount to ~ 0.0045 ethers (or ~ USD 0.61 at ETH/USD 136).
 
-The is also a `minimumFee` (currently 0.1 ETH), that must be sent along with the factory's `deployTokenContract()` call.
+The is also a `minimumFee` (currently 0.1 ETH), that must be sent along with the factory's `deployTokenContract()` call. You can view the current `minimumFee` setting in the *Read Contract** tab of [EtherScan](https://etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#readContract), specified in wei.
 
 <br />
 
