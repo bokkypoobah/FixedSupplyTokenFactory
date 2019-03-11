@@ -49,6 +49,11 @@ The is also a `minimumFee` (currently 0.1 ETH), that must be sent along with the
 
 [EIP 1167: Minimal Proxy Contract](https://eips.ethereum.org/EIPS/eip-1167) will result in cheaper gas cost for deployments (e.g. ~ 100k vs 900k). At this time, EtherScan has not implemented the use of the [ContractProbe contract](https://github.com/optionality/clone-factory#contractprobe-contract) to link a cloned contract to the template contract.
 
+Additionally, each function execution using the CloneFactory will incur a slightly higher gas cost per transaction. From [DELEGATECALL forwarders: how to save ~50-98% on making many new contracts with the same code](https://www.reddit.com/r/ethereum/comments/6c1jui/delegatecall_forwarders_how_to_save_5098_on/):
+
+> * Creating the forwarding contract only costs <50000 gas, regardless of the length of the underlying call
+> * Each call to the contract thereafter will cost an additional ~1100 gas (700 DELEGATECALL + 400 memory expansion)
+
 <br />
 
 <hr />
