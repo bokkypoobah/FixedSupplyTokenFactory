@@ -60,6 +60,9 @@ contract Owned {
 
 // ----------------------------------------------------------------------------
 // ApproveAndCall Fallback
+// NOTE for contracts implementing this interface:
+// 1. An error must be thrown if there are errors executing `transferFrom(...)`
+// 2. The calling token contract must be checked to prevent malicious behaviour
 // ----------------------------------------------------------------------------
 contract ApproveAndCallFallback {
     function receiveApproval(address from, uint256 tokens, address token, bytes memory data) public;
@@ -152,6 +155,7 @@ contract FixedSupplyToken is TokenInterface, Owned {
     function allowance(address tokenOwner, address spender) public view returns (uint remaining) {
         return allowed[tokenOwner][spender];
     }
+    // NOTE Only use this call with a trusted spender contract
     function approveAndCall(address spender, uint tokens, bytes memory data) public returns (bool success) {
         allowed[msg.sender][spender] = tokens;
         emit Approval(msg.sender, spender, tokens);
