@@ -5,7 +5,8 @@
 <hr />
 
 # BokkyPooBah's Fixed Supply Token 👊 Factory
-Fixed Supply ERC20 Token Contract And Factory
+
+Use this factory to deploy your own token contract.
 
 <br />
 
@@ -14,6 +15,7 @@ Fixed Supply ERC20 Token Contract And Factory
 ## Table Of Contents
 
 * [History](#history)
+* [Bug Bounty Scope And Donations](#bug-bounty-scope-and-donations)
 * [Factory Deployment Address](#factory-deployment-address)
 * [Questions And Answers](#questions-and-answers)
 * [Factory Functions](#factory-functions)
@@ -30,6 +32,18 @@ Fixed Supply ERC20 Token Contract And Factory
 Version | Date         | Notes
 :------ |:------------ |:---------------------------------------
 v1.00   | Mar 11 2019  | First version deployed to mainnet, Ropsten, Kovan, Rinkeby and Görli
+
+<br />
+
+<hr />
+
+## Bug Bounty Scope And Donations
+
+Details of the bug bounty program for this project can be found at [BokkyPooBah's Hall Of Fame And Bug Bounties](https://github.com/bokkypoobah/BokkyPooBahsHallOfFameAndBugBounties). Please consider [donating](https://github.com/bokkypoobah/BokkyPooBahsHallOfFameAndBugBounties#donations) to support the bug bounty, and the development and maintenance of decentralised applications.
+
+The scope of the bug bounty for this project follows:
+
+* [contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](contracts/BokkyPooBahsFixedSupplyTokenFactory.sol)
 
 <br />
 
@@ -55,6 +69,12 @@ Additionally, each function execution using the CloneFactory will incur a slight
 > * Each call to the contract thereafter will cost an additional ~1100 gas (700 DELEGATECALL + 400 memory expansion)
 
 Using the CloneFactory will save on the upfront cost of deployment, but this should be compared to the additional long term expense of the ~1,100 gas per call.
+
+<br />
+
+### How is this a source code verified smart contract?
+
+
 
 <br />
 
@@ -327,4 +347,4 @@ contract FixedSupplyToken is TokenInterface, Owned {
 
 Enjoy!
 
-(c) BokkyPooBah / Bok Consulting Pty Ltd - Mar 11 2019. The MIT Licence.
+(c) BokkyPooBah / Bok Consulting Pty Ltd - Mar 13 2019. The MIT Licence.

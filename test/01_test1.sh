@@ -76,7 +76,7 @@ console.log("RESULT: ---------- " + deployGroup1Message + " ----------");
 var tokenFactoryContract = web3.eth.contract(tokenFactoryAbi);
 var tokenFactoryTx = null;
 var tokenFactoryAddress = null;
-var tokenFactory = tokenFactoryContract.new({from: deployer, data: tokenFactoryBin, gas: 6400000, gasPrice: defaultGasPrice},
+var tokenFactory = tokenFactoryContract.new({from: deployer, data: tokenFactoryBin, gas: 4000000, gasPrice: defaultGasPrice},
   function(e, contract) {
     if (!e) {
       if (!contract.address) {
