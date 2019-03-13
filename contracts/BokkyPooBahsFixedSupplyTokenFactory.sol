@@ -3,10 +3,10 @@ pragma solidity ^0.5.4;
 // ----------------------------------------------------------------------------
 // BokkyPooBah's Fixed Supply Token 👊 + Factory v1.10
 //
-// A factory to convieniently deploy your own source verified fixed supply
+// A factory to conveniently deploy your own source code verified fixed supply
 // token contracts
 //
-// Factory deployment address: 0xf157eE7e0f5121e40bCDD3f88e02eb1242E560f2
+// Factory deployment address: 0xA550114ee3688601006b8b9f25e64732eF774934
 //
 // https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
@@ -30,9 +30,9 @@ library SafeMath {
 
 
 // ----------------------------------------------------------------------------
-// Owned contract
+// Owned contract, with token recovery
 // ----------------------------------------------------------------------------
-contract Owned {
+contract OwnedWithTokenRecovery {
     address public owner;
     address public newOwner;
 
@@ -43,7 +43,8 @@ contract Owned {
         _;
     }
 
-    constructor(address _owner) public {
+    function init(address _owner) public {
+        require(owner != address(0));
         owner = _owner;
     }
     function transferOwnership(address _newOwner) public onlyOwner {
@@ -54,15 +55,6 @@ contract Owned {
         emit OwnershipTransferred(owner, newOwner);
         owner = newOwner;
         newOwner = address(0);
-    }
-}
-
-
-// ----------------------------------------------------------------------------
-// Recover ETH and other ERC20 tokens trapped at the deployed contract address
-// ----------------------------------------------------------------------------
-contract TokensRecoverable is Owned {
-    constructor(address _owner) public Owned(_owner){
     }
     function recoverTokens(address token, uint tokens) public onlyOwner {
         if (token == address(0)) {
@@ -116,7 +108,7 @@ contract TokenInterface is ERC20Interface {
 // ----------------------------------------------------------------------------
 // FixedSupplyToken 👊 = ERC20 + symbol + name + decimals + approveAndCall
 // ----------------------------------------------------------------------------
-contract FixedSupplyToken is TokenInterface, TokensRecoverable {
+contract FixedSupplyToken is TokenInterface, OwnedWithTokenRecovery {
     using SafeMath for uint;
 
     string _symbol;
@@ -127,7 +119,8 @@ contract FixedSupplyToken is TokenInterface, TokensRecoverable {
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
 
-    constructor(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply) public TokensRecoverable(tokenOwner) {
+    function init(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply) public {
+        super.init(tokenOwner);
         _symbol = symbol;
         _name = name;
         _decimals = decimals;
@@ -215,7 +208,7 @@ contract FixedSupplyToken is TokenInterface, TokensRecoverable {
 //   decimals       number of decimal places for the token contract
 //   totalSupply    the fixed token total supply
 // ----------------------------------------------------------------------------
-contract BokkyPooBahsFixedSupplyTokenFactory is TokensRecoverable {
+contract BokkyPooBahsFixedSupplyTokenFactory is OwnedWithTokenRecovery {
     using SafeMath for uint;
 
     address public newAddress;
@@ -227,7 +220,8 @@ contract BokkyPooBahsFixedSupplyTokenFactory is TokensRecoverable {
     event MinimumFeeUpdated(uint oldFee, uint newFee);
     event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
 
-    constructor() public TokensRecoverable(msg.sender) {
+    function init() public {
+        super.init(msg.sender);
     }
     function numberOfChildren() public view returns (uint) {
         return children.length;
@@ -241,22 +235,20 @@ contract BokkyPooBahsFixedSupplyTokenFactory is TokensRecoverable {
         emit MinimumFeeUpdated(minimumFee, _minimumFee);
         minimumFee = _minimumFee;
     }
-    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token) {
+    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (FixedSupplyToken token) {
         require(msg.value >= minimumFee);
         require(decimals <= 27);
         require(totalSupply > 0);
-        token = _deployTokenContract(msg.sender, symbol, name, decimals, totalSupply);
+        token = new FixedSupplyToken();
+        token.init(msg.sender, symbol, name, decimals, totalSupply);
+        isChild[address(token)] = true;
+        children.push(address(token));
+        emit TokenDeployed(owner, address(token), symbol, name, decimals, totalSupply);
         if (msg.value > 0) {
             address(uint160(owner)).transfer(msg.value);
         }
     }
     function () external payable {
         revert();
-    }
-    function _deployTokenContract(address owner, string memory symbol, string memory name, uint8 decimals, uint totalSupply) internal returns (address token) {
-        token = address(new FixedSupplyToken(owner, symbol, name, decimals, totalSupply));
-        isChild[token] = true;
-        children.push(token);
-        emit TokenDeployed(owner, token, symbol, name, decimals, totalSupply);
     }
 }
