@@ -176,8 +176,8 @@ contract FixedSupplyToken is TokenInterface, Owned {
 //
 // Notes:
 //   * The `newContractAddress` deprecation is just advisory
-//   * The minimum fee must be sent with the `deployTokenContract(...)` call
-//   * Any excess over the fee will be refunded to the sending account
+//   * A fee equal to or above `minimumFee` must be sent with the
+//   `deployTokenContract(...)` call
 //
 // Execute `deployTokenContract(...)` with the following parameters
 // to deploy your very own FixedSupplyToken contract:
