@@ -32,7 +32,7 @@ library SafeMath {
 // ----------------------------------------------------------------------------
 // Owned contract, with token recovery
 // ----------------------------------------------------------------------------
-contract OwnedWithTokenRecovery {
+contract Owned {
     address public owner;
     address public newOwner;
 
@@ -44,7 +44,7 @@ contract OwnedWithTokenRecovery {
     }
 
     function init(address _owner) public {
-        require(owner != address(0));
+        require(owner == address(0));
         owner = _owner;
     }
     function transferOwnership(address _newOwner) public onlyOwner {
@@ -108,7 +108,7 @@ contract TokenInterface is ERC20Interface {
 // ----------------------------------------------------------------------------
 // FixedSupplyToken 👊 = ERC20 + symbol + name + decimals + approveAndCall
 // ----------------------------------------------------------------------------
-contract FixedSupplyToken is TokenInterface, OwnedWithTokenRecovery {
+contract FixedSupplyToken is TokenInterface, Owned {
     using SafeMath for uint;
 
     string _symbol;
@@ -185,22 +185,21 @@ contract FixedSupplyToken is TokenInterface, OwnedWithTokenRecovery {
 //   * A fee equal to or above `minimumFee` must be sent with the
 //   `deployTokenContract(...)` call
 //
-// Execute `deployTokenContract(...)` with the following parameters
-// to deploy your very own FixedSupplyToken contract:
+// Execute `deployTokenContract(...)` with the following parameters to deploy
+// your very own FixedSupplyToken contract:
 //   symbol         symbol
 //   name           name
 //   decimals       number of decimal places for the token contract
 //   totalSupply    the fixed token total supply
 //
-// For example, deploying a FixedSupplyToken contract with a
-// `totalSupply` of 1,000.000000000000000000 tokens:
+// For example, deploying a FixedSupplyToken contract with a `totalSupply`
+// of 1,000.000000000000000000 tokens:
 //   symbol         "ME"
 //   name           "My Token"
 //   decimals       18
 //   initialSupply  10000000000000000000000 = 1,000.000000000000000000 tokens
 //
-// The TokenDeployed() event is logged with the following
-// parameters:
+// The TokenDeployed() event is logged with the following parameters:
 //   owner          the account that execute this transaction
 //   token          the newly deployed FixedSupplyToken address
 //   symbol         symbol
@@ -208,7 +207,7 @@ contract FixedSupplyToken is TokenInterface, OwnedWithTokenRecovery {
 //   decimals       number of decimal places for the token contract
 //   totalSupply    the fixed token total supply
 // ----------------------------------------------------------------------------
-contract BokkyPooBahsFixedSupplyTokenFactory is OwnedWithTokenRecovery {
+contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     using SafeMath for uint;
 
     address public newAddress;
@@ -220,7 +219,7 @@ contract BokkyPooBahsFixedSupplyTokenFactory is OwnedWithTokenRecovery {
     event MinimumFeeUpdated(uint oldFee, uint newFee);
     event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
 
-    function init() public {
+    constructor () public {
         super.init(msg.sender);
     }
     function numberOfChildren() public view returns (uint) {
