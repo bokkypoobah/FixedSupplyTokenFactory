@@ -1,12 +1,12 @@
 pragma solidity ^0.5.4;
 
 // ----------------------------------------------------------------------------
-// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.00
+// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.10
 //
 // A factory to convieniently deploy your own source verified fixed supply
 // token contracts
 //
-// Factory deployment address: 0xfAEcE565D445e98Ea024f02FF06607B4654eEb56
+// Factory deployment address: 0xf157eE7e0f5121e40bCDD3f88e02eb1242E560f2
 //
 // https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
@@ -59,6 +59,22 @@ contract Owned {
 
 
 // ----------------------------------------------------------------------------
+// Recover ETH and other ERC20 tokens trapped at the deployed contract address
+// ----------------------------------------------------------------------------
+contract TokensRecoverable is Owned {
+    constructor(address _owner) public Owned(_owner){
+    }
+    function recoverTokens(address token, uint tokens) public onlyOwner {
+        if (token == address(0)) {
+            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
+        } else {
+            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
+        }
+    }
+}
+
+
+// ----------------------------------------------------------------------------
 // ApproveAndCall Fallback
 // NOTE for contracts implementing this interface:
 // 1. An error must be thrown if there are errors executing `transferFrom(...)`
@@ -100,7 +116,7 @@ contract TokenInterface is ERC20Interface {
 // ----------------------------------------------------------------------------
 // FixedSupplyToken 👊 = ERC20 + symbol + name + decimals + approveAndCall
 // ----------------------------------------------------------------------------
-contract FixedSupplyToken is TokenInterface, Owned {
+contract FixedSupplyToken is TokenInterface, TokensRecoverable {
     using SafeMath for uint;
 
     string _symbol;
@@ -111,7 +127,7 @@ contract FixedSupplyToken is TokenInterface, Owned {
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
 
-    constructor(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply) public Owned(tokenOwner) {
+    constructor(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply) public TokensRecoverable(tokenOwner) {
         _symbol = symbol;
         _name = name;
         _decimals = decimals;
@@ -162,13 +178,6 @@ contract FixedSupplyToken is TokenInterface, Owned {
         ApproveAndCallFallback(spender).receiveApproval(msg.sender, tokens, address(this), data);
         return true;
     }
-    function recoverTokens(address token, uint tokens) public onlyOwner {
-        if (token == address(0)) {
-            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
-        } else {
-            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
-        }
-    }
     function () external payable {
         revert();
     }
@@ -197,16 +206,16 @@ contract FixedSupplyToken is TokenInterface, Owned {
 //   decimals       18
 //   initialSupply  10000000000000000000000 = 1,000.000000000000000000 tokens
 //
-// The FixedSupplyTokenListing() event is logged with the following
+// The TokenDeployed() event is logged with the following
 // parameters:
 //   owner          the account that execute this transaction
-//   tokenAddress   the newly deployed FixedSupplyToken address
+//   token          the newly deployed FixedSupplyToken address
 //   symbol         symbol
 //   name           name
 //   decimals       number of decimal places for the token contract
 //   totalSupply    the fixed token total supply
 // ----------------------------------------------------------------------------
-contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
+contract BokkyPooBahsFixedSupplyTokenFactory is TokensRecoverable {
     using SafeMath for uint;
 
     address public newAddress;
@@ -218,9 +227,7 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     event MinimumFeeUpdated(uint oldFee, uint newFee);
     event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
 
-    constructor() public Owned(msg.sender) {
-        // Initial contract for source code verification
-        _deployTokenContract(msg.sender, "FIST", "Fixed Supply Token 👊 v1.00", 18, 10**24);
+    constructor() public TokensRecoverable(msg.sender) {
     }
     function numberOfChildren() public view returns (uint) {
         return children.length;
@@ -241,13 +248,6 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
         token = _deployTokenContract(msg.sender, symbol, name, decimals, totalSupply);
         if (msg.value > 0) {
             address(uint160(owner)).transfer(msg.value);
-        }
-    }
-    function recoverTokens(address token, uint tokens) public onlyOwner {
-        if (token == address(0)) {
-            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
-        } else {
-            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
         }
     }
     function () external payable {
