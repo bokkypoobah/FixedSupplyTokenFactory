@@ -33,7 +33,7 @@ library SafeMath {
 // Owned contract, with token recovery
 // ----------------------------------------------------------------------------
 contract Owned {
-    address public owner;
+    address payable public owner;
     address public newOwner;
 
     event OwnershipTransferred(address indexed _from, address indexed _to);
@@ -45,7 +45,7 @@ contract Owned {
 
     function init(address _owner) public {
         require(owner == address(0));
-        owner = _owner;
+        owner = address(uint160(_owner));
     }
     function transferOwnership(address _newOwner) public onlyOwner {
         newOwner = _newOwner;
@@ -53,12 +53,12 @@ contract Owned {
     function acceptOwnership() public {
         require(msg.sender == newOwner);
         emit OwnershipTransferred(owner, newOwner);
-        owner = newOwner;
+        owner = address(uint160(newOwner));
         newOwner = address(0);
     }
     function recoverTokens(address token, uint tokens) public onlyOwner {
         if (token == address(0)) {
-            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
+            owner.transfer((tokens == 0 ? address(this).balance : tokens));
         } else {
             ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
         }
@@ -244,7 +244,7 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
         children.push(address(token));
         emit TokenDeployed(owner, address(token), symbol, name, decimals, totalSupply);
         if (msg.value > 0) {
-            address(uint160(owner)).transfer(msg.value);
+            owner.transfer(msg.value);
         }
     }
     function () external payable {
