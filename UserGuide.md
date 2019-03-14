@@ -135,6 +135,18 @@ After the wallet is accessed, the MyCrypto screen changes to:
 * Click on the `ERC-20(LEMON)` link two screens above to see the [token contract transfers](https://ropsten.etherscan.io/token/0x9e458482b817e1238d04c374934f1306498b65b9):
     <kbd><img src="images/EtherScan-LEMON-TokenTransfers.png" /></kbd><br />
 
+<br />
+
+<hr />
+
+## Interacting with the newly deployed token contract
+
+We will add the new token contract address to MetaMask so we can execute transfers of these tokens to other accounts.
+
+### 1. Add new token contract to MetaMask
+
+
+
 
 
 
