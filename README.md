@@ -14,7 +14,7 @@ Call the factory `deployTokenContract(string symbol, string name, uint8 decimals
 
 Use the standard ERC20 `transfer(...)`, `approve(...)` and `transferFrom(...)` functions to transfer these tokens to other accounts.
 
-`minimumFee` is set to 0.1 ethers (ETH) currently. This amount can be viewed on the EtherScan page for the factory at [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934#readContract).
+`minimumFee` is set to 0.1 ethers (ETH) currently. This amount can be viewed on the EtherScan page for the factory at [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934#readContract) (mainnet).
 
 <br />
 
