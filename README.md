@@ -96,7 +96,7 @@ Using the CloneFactory will save on the upfront cost of deployment, but this sho
 
 <br />
 
-### Factory Partial Application Binary Interface
+### Factory deployTokenContract Only Application Binary Interface
 
 Only for the `deployTokenContract(...)` function:
 
