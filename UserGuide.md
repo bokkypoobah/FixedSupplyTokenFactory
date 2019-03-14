@@ -54,16 +54,15 @@ The Application Binary Interface (ABI) for this factory's `deployTokenContract(.
 
 For an example, we will deploy a token contract contract with the symbol `LEMON`, name `Lemonade 🍋 Stand`, 2 decimal places and a fixed totalSupply of 1000.00 tokens. This could represent the proportional share in the lemonade stand enterprise.
 
-For this exercise, I will be using MyCrypto to interact with the factory contract, and MetaMask as the signing wallet.
+For this exercise, I will be using MyCrypto to interact with the factory contract, and MetaMask as the signing wallet. And I will be deploying my token contract on the Ropsten tesnet.
 
 #### 1. Select your desired network in MetaMask
 
+* Click on the MetaMask icon in your web browser tool bar
 * Click on the selected network in the top to select a new network:
   <kbd><img src="images/MetaMask-SelectNetwork.png" /></kbd>
 
 #### 2. Navigate to MyCrypto and select the right network
-
-In this example, I will be using the Ropsten testnet.
 
 * Navigate to the contracts interaction page https://mycrypto.com/contracts/interact:
     <kbd><img src="images/MyCrypto-FirstScreen.png" /></kbd>
@@ -78,6 +77,9 @@ In this example, I will be using the Ropsten testnet.
 
     <kbd><img src="images/MyCrypto-FactoryAddressABI.png" /></kbd>
 
+#### 4. Fill in your token contract details
+
+<kbd><img src="images/MyCrypto-LEMON.png" /></kbd>
 
 
 
