@@ -132,12 +132,15 @@ Additionally, the `approveAndCall(...)` functionality is included so that the tw
 
 <br />
 
-### How do I confirm whether a token contract has been created by this factory?
+### How do I confirm that a token contract has been created by this factory?
 
 Navigate to the **Read Contract** tab for the factory in EtherScan. e.g., Mainnet [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934#readContract). Enter the address of your token contract (e.g., `0x7492e4ed68d9f39579690c9cd9051ddcc805a8d5`) in the `isChild` input field and click on Query:
 
 <kbd><img src="images/EtherScan-FactoryIsChild.png" /></kbd>
 
+On the EtherScan token contract screen (e.g. [FIST110](https://etherscan.io/address/0x7492e4ed68d9f39579690c9cd9051ddcc805a8d5)) the **Contract Creator** will be the address of the factory contract `0xA550114ee3688601006b8b9f25e64732eF774934`.
+
+<kbd><img src="images/EtherScan-FixedSupplyTokenCreator.png" /></kbd>
 
 <br />
 
