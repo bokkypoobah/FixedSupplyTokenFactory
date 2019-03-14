@@ -99,7 +99,6 @@ After the wallet is accessed, the MyCrypto screen changes to:
 
 <kbd><img src="images/MyCrypto-WalletAccessed.png" /></kbd>
 
-
 #### 7. Fill in transaction details
 
 * Automatically Calculate Gas Limit: `off`
@@ -107,6 +106,12 @@ After the wallet is accessed, the MyCrypto screen changes to:
 * Gas Limit: `1200000` (1,200,000 without the commas)
 
 <kbd><img src="images/MyCrypto-ValueGasPriceAndGasLimit.png" /></kbd>
+
+#### 8. Generate and send the transaction
+
+<kbd><img src="images/MyCrypto-GenerateAndSendTx.png" /></kbd>
+
+
 
 
 #### Fill in the factory contract address and Application Binary Interface
