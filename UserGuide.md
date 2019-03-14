@@ -103,7 +103,7 @@ After the wallet is accessed, the MyCrypto screen changes to:
 
 * Automatically Calculate Gas Limit: `off`
 * Gas Price (gwei): `10` is OK for testnets. See [https://ethgasstation.info/](https://ethgasstation.info/) for the current Ethereum mainnet estimated gas prices
-* Gas Limit: `1200000` (1,200,000 without the commas)
+* Gas Limit: `1200000` (manually enter 200,000 without the commas)
 * Click Write
 
 <kbd><img src="images/MyCrypto-ValueGasPriceAndGasLimit.png" /></kbd>
