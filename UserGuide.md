@@ -80,13 +80,17 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 
 #### 4. Fill in your token contract details
 
+* symbol: `LEMON`
+* name: `Lemonade 🍋 Stand`
+* decimals: `2`
+* totalSupply: 100000 (100000 units = 1,000.00 tokens with 2 decimal places)
+
 <kbd><img src="images/MyCrypto-LEMON.png" /></kbd>
 
+#### 5. Access your wallet
 
+<kbd><img src="images/MyCrypto-AccessWallet.png" /></kbd>
 
-Check that you are on your desired network. In this example, we will use the Ropsten testnet.
-
-<kbd><img src="images/PrincessLeiaPeachExpelsARainbowBigBang-FixedSupplyTokenFactory.png" /></kbd>
 
 
 #### Fill in the factory contract address and Application Binary Interface
@@ -95,13 +99,6 @@ Check that you are on your desired network. In this example, we will use the Rop
 <kbd><img src="images/PrincessLeiaPeachExpelsARainbowBigBang-FixedSupplyTokenFactory.png" /></kbd>
 
 
-LEMON
-
-Lemonade 🍋 Stand
-
-2
-
-100000
 
 
 https://ropsten.etherscan.io/tx/0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2
