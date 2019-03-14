@@ -31,7 +31,8 @@ Use this factory to deploy your own token contract.
 
 Version | Date         | Notes
 :------ |:------------ |:---------------------------------------
-v1.00   | Mar 11 2019  | First version deployed to mainnet, Ropsten, Kovan, Rinkeby and Görli
+v1.00   | Mar 11 2019  | First version deployed to mainnet, and the Ropsten, Kovan, Rinkeby and Görli testnets
+v1.10   | Mar 14 2019  | Second version deployed with [Incorrect comment on fee refund #1](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/1), [Add warnings to `approveAndCall(...)` and `receiveApproval(...)` #2](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/2), [Cosmetics including `address payable` #3](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/3), [Remove deployment constructor arguments #4](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/4),
 
 <br />
 
@@ -44,6 +45,13 @@ Details of the bug bounty program for this project can be found at [BokkyPooBah'
 The scope of the bug bounty for this project follows:
 
 * [contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](contracts/BokkyPooBahsFixedSupplyTokenFactory.sol)
+
+<br />
+
+Bounties awarded for this project:
+
+* Mar 14 2019 - [smarx](https://github.com/smarx/) - [Incorrect comment on fee refund #1](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/1)
+* Mar 14 2019 - [pertsev](https://github.com/pertsev) - [Add warnings to `approveAndCall(...)` and `receiveApproval(...)` #2](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/2) and [Cosmetics including `address payable` #3](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/3)
 
 <br />
 
@@ -72,41 +80,41 @@ Using the CloneFactory will save on the upfront cost of deployment, but this sho
 
 <br />
 
-### How is this a source code verified smart contract?
-
-
-
-<br />
-
 <hr />
 
-## Factory Deployment Address
+## BokkyPooBah's Fixed Supply Token Factory
 
-[contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](https://github.com/bokkypoobah/FixedSupplyTokenFactory/blob/3467f170b149465438c72a154c2b1b0771aa5a3e/contracts/BokkyPooBahsFixedSupplyTokenFactory.sol) has been deployed to the same address `0xfAEcE565D445e98Ea024f02FF06607B4654eEb56` on the following networks:
+### Factory Deployment Addresses
 
-* Mainnet [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
-* Ropsten [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://ropsten.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
-* Kovan [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://kovan.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
-* Rinkeby [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://rinkeby.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code) (Source validation for FixedSupplyToken unsuccessful)
-* Görli [0xfAEcE565D445e98Ea024f02FF06607B4654eEb56](https://goerli.etherscan.io/address/0xfAEcE565D445e98Ea024f02FF06607B4654eEb56#code)
+[contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](https://github.com/bokkypoobah/FixedSupplyTokenFactory/blob/a775958f9eba9ef1579c40ef0c799b8e326780d2/contracts/BokkyPooBahsFixedSupplyTokenFactory.sol) has been deployed to the same address `0xA550114ee3688601006b8b9f25e64732eF774934` on the following networks:
 
-<br />
-
-<hr />
-
-## Factory Functions
-
-The factory has been deployed to `0xfAEcE565D445e98Ea024f02FF06607B4654eEb56` on all networks.
+* Mainnet [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
+* Ropsten [0xA550114ee3688601006b8b9f25e64732eF774934](https://ropsten.etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
+* Kovan [0xA550114ee3688601006b8b9f25e64732eF774934](https://kovan.etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
+* Rinkeby [0xA550114ee3688601006b8b9f25e64732eF774934](https://rinkeby.etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
+* Görli [0xA550114ee3688601006b8b9f25e64732eF774934](https://goerli.etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
 
 <br />
 
-### Application Binary Interface
+### Factory Partial Application Binary Interface
+
+Only for the `deployTokenContract(...)` function:
+
+```javascript
+[{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
+```
+
+<br />
+
+### Factory Full Application Binary Interface
 
 ```javascript
 [{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"symbol","type":"string"},{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"decimals","type":"uint8"},{"indexed":false,"name":"totalSupply","type":"uint256"}],"name":"TokenDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}]
 ```
 
-### deployTokenContract
+<br />
+
+### deployTokenContract Function
 
 ```javascript
 function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token);
@@ -138,16 +146,18 @@ event TokenDeployed(address indexed owner, address indexed token, string symbol,
 #### Example
 
 ```javascript
-address newTokenContract = factory.deployTokenContract("MYT", "My Token", 18, "1000000000000000000000000");
+address newTokenContract = factory.deployTokenContract("FIST110", "Fixed Supply Token 👊 v1.10", 18, "1000000000000000000000000");
 ```
 
-Deploys a new token contract with 1,000,000.000000000000000000 MYT tokens minted to the transaction sending account.
+Deploys a new token contract with 1,000,000.000000000000000000 FIST110 tokens minted to the transaction sending account.
 
 <br />
 
-## Fixed Supply Token 👊
+<hr />
 
-Following is the screenshot of a newly deployed [Fixed Supply Token 👊 v1.00](https://etherscan.io/token/0xbd2ea74a74820c9b5750e40c2851bed7136292ed#balances):
+## Sample Fixed Supply Token 👊
+
+Following is the screenshot of a newly deployed [Fixed Supply Token 👊 v1.10](https://etherscan.io/token/0x7492e4ed68d9f39579690c9cd9051ddcc805a8d5#balances):
 
 <kbd><img src="images/EtherScan-FixedSupplyToken.png" /></kbd>
 
@@ -155,20 +165,18 @@ Following is the screenshot of a newly deployed [Fixed Supply Token 👊 v1.00](
 
 <hr />
 
-### Source Code
-
-**FixedSupplyToken** source code, from [contracts/BokkyPooBahsFixedSupplyTokenFactory.sol](https://github.com/bokkypoobah/FixedSupplyTokenFactory/blob/3467f170b149465438c72a154c2b1b0771aa5a3e/contracts/BokkyPooBahsFixedSupplyTokenFactory.sol):
+### BokkyPooBah's Fixed Supply Token Factory Source Code
 
 ```javascript
 pragma solidity ^0.5.4;
 
 // ----------------------------------------------------------------------------
-// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.00
+// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.10
 //
-// A factory to convieniently deploy your own source verified fixed supply
+// A factory to conveniently deploy your own source code verified fixed supply
 // token contracts
 //
-// Factory deployment address: 0xfAEcE565D445e98Ea024f02FF06607B4654eEb56
+// Factory deployment address: 0xA550114ee3688601006b8b9f25e64732eF774934
 //
 // https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
@@ -192,10 +200,10 @@ library SafeMath {
 
 
 // ----------------------------------------------------------------------------
-// Owned contract
+// Owned contract, with token recovery
 // ----------------------------------------------------------------------------
 contract Owned {
-    address public owner;
+    address payable public owner;
     address public newOwner;
 
     event OwnershipTransferred(address indexed _from, address indexed _to);
@@ -205,8 +213,9 @@ contract Owned {
         _;
     }
 
-    constructor(address _owner) public {
-        owner = _owner;
+    function init(address _owner) public {
+        require(owner == address(0));
+        owner = address(uint160(_owner));
     }
     function transferOwnership(address _newOwner) public onlyOwner {
         newOwner = _newOwner;
@@ -214,14 +223,24 @@ contract Owned {
     function acceptOwnership() public {
         require(msg.sender == newOwner);
         emit OwnershipTransferred(owner, newOwner);
-        owner = newOwner;
+        owner = address(uint160(newOwner));
         newOwner = address(0);
+    }
+    function recoverTokens(address token, uint tokens) public onlyOwner {
+        if (token == address(0)) {
+            owner.transfer((tokens == 0 ? address(this).balance : tokens));
+        } else {
+            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
+        }
     }
 }
 
 
 // ----------------------------------------------------------------------------
 // ApproveAndCall Fallback
+// NOTE for contracts implementing this interface:
+// 1. An error must be thrown if there are errors executing `transferFrom(...)`
+// 2. The calling token contract must be checked to prevent malicious behaviour
 // ----------------------------------------------------------------------------
 contract ApproveAndCallFallback {
     function receiveApproval(address from, uint256 tokens, address token, bytes memory data) public;
@@ -270,7 +289,8 @@ contract FixedSupplyToken is TokenInterface, Owned {
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
 
-    constructor(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply) public Owned(tokenOwner) {
+    function init(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply) public {
+        super.init(tokenOwner);
         _symbol = symbol;
         _name = name;
         _decimals = decimals;
@@ -314,17 +334,87 @@ contract FixedSupplyToken is TokenInterface, Owned {
     function allowance(address tokenOwner, address spender) public view returns (uint remaining) {
         return allowed[tokenOwner][spender];
     }
+    // NOTE Only use this call with a trusted spender contract
     function approveAndCall(address spender, uint tokens, bytes memory data) public returns (bool success) {
         allowed[msg.sender][spender] = tokens;
         emit Approval(msg.sender, spender, tokens);
         ApproveAndCallFallback(spender).receiveApproval(msg.sender, tokens, address(this), data);
         return true;
     }
-    function recoverTokens(address token, uint tokens) public onlyOwner {
-        if (token == address(0)) {
-            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
-        } else {
-            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
+    function () external payable {
+        revert();
+    }
+}
+
+
+// ----------------------------------------------------------------------------
+// BokkyPooBah's Fixed Supply Token 👊 Factory
+//
+// Notes:
+//   * The `newContractAddress` deprecation is just advisory
+//   * A fee equal to or above `minimumFee` must be sent with the
+//   `deployTokenContract(...)` call
+//
+// Execute `deployTokenContract(...)` with the following parameters to deploy
+// your very own FixedSupplyToken contract:
+//   symbol         symbol
+//   name           name
+//   decimals       number of decimal places for the token contract
+//   totalSupply    the fixed token total supply
+//
+// For example, deploying a FixedSupplyToken contract with a `totalSupply`
+// of 1,000.000000000000000000 tokens:
+//   symbol         "ME"
+//   name           "My Token"
+//   decimals       18
+//   initialSupply  10000000000000000000000 = 1,000.000000000000000000 tokens
+//
+// The TokenDeployed() event is logged with the following parameters:
+//   owner          the account that execute this transaction
+//   token          the newly deployed FixedSupplyToken address
+//   symbol         symbol
+//   name           name
+//   decimals       number of decimal places for the token contract
+//   totalSupply    the fixed token total supply
+// ----------------------------------------------------------------------------
+contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
+    using SafeMath for uint;
+
+    address public newAddress;
+    uint public minimumFee = 0.1 ether;
+    mapping(address => bool) public isChild;
+    address[] public children;
+
+    event FactoryDeprecated(address _newAddress);
+    event MinimumFeeUpdated(uint oldFee, uint newFee);
+    event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
+
+    constructor () public {
+        super.init(msg.sender);
+    }
+    function numberOfChildren() public view returns (uint) {
+        return children.length;
+    }
+    function deprecateFactory(address _newAddress) public onlyOwner {
+        require(newAddress == address(0));
+        emit FactoryDeprecated(_newAddress);
+        newAddress = _newAddress;
+    }
+    function setMinimumFee(uint _minimumFee) public onlyOwner {
+        emit MinimumFeeUpdated(minimumFee, _minimumFee);
+        minimumFee = _minimumFee;
+    }
+    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (FixedSupplyToken token) {
+        require(msg.value >= minimumFee);
+        require(decimals <= 27);
+        require(totalSupply > 0);
+        token = new FixedSupplyToken();
+        token.init(msg.sender, symbol, name, decimals, totalSupply);
+        isChild[address(token)] = true;
+        children.push(address(token));
+        emit TokenDeployed(owner, address(token), symbol, name, decimals, totalSupply);
+        if (msg.value > 0) {
+            owner.transfer(msg.value);
         }
     }
     function () external payable {
@@ -335,10 +425,12 @@ contract FixedSupplyToken is TokenInterface, Owned {
 
 <br />
 
-### Application Binary Interface
+<hr />
+
+## Fixed Supply Token Application Binary Interface
 
 ```javascript
-[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"tokenOwner","type":"address"},{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"fixedSupply","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}]
+[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_owner","type":"address"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"fixedSupply","type":"uint256"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}]
 ```
 
 <br />
@@ -347,4 +439,4 @@ contract FixedSupplyToken is TokenInterface, Owned {
 
 Enjoy!
 
-(c) BokkyPooBah / Bok Consulting Pty Ltd - Mar 13 2019. The MIT Licence.
+(c) BokkyPooBah / Bok Consulting Pty Ltd - Mar 14 2019. The MIT Licence.
