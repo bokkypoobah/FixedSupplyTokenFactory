@@ -6,7 +6,9 @@
 
 # BokkyPooBah's Fixed Supply Token 👊 Factory
 
-Use this factory to deploy your own token contract.
+Use this factory to deploy your own vanilla fixed supply token token contract. This fixed supply token contract implements the [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) token standard interface. The ERC20 optional `symbol()`, `name()` and `decimals()` have been implemented in this token contract.
+
+Additionally, the `approveAndCall(...)` functionality is included so that the two operations of executing `tokenContract.approve(targetContract, tokens)` and `targetContract.doSomething(...)` (which will execute `tokenContract.transferFrom(user, targetContact, tokens)`) can be combined into a single `approveAndCall(...)` transaction. Please only use this functionality with trusted smart contracts!
 
 <br />
 
@@ -17,7 +19,7 @@ Use this factory to deploy your own token contract.
 * [History](#history)
 * [Bug Bounty Scope And Donations](#bug-bounty-scope-and-donations)
 * [Questions And Answers](#questions-and-answers)
-* [BokkyPooBah's Fixed Supply Token Factory](#bokkypoobahs-fixed-supply-token-factory)
+* [BokkyPooBah's Fixed Supply Token 👊 Factory](#bokkypoobahs-fixed-supply-token--factory)
   * [Factory Deployment Addresses](#factory-deployment-addresses)
   * [Factory deployTokenContract Only Application Binary Interface](#factory-deploytokencontract-only-application-binary-interface)
   * [Factory Full Application Binary Interface](#factory-full-application-binary-interface)
@@ -25,7 +27,7 @@ Use this factory to deploy your own token contract.
 * [Fixed Supply Token 👊](#fixed-supply-token-)
   * [Fixed Supply Token 👊 Application Binary Interface](#fixed-supply-token--application-binary-interface)
   * [Sample Fixed Supply Token 👊](#sample-fixed-supply-token-)
-* [BokkyPooBah's Fixed Supply Token Factory Source Code](#bokkypoobahs-fixed-supply-token-factory-source-code)
+* [BokkyPooBah's Fixed Supply Token 👊 Factory Source Code](#bokkypoobahs-fixed-supply-token--factory-source-code)
 
 <br />
 
@@ -100,7 +102,7 @@ You can always deploy a fixed supply token contract like [https://github.com/bok
 
 <hr />
 
-## BokkyPooBah's Fixed Supply Token Factory
+## BokkyPooBah's Fixed Supply Token 👊 Factory
 
 ### Factory Deployment Addresses
 
@@ -175,6 +177,12 @@ Deploys a new token contract with 1,000,000.000000000000000000 FIST110 tokens mi
 
 ## Fixed Supply Token 👊
 
+This factory will deploy fixed supply token token contract that implement the [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) token standard interface. The ERC20 optional `symbol()`, `name()` and `decimals()` have been implemented in this token contract.
+
+Additionally, the `approveAndCall(...)` functionality is included so that the two operations of executing `tokenContract.approve(targetContract, tokens)` and `targetContract.doSomething(...)` (which will execute `tokenContract.transferFrom(user, targetContact, tokens)`) can be combined into a single `approveAndCall(...)` transaction. Please only use this functionality with trusted smart contracts!
+
+<br />
+
 ## Fixed Supply Token 👊 Application Binary Interface
 
 ```javascript
@@ -193,7 +201,7 @@ Following is the screenshot of a newly deployed [Fixed Supply Token 👊 v1.10](
 
 <hr />
 
-### BokkyPooBah's Fixed Supply Token Factory Source Code
+### BokkyPooBah's Fixed Supply Token 👊 Factory Source Code
 
 From [contracts/BokkyPooBahsFixedSupplyTokenFactory.sol #a775958](https://github.com/bokkypoobah/FixedSupplyTokenFactory/blob/a775958f9eba9ef1579c40ef0c799b8e326780d2/contracts/BokkyPooBahsFixedSupplyTokenFactory.sol):
 
