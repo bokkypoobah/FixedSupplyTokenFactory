@@ -6,15 +6,15 @@
 
 # BokkyPooBah's Fixed Supply Token 👊 Factory
 
-I have deploy many "vanilla" fixed supply token contracts in the past, on special request. This factory is a low fee vending machine to automate my fixed supply token contract deployment service.
+I have deployed many "vanilla" fixed supply token contracts in the past, on special request. This factory is a low fee vending machine to automate my fixed supply token contract deployment service.
 
 This factory allows anyone to deploy an [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) token contract in a few minutes.
 
-Call the factory `deployTokenContract(string symbol, string name, uint8 decimals, uint totalSupply)` function, sending the factory's `minimumFee` amount (or more) in ethers. The token contract will be deployed with the entire `totalSupply` assigned to the account executing the deployment transaction.
+Call the factory `deployTokenContract(string symbol, string name, uint8 decimals, uint totalSupply)` function, sending `minimumFee` (or more) in ethers. The factory will deploy a token contract with the entire `totalSupply` assigned to the account executing the deployment transaction.
 
 Use the standard ERC20 `transfer(...)`, `approve(...)` and `transferFrom(...)` functions to transfer these tokens to other accounts.
 
-Note that `minimumFee` is set to 0.1 ethers (ETH) currently.
+`minimumFee` is set to 0.1 ethers (ETH) currently. This amount can be viewed on the EtherScan page for the factory at [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934#readContract).
 
 <br />
 
