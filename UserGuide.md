@@ -118,6 +118,12 @@ After the wallet is accessed, the MyCrypto screen changes to:
 
 <kbd><img src="images/MetaMask-TxConfirmation-2.png" /></kbd>
 
+#### 10. Transaction confirmed
+
+* MyCrypto provides a link to the transaction in EtherScan:
+    <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd>
+* The transaction in EtherScan:
+<kbd><img src="images/EtherScan-ConfirmedTransaction.png" /></kbd>
 
 
 
