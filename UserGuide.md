@@ -89,7 +89,7 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 
 #### 5. Access your wallet
 
-In this example, I click on the MetaMask button:
+In this example, I clicked on the MetaMask button:
 
 <kbd><img src="images/MyCrypto-AccessWallet.png" /></kbd>
 
@@ -104,6 +104,7 @@ After the wallet is accessed, the MyCrypto screen changes to:
 * Automatically Calculate Gas Limit: `off`
 * Gas Price (gwei): `10` is OK for testnets. See [https://ethgasstation.info/](https://ethgasstation.info/) for the current Ethereum mainnet estimated gas prices
 * Gas Limit: `1200000` (1,200,000 without the commas)
+* Click Write
 
 <kbd><img src="images/MyCrypto-ValueGasPriceAndGasLimit.png" /></kbd>
 
@@ -112,12 +113,12 @@ After the wallet is accessed, the MyCrypto screen changes to:
 <kbd><img src="images/MyCrypto-GenerateAndSendTx.png" /></kbd>
 
 
+#### 9. Confirm the transaction in MetaMask
+
+<kbd><img src="images/MetaMask-TxConfirmation.png" /></kbd>
 
 
-#### Fill in the factory contract address and Application Binary Interface
 
-
-<kbd><img src="images/PrincessLeiaPeachExpelsARainbowBigBang-FixedSupplyTokenFactory.png" /></kbd>
 
 
 
