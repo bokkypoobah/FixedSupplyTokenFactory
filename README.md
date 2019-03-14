@@ -94,7 +94,7 @@ I have been asked multiple times to deploy fixed supply token contracts for othe
 
 ### Can I deploy my own fixed supply token contract without paying the fee?
 
-This factory is just a convenient method of deploying vanilla fixed supply token contracts, and this deployment can be completed within 3 minutes. Ethereum wallets can utilise this factory to deploy fixed supply token contracts for their users.
+This factory is just a convenient method of deploying vanilla fixed supply token contracts, and this deployment can be completed within 3 minutes. Ethereum wallets can utilise this factory to deploy fixed supply token contracts for their users. The fee is charged for this convenience.
 
 You can always deploy a fixed supply token contract like [https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol](https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol) yourself to avoid this Factory's `minimumFee`, but then you will have to check, deploy and verify the source code yourself.
 
