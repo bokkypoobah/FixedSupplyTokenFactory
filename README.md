@@ -16,12 +16,15 @@ Use this factory to deploy your own token contract.
 
 * [History](#history)
 * [Bug Bounty Scope And Donations](#bug-bounty-scope-and-donations)
-* [Factory Deployment Address](#factory-deployment-address)
 * [Questions And Answers](#questions-and-answers)
-* [Factory Functions](#factory-functions)
-  * [deployTokenContract](#deployTokenContract)
-* [Fixed Supply Token 👊](#fixed-supply-token-)
-  * [Source Code](#source-code)
+* [BokkyPooBah's Fixed Supply Token Factory](#bokkypoobahs-fixed-supply-token-factory)
+  * [Factory Deployment Addresses](#factory-deployment-addresses)
+  * [Factory deployTokenContract Only Application Binary Interface](#factory-deploytokencontract-only-application-binary-interface)
+  * [Factory Full Application Binary Interface](#factory-full-application-binary-interface)
+  * [Factory deployTokenContract Function](#factory-deploytokencontract-function)
+* [Sample Fixed Supply Token 👊](#sample-fixed-supply-token-)
+* [BokkyPooBah's Fixed Supply Token Factory Source Code](#bokkypoobahs-fixed-supply-token-factory-source-code)
+* [Fixed Supply Token Application Binary Interface](#fixed-supply-token-application-binary-interface)
 
 <br />
 
@@ -32,7 +35,7 @@ Use this factory to deploy your own token contract.
 Version | Date         | Notes
 :------ |:------------ |:---------------------------------------
 v1.00   | Mar 11 2019  | First version deployed to mainnet, and the Ropsten, Kovan, Rinkeby and Görli testnets
-v1.10   | Mar 14 2019  | Second version deployed with [Incorrect comment on fee refund #1](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/1), [Add warnings to `approveAndCall(...)` and `receiveApproval(...)` #2](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/2), [Cosmetics including `address payable` #3](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/3), [Remove deployment constructor arguments #4](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/4),
+v1.10   | Mar 14 2019  | Second version deployed with:<br /> * [Incorrect comment on fee refund #1](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/1)<br /> *  [Add warnings to `approveAndCall(...)` and `receiveApproval(...)` #2](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/2)<br /> * [Cosmetics including `address payable` #3](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/3)<br /> * [Remove deployment constructor arguments #4](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/4),
 
 <br />
 
@@ -114,7 +117,7 @@ Only for the `deployTokenContract(...)` function:
 
 <br />
 
-### deployTokenContract Function
+### Factory deployTokenContract Function
 
 ```javascript
 function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token);

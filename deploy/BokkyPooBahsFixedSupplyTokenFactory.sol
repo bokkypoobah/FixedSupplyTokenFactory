@@ -1,12 +1,12 @@
 pragma solidity ^0.5.4;
 
 // ----------------------------------------------------------------------------
-// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.00
+// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.10
 //
-// A factory to convieniently deploy your own source verified fixed supply
+// A factory to conveniently deploy your own source code verified fixed supply
 // token contracts
 //
-// Factory deployment address: 0xfAEcE565D445e98Ea024f02FF06607B4654eEb56
+// Factory deployment address: 0xA550114ee3688601006b8b9f25e64732eF774934
 //
 // https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
@@ -30,10 +30,10 @@ library SafeMath {
 
 
 // ----------------------------------------------------------------------------
-// Owned contract
+// Owned contract, with token recovery
 // ----------------------------------------------------------------------------
 contract Owned {
-    address public owner;
+    address payable public owner;
     address public newOwner;
 
     event OwnershipTransferred(address indexed _from, address indexed _to);
@@ -43,8 +43,9 @@ contract Owned {
         _;
     }
 
-    constructor(address _owner) public {
-        owner = _owner;
+    function init(address _owner) public {
+        require(owner == address(0));
+        owner = address(uint160(_owner));
     }
     function transferOwnership(address _newOwner) public onlyOwner {
         newOwner = _newOwner;
@@ -52,14 +53,24 @@ contract Owned {
     function acceptOwnership() public {
         require(msg.sender == newOwner);
         emit OwnershipTransferred(owner, newOwner);
-        owner = newOwner;
+        owner = address(uint160(newOwner));
         newOwner = address(0);
+    }
+    function recoverTokens(address token, uint tokens) public onlyOwner {
+        if (token == address(0)) {
+            owner.transfer((tokens == 0 ? address(this).balance : tokens));
+        } else {
+            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
+        }
     }
 }
 
 
 // ----------------------------------------------------------------------------
 // ApproveAndCall Fallback
+// NOTE for contracts implementing this interface:
+// 1. An error must be thrown if there are errors executing `transferFrom(...)`
+// 2. The calling token contract must be checked to prevent malicious behaviour
 // ----------------------------------------------------------------------------
 contract ApproveAndCallFallback {
     function receiveApproval(address from, uint256 tokens, address token, bytes memory data) public;
@@ -108,7 +119,8 @@ contract FixedSupplyToken is TokenInterface, Owned {
     mapping(address => uint) balances;
     mapping(address => mapping(address => uint)) allowed;
 
-    constructor(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply) public Owned(tokenOwner) {
+    function init(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply) public {
+        super.init(tokenOwner);
         _symbol = symbol;
         _name = name;
         _decimals = decimals;
@@ -152,18 +164,12 @@ contract FixedSupplyToken is TokenInterface, Owned {
     function allowance(address tokenOwner, address spender) public view returns (uint remaining) {
         return allowed[tokenOwner][spender];
     }
+    // NOTE Only use this call with a trusted spender contract
     function approveAndCall(address spender, uint tokens, bytes memory data) public returns (bool success) {
         allowed[msg.sender][spender] = tokens;
         emit Approval(msg.sender, spender, tokens);
         ApproveAndCallFallback(spender).receiveApproval(msg.sender, tokens, address(this), data);
         return true;
-    }
-    function recoverTokens(address token, uint tokens) public onlyOwner {
-        if (token == address(0)) {
-            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
-        } else {
-            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
-        }
     }
     function () external payable {
         revert();
@@ -176,27 +182,26 @@ contract FixedSupplyToken is TokenInterface, Owned {
 //
 // Notes:
 //   * The `newContractAddress` deprecation is just advisory
-//   * The minimum fee must be sent with the `deployTokenContract(...)` call
-//   * Any excess over the fee will be refunded to the sending account
+//   * A fee equal to or above `minimumFee` must be sent with the
+//   `deployTokenContract(...)` call
 //
-// Execute `deployTokenContract(...)` with the following parameters
-// to deploy your very own FixedSupplyToken contract:
+// Execute `deployTokenContract(...)` with the following parameters to deploy
+// your very own FixedSupplyToken contract:
 //   symbol         symbol
 //   name           name
 //   decimals       number of decimal places for the token contract
 //   totalSupply    the fixed token total supply
 //
-// For example, deploying a FixedSupplyToken contract with a
-// `totalSupply` of 1,000.000000000000000000 tokens:
+// For example, deploying a FixedSupplyToken contract with a `totalSupply`
+// of 1,000.000000000000000000 tokens:
 //   symbol         "ME"
 //   name           "My Token"
 //   decimals       18
 //   initialSupply  10000000000000000000000 = 1,000.000000000000000000 tokens
 //
-// The FixedSupplyTokenListing() event is logged with the following
-// parameters:
+// The TokenDeployed() event is logged with the following parameters:
 //   owner          the account that execute this transaction
-//   tokenAddress   the newly deployed FixedSupplyToken address
+//   token          the newly deployed FixedSupplyToken address
 //   symbol         symbol
 //   name           name
 //   decimals       number of decimal places for the token contract
@@ -214,9 +219,8 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     event MinimumFeeUpdated(uint oldFee, uint newFee);
     event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
 
-    constructor() public Owned(msg.sender) {
-        // Initial contract for source code verification
-        _deployTokenContract(msg.sender, "FIST", "Fixed Supply Token 👊 v1.00", 18, 10**24);
+    constructor () public {
+        super.init(msg.sender);
     }
     function numberOfChildren() public view returns (uint) {
         return children.length;
@@ -230,29 +234,20 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
         emit MinimumFeeUpdated(minimumFee, _minimumFee);
         minimumFee = _minimumFee;
     }
-    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token) {
+    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (FixedSupplyToken token) {
         require(msg.value >= minimumFee);
         require(decimals <= 27);
         require(totalSupply > 0);
-        token = _deployTokenContract(msg.sender, symbol, name, decimals, totalSupply);
+        token = new FixedSupplyToken();
+        token.init(msg.sender, symbol, name, decimals, totalSupply);
+        isChild[address(token)] = true;
+        children.push(address(token));
+        emit TokenDeployed(owner, address(token), symbol, name, decimals, totalSupply);
         if (msg.value > 0) {
-            address(uint160(owner)).transfer(msg.value);
-        }
-    }
-    function recoverTokens(address token, uint tokens) public onlyOwner {
-        if (token == address(0)) {
-            address(uint160(owner)).transfer((tokens == 0 ? address(this).balance : tokens));
-        } else {
-            ERC20Interface(token).transfer(owner, tokens == 0 ? ERC20Interface(token).balanceOf(address(this)) : tokens);
+            owner.transfer(msg.value);
         }
     }
     function () external payable {
         revert();
-    }
-    function _deployTokenContract(address owner, string memory symbol, string memory name, uint8 decimals, uint totalSupply) internal returns (address token) {
-        token = address(new FixedSupplyToken(owner, symbol, name, decimals, totalSupply));
-        isChild[token] = true;
-        children.push(token);
-        emit TokenDeployed(owner, token, symbol, name, decimals, totalSupply);
     }
 }
