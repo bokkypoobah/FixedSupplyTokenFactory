@@ -9,7 +9,7 @@
 
 Or how to deploy your own FixedSupplyToken token contract in less than 3 minutes.
 
-This guide will assume that you already have MetaMask installed in your browser, and you have some ethers (ETH) in your MetaMask account on your desired network.
+This guide will assume that you already have MetaMask installed in your browser, and you have some ethers (ETH) in your MetaMask account on your desired network. We will use MyCrypto to interact with the factory smart contract, and use MetaMask as the signing wallet.
 
 <br />
 
@@ -17,7 +17,7 @@ This guide will assume that you already have MetaMask installed in your browser,
 
 The Ropsten, Kovan, Rinkeby and Görli testnets have faucets where you can request for some testnet ETH.
 
-To deploy your own token contract, you will need sufficient ethers to pay for factory `minimumFee` and the Ethereum network transaction fees.
+To deploy your own token contract, you will need sufficient ethers to pay for factory `minimumFee` (currently set to 0.1 ethers) and the Ethereum network transaction fees.
 
 Experiment in the testnets before deploying your own token contracts on the Ethereum mainnet.
 
@@ -34,7 +34,7 @@ Görli     | https://goerli.etherscan.io/  | https://faucet.goerli.mudit.blog/<b
 
 ## Factory Contract Details
 
-The factory contracts have been deployed on the following networks:
+The factory contracts have been deployed to the same address `0xA550114ee3688601006b8b9f25e64732eF774934` on the following networks:
 
 * Mainnet [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
 * Ropsten [0xA550114ee3688601006b8b9f25e64732eF774934](https://ropsten.etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
@@ -50,23 +50,35 @@ The Application Binary Interface (ABI) for this factory's `deployTokenContract(.
 
 <hr />
 
-## Let's Do It
+## Deploying a new token contract
 
-For an example, we will deploy a token contract contract with the symbol `LEMON`, name `Lemonade 🍋 Stand`, 2 decimal places and a fixed totalSupply of 1000.00 tokens.
+For an example, we will deploy a token contract contract with the symbol `LEMON`, name `Lemonade 🍋 Stand`, 2 decimal places and a fixed totalSupply of 1000.00 tokens. This could represent the proportional share in the lemonade stand enterprise.
 
-For this exercise, I will be using MyCrypto as the front end, and MetaMask as the wallet.
+For this exercise, I will be using MyCrypto to interact with the factory contract, and MetaMask as the signing wallet.
 
 #### 1. Select your desired network in MetaMask
 
 * Click on the selected network in the top to select a new network:
   <kbd><img src="images/MetaMask-SelectNetwork.png" /></kbd>
 
-#### 1. Navigate to MyCrypto and select the right network
+#### 2. Navigate to MyCrypto and select the right network
+
+In this example, I will be using the Ropsten testnet.
 
 * Navigate to the contracts interaction page https://mycrypto.com/contracts/interact:
     <kbd><img src="images/MyCrypto-FirstScreen.png" /></kbd>
 * Click the currently network on the top right if you want to select another network:
     <kbd><img src="images/MyCrypto-SelectNetwork.png" /></kbd>
+
+#### 3. Fill in the factory contract address and ABI
+
+* Enter the factory contract address: `0xA550114ee3688601006b8b9f25e64732eF774934`
+* Enter the `deployTokenContract(...)` ABI:
+    > [{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
+
+    <kbd><img src="images/MyCrypto-FactoryAddressABI.png" /></kbd>
+
+
 
 
 Check that you are on your desired network. In this example, we will use the Ropsten testnet.
