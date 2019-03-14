@@ -57,13 +57,15 @@ For an example, we will deploy a token contract contract with the symbol `LEMON`
 For this exercise, I will be using MyCrypto as the front end, and MetaMask as the wallet.
 
 #### 1. Select your desired network in MetaMask
-  <kbd><img src="images/MetaMask-SelectNetwork.png" /></kbd>
+
+* Click on the selected network in the top to select a new network:
+  <kbd><img src="images/MetaMask-SelectNetwork.png" size="50%"/></kbd>
 
 #### 1. Navigate to MyCrypto and select the right network
 
-* Navigate to the contracts interaction page https://mycrypto.com/contracts/interact
+* Navigate to the contracts interaction page https://mycrypto.com/contracts/interact:
     <kbd><img src="images/MyCrypto-FirstScreen.png" /></kbd>
-* Click the currently network on the top right if you want to select another network
+* Click the currently network on the top right if you want to select another network:
     <kbd><img src="images/MyCrypto-SelectNetwork.png" /></kbd>
 
 
