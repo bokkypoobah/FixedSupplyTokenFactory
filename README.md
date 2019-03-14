@@ -6,9 +6,15 @@
 
 # BokkyPooBah's Fixed Supply Token 👊 Factory
 
-Use this factory to deploy your own vanilla fixed supply token token contract. This fixed supply token contract implements the [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) token standard interface. The ERC20 optional `symbol()`, `name()` and `decimals()` have been implemented in this token contract.
+I have deploy many "vanilla" fixed supply token contracts in the past, on special request. This factory is a low fee vending machine to automate my fixed supply token contract deployment service.
 
-Additionally, the `approveAndCall(...)` functionality is included so that the two operations of executing `tokenContract.approve(targetContract, tokens)` and `targetContract.doSomething(...)` (which will execute `tokenContract.transferFrom(user, targetContact, tokens)`) can be combined into a single `approveAndCall(...)` transaction. Please only use this functionality with trusted smart contracts!
+This factory allows anyone to deploy an [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) token contract in a few minutes.
+
+Call the factory `deployTokenContract(string symbol, string name, uint8 decimals, uint totalSupply)` function, sending the factory's `minimumFee` amount (or more) in ethers. The token contract will be deployed with the entire `totalSupply` assigned to the account executing the deployment transaction.
+
+Use the standard ERC20 `transfer(...)`, `approve(...)` and `transferFrom(...)` functions to transfer these tokens to other accounts.
+
+Note that `minimumFee` is set to 0.1 ethers (ETH) currently.
 
 <br />
 
@@ -92,15 +98,46 @@ I have been asked multiple times to deploy fixed supply token contracts for othe
 
 <br />
 
-### Can I deploy my own fixed supply token contract without paying the fee?
+### Why would I use this factory to deploy my fixed supply token?
 
-This factory is just a convenient method of deploying vanilla fixed supply token contracts, and this deployment can be completed within 3 minutes. Ethereum wallets can utilise this factory to deploy fixed supply token contracts for their users. The fee is charged for this convenience.
-
-Note that the source code for FixedSupplyToken is optimised for easy source code validation and has the constructor operations moved into an `init(...)` function that has to be run once only, immediately after the token contract has been deployed. These two operations are automatically executed when deploying through the factory.
+#### Scrutinised smart contracts
 
 The factory smart contracts deployed to the Ethereum mainnet at [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934#code) have an active bug bounty program to encourage other developers and researchers to scrutinise these smart contracts. Any FixedSupplyToken smart contracts deployed through the factory will be relying on the same set of scrutinised smart contracts.
 
-You can always deploy a simpler fixed supply token contract like [https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol](https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol) yourself to avoid this Factory's `minimumFee`, but then you will have to check, deploy and verify the source code yourself.
+#### Convenience
+
+This factory is just a convenient method of deploying vanilla fixed supply token contracts, and this deployment can be completed within 3 minutes.
+
+Ethereum ERC20 supporting wallets can easily utilise this factory to deploy fixed supply token contracts on their user's request, straight from the wallet.
+
+<br />
+
+### Can I deploy my own fixed supply token contract without paying the fee?
+
+Why not?
+
+Note that the source code for FixedSupplyToken is optimised for easy source code validation and has the constructor operations moved into an `init(...)` function that has to be run once only, immediately after the token contract has been deployed. These two operations are automatically executed when deploying through the factory.
+
+It is simpler to deploy a fixed supply token contract like [https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol](https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol) yourself, if you want to avoid this Factory's `minimumFee`. You will however have to check, deploy and verify the source code yourself.
+
+<br />
+
+### How ERC20 compliant are the deployed FixedSupplyToken contract?
+
+The FixedSupplyToken smart contract implements all the mandatory [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20.md) `totalSupply()`, `balanceOf(...)`, `transfer(...)`, `transferFrom(...)`, `approve(...)` and `allowance(...)` functions.
+
+This smart contract also implements the all the optional ERC20 `symbol()`, `name()` and `decimals()` functions.
+
+Additionally, the `approveAndCall(...)` functionality is included so that the two operations of executing `tokenContract.approve(targetContract, tokens)` and `targetContract.doSomething(...)` (which will execute `tokenContract.transferFrom(user, targetContact, tokens)`) can be combined into a single `approveAndCall(...)` transaction. **Please only use this functionality with trusted smart contracts, and with checks!**
+
+<br />
+
+### How do I confirm whether a token contract has been created by this factory?
+
+Navigate to the **Read Contract** tab for the factory in EtherScan. e.g., Mainnet [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934#readContract). Enter the address of your token contract (e.g., `0x7492e4ed68d9f39579690c9cd9051ddcc805a8d5`) in the `isChild` input field and click on Query:
+
+<kbd><img src="images/EtherScan-FactoryIsChild.png" /></kbd>
+
 
 <br />
 
