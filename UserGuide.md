@@ -66,7 +66,7 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 
 * Navigate to the contracts interaction page https://mycrypto.com/contracts/interact:
     <kbd><img src="images/MyCrypto-FirstScreen.png" /></kbd>
-* Click the currently network on the top right if you want to select another network:
+* Click the currently selected network on the top right if you want to select another network:
     <kbd><img src="images/MyCrypto-SelectNetwork.png" /></kbd>
 
 #### 3. Fill in the factory contract address and ABI
@@ -75,6 +75,7 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 * Enter the `deployTokenContract(...)` ABI:
     > [{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
 
+* Click on Access
     <kbd><img src="images/MyCrypto-FactoryAddressABI.png" /></kbd>
 
 #### 4. Fill in your token contract details
