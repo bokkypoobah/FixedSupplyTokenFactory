@@ -112,11 +112,11 @@ After the wallet is accessed, the MyCrypto screen changes to:
 
 <kbd><img src="images/MyCrypto-GenerateAndSendTx.png" /></kbd>
 
-
 #### 9. Confirm the transaction in MetaMask
 
-<kbd><img src="images/MetaMask-TxConfirmation.png" /></kbd>
+<kbd><img src="images/MetaMask-TxConfirmation-1.png" /></kbd>
 
+<kbd><img src="images/MetaMask-TxConfirmation-2.png" /></kbd>
 
 
 
