@@ -89,8 +89,15 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 
 #### 5. Access your wallet
 
+In this example, I click on the MetaMask button:
+
 <kbd><img src="images/MyCrypto-AccessWallet.png" /></kbd>
 
+#### 6. Wallet accessed
+
+After the wallet is accessed, the screen changes to:
+
+<kbd><img src="images/MyCrypto-WalletAccessed.png" /></kbd>
 
 
 #### Fill in the factory contract address and Application Binary Interface
