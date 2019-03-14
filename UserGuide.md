@@ -60,14 +60,17 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 
 * Click on the MetaMask icon in your web browser tool bar
 * Click on the selected network in the top to select a new network:
-  <kbd><img src="images/MetaMask-SelectNetwork.png" /></kbd><br />
+    <kbd><img src="images/MetaMask-SelectNetwork.png" /></kbd>
+    <br />
 
 #### 2. Navigate to MyCrypto and select the right network
 
 * Navigate to the contracts interaction page https://mycrypto.com/contracts/interact:
-    <kbd><img src="images/MyCrypto-FirstScreen.png" /></kbd><br />
+    <kbd><img src="images/MyCrypto-FirstScreen.png" /></kbd>
+    <br />
 * Click the currently selected network on the top right if you want to select another network:
-    <kbd><img src="images/MyCrypto-SelectNetwork.png" /></kbd><br />
+    <kbd><img src="images/MyCrypto-SelectNetwork.png" /></kbd>
+    <br />
 
 #### 3. Fill in the factory contract address and ABI
 
