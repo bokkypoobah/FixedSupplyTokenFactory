@@ -95,9 +95,18 @@ In this example, I click on the MetaMask button:
 
 #### 6. Wallet accessed
 
-After the wallet is accessed, the screen changes to:
+After the wallet is accessed, the MyCrypto screen changes to:
 
 <kbd><img src="images/MyCrypto-WalletAccessed.png" /></kbd>
+
+
+#### 7. Fill in transaction details
+
+* Automatically Calculate Gas Limit: `off`
+* Gas Price (gwei): `10` is OK for testnets. See [https://ethgasstation.info/](https://ethgasstation.info/) for the current Ethereum mainnet estimated gas prices
+* Gas Limit: `1200000` (1,200,000 without the commas)
+
+<kbd><img src="images/MyCrypto-ValueGasPriceAndGasLimit.png" /></kbd>
 
 
 #### Fill in the factory contract address and Application Binary Interface
