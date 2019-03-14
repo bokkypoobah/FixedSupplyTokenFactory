@@ -59,7 +59,7 @@ For this exercise, I will be using MyCrypto as the front end, and MetaMask as th
 #### 1. Select your desired network in MetaMask
 
 * Click on the selected network in the top to select a new network:
-  <kbd><img src="images/MetaMask-SelectNetwork.png" size="50%"/></kbd>
+  <kbd><img src="images/MetaMask-SelectNetwork.png" width="50%"/></kbd>
 
 #### 1. Navigate to MyCrypto and select the right network
 
