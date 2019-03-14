@@ -56,8 +56,8 @@ The scope of the bug bounty for this project follows:
 
 Bounties awarded for this project:
 
-* Mar 14 2019 - [smarx](https://github.com/smarx/) - [Incorrect comment on fee refund #1](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/1)
-* Mar 14 2019 - [pertsev](https://github.com/pertsev) - [Add warnings to `approveAndCall(...)` and `receiveApproval(...)` #2](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/2) and [Cosmetics including `address payable` #3](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/3)
+* Mar 14 2019 - [Steve Marx](https://github.com/smarx/) - [Incorrect comment on fee refund #1](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/1)
+* Mar 14 2019 - [Alexey Pertsev](https://github.com/pertsev) - [Add warnings to `approveAndCall(...)` and `receiveApproval(...)` #2](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/2) and [Cosmetics including `address payable` #3](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/3)
 
 <br />
 
@@ -96,7 +96,11 @@ I have been asked multiple times to deploy fixed supply token contracts for othe
 
 This factory is just a convenient method of deploying vanilla fixed supply token contracts, and this deployment can be completed within 3 minutes. Ethereum wallets can utilise this factory to deploy fixed supply token contracts for their users. The fee is charged for this convenience.
 
-You can always deploy a fixed supply token contract like [https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol](https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol) yourself to avoid this Factory's `minimumFee`, but then you will have to check, deploy and verify the source code yourself.
+Note that the source code for FixedSupplyToken is optimised for easy source code validation and has the constructor operations moved into an `init(...)` function that has to be run once only, immediately after the token contract has been deployed. These two operations are automatically executed when deploying through the factory.
+
+The factory smart contracts deployed to the Ethereum mainnet at [0xA550114ee3688601006b8b9f25e64732eF774934](https://etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934#code) have an active bug bounty program to encourage other developers and researchers to scrutinise these smart contracts. Any FixedSupplyToken smart contracts deployed through the factory will be relying on the same set of scrutinised smart contracts.
+
+You can always deploy a simpler fixed supply token contract like [https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol](https://github.com/bokkypoobah/Tokens/blob/master/contracts/FixedSupplyToken.sol) yourself to avoid this Factory's `minimumFee`, but then you will have to check, deploy and verify the source code yourself.
 
 <br />
 
