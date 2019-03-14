@@ -44,7 +44,7 @@ Use the standard ERC20 `transfer(...)`, `approve(...)` and `transferFrom(...)` f
 Version | Date         | Notes
 :------ |:------------ |:---------------------------------------
 v1.00   | Mar 11 2019  | First version deployed to mainnet, and the Ropsten, Kovan, Rinkeby and Görli testnets
-v1.10   | Mar 14 2019  | Second version deployed with:<br /> * [Incorrect comment on fee refund #1](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/1)<br /> *  [Add warnings to `approveAndCall(...)` and `receiveApproval(...)` #2](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/2)<br /> * [Cosmetics including `address payable` #3](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/3)<br /> * [Remove deployment constructor arguments #4](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/4),
+v1.10   | Mar 14 2019  | Second version deployed with:<br /> * [Incorrect comment on fee refund #1](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/1)<br /> *  [Add warnings to `approveAndCall(...)` and `receiveApproval(...)` #2](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/2)<br /> * [Cosmetics including `address payable` #3](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/3)<br /> * [Remove deployment constructor arguments #4](https://github.com/bokkypoobah/FixedSupplyTokenFactory/issues/4)
 
 <br />
 
@@ -164,9 +164,7 @@ On the EtherScan token contract screen (e.g. [FIST110](https://etherscan.io/addr
 
 Only for the `deployTokenContract(...)` function:
 
-```javascript
-[{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
-```
+> [{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
 
 <br />
 
