@@ -104,6 +104,7 @@ After the wallet is accessed, the MyCrypto screen changes to:
 
 #### 7. Fill in transaction details
 
+* Value: Any amount greater than or equal `0.1` (the current `minimumFee`)
 * Automatically Calculate Gas Limit: `off`
 * Gas Price (gwei): `10` is OK for testnets. See [https://ethgasstation.info/](https://ethgasstation.info/) for the current Ethereum mainnet estimated gas prices
 * Gas Limit: `1200000` (manually enter 200,000 without the commas)
