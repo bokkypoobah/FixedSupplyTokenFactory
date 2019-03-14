@@ -124,17 +124,16 @@ After the wallet is accessed, the MyCrypto screen changes to:
     <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd>
 * The [transaction](https://ropsten.etherscan.io/tx/0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2) in EtherScan:
     <kbd><img src="images/EtherScan-ConfirmedTransaction.png" /></kbd>
-* The transaction data:
+* The transaction input data:
     <kbd><img src="images/EtherScan-TransactionData1.png" /></kbd>
 * Click on the Decode Input Data to see the token contract deployment data:
     <kbd><img src="images/EtherScan-TransactionData2.png" /></kbd>
+* Click on the `ERC-20(LEMON)` two screens above to see the [token contract transfers](https://ropsten.etherscan.io/token/0x9e458482b817e1238d04c374934f1306498b65b9):
+    <kbd><img src="images/EtherScan-LEMON-TokenTransfers.png" /></kbd>
 
 
 
 
-
-
-https://ropsten.etherscan.io/token/0x9e458482b817e1238d04c374934f1306498b65b9
 
 https://ropsten.etherscan.io/find-similiar-contracts?a=0x9e458482b817e1238d04c374934f1306498b65b9&lvl=5
 
