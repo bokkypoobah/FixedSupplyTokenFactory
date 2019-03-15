@@ -177,10 +177,12 @@ After the wallet is accessed, the MyCrypto screen changes to:
 We will add the new token contract address to MetaMask so we can execute transfers of these tokens to other accounts.
 
 ### 1. Click on the MetaMask button in your browser tool bar
-    <kbd><img src="images/MetaMask-FrontScreen.png" /></kbd>
+
+<kbd><img src="images/MetaMask-FrontScreen.png" /></kbd>
+
+<br />
 
 
-*
 
 
 
