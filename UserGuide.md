@@ -7,9 +7,31 @@
 
 # BokkyPooBah's Fixed Supply Token 👊 Factory - User's Guide
 
-Or how to deploy your own FixedSupplyToken token contract in less than 3 minutes.
+#### Or how to deploy your own fixed supply token contract in a few minutes
+
+If you are an expert, all the information you need is in [Factory Contract Details](#factory-contract-details).
+
+If you have not already installed MetaMask, start with [Install MetaMask](#install-metamask).
+
+
+
+
+
 
 This guide will assume that you already have MetaMask installed in your browser, and you have some ethers (ETH) in your MetaMask account on your desired network. We will use MyCrypto to interact with the factory smart contract, and use MetaMask as the signing wallet.
+
+<br />
+
+<hr />
+
+## Table Of Contents
+
+
+* [Factory Contract Details](#factory-contract-details)
+* [Install MetaMask](#install-metamask)
+* [Testnet Faucets](#testnet-faucets)
+* [Deploy Token Contract](#deploy-token-contract)
+* [Watch And Send Tokens](#watch-and-send-tokens)
 
 <br />
 
