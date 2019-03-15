@@ -42,6 +42,35 @@ The factory contracts have been deployed to the same address `0xA550114ee3688601
 * Rinkeby [0xA550114ee3688601006b8b9f25e64732eF774934](https://rinkeby.etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
 * Görli [0xA550114ee3688601006b8b9f25e64732eF774934](https://goerli.etherscan.io/address/0xA550114ee3688601006b8b9f25e64732eF774934)
 
+The function in the factory contract that deploys new token contracts:
+
+```javascript
+function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (address token);
+```
+
+The account executing this function will be assigned as the owner of the new token contract. The entire `totalSupply` is minted for the token contract owner.
+
+A fee in ethers (`minimumFee`, currently 0.1 ETH) is also be payable for the successful execution of this function.
+
+#### Parameters
+
+* `string symbol` - Symbol, e.g., 'MYT'
+* `string name` - Token contract name, e.g., 'My Token Contract'
+* `uint decimals` - Decimal places, between 0 and 27. Commonly 18
+* `uint totalSupply` - The number of tokens that will be minted to the token contract owner's account
+
+#### Returns
+
+* `address` - Address of the new token contract
+
+#### Events
+
+The following event is emitted on successful deployment of the new token contract
+
+```javascript
+event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
+```
+
 The Application Binary Interface (ABI) for this factory's `deployTokenContract(...)` function follows:
 
 > [{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
