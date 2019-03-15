@@ -199,8 +199,10 @@ We will add the new token contract address to MetaMask so we can execute transfe
     <kbd><img src="images/MetaMask-AddTokens-1.png" /></kbd>&nbsp;
 * Paste your token contract address (e.g. `0x9e458482b817e1238d04c374934f1306498b65b9`) into the Token Contract Address field
     <kbd><img src="images/MetaMask-AddTokens-2.png" /></kbd>&nbsp;
-* Click Next, then Add
+* Click Next, then click ADD TOKENS
     <kbd><img src="images/MetaMask-AddTokens-3.png" /></kbd>&nbsp;
+* You can now transfer these tokens from your account to another account
+    <kbd><img src="images/MetaMask-TransferLemons-1.png" /></kbd>&nbsp;
 
 <br />
 
