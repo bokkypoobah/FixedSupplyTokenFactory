@@ -158,8 +158,9 @@ After the wallet is accessed, the MyCrypto screen changes to:
 #### 10. Transaction confirmed
 
 * MyCrypto provides a link to the transaction in EtherScan at the bottom of the page:
-    <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd>
-* The [transaction](https://ropsten.etherscan.io/tx/0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2) in EtherScan:
+    <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd>\
+    
+* The transaction [0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2](https://ropsten.etherscan.io/tx/0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2) in EtherScan:
     <kbd><img src="images/EtherScan-ConfirmedTransaction.png" /></kbd>
 * The transaction input data:
     <kbd><img src="images/EtherScan-TransactionData1.png" /></kbd>
@@ -176,9 +177,16 @@ After the wallet is accessed, the MyCrypto screen changes to:
 
 We will add the new token contract address to MetaMask so we can execute transfers of these tokens to other accounts.
 
-### 1. Click on the MetaMask button in your browser tool bar
+### 1. Watch the new token contract in MetaMask
 
-<kbd><img src="images/MetaMask-FrontScreen.png" /></kbd>
+* Click on the MetaMask button in your browser tool bar
+    <kbd><img src="images/MetaMask-FrontScreen.png" /></kbd>
+* Click on the triple horizontal bar icon on the top left to show the tokens page
+    <kbd><img src="images/MetaMask-TokensAdd.png" /></kbd>
+* Click on the triple horizontal bar icon on the top left to show the tokens page
+    <kbd><img src="images/MetaMask-TokensAdd.png" /></kbd>
+
+
 
 <br />
 
