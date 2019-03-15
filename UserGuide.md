@@ -93,17 +93,14 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 
 * Click on the MetaMask icon in your web browser tool bar
 * Click on the selected network in the top to select a new network:
-    <kbd><img src="images/MetaMask-SelectNetwork.png" /></kbd>
-    <br />
+    <kbd><img src="images/MetaMask-SelectNetwork.png" /></kbd>&nbsp;
 
 #### 2. Navigate to MyCrypto and select the right network
 
 * Navigate to the contracts interaction page https://mycrypto.com/contracts/interact:
-    <kbd><img src="images/MyCrypto-FirstScreen.png" /></kbd>
-    <br />
+    <kbd><img src="images/MyCrypto-FirstScreen.png" /></kbd>&nbsp;
 * Click the currently selected network on the top right if you want to select another network:
-    <kbd><img src="images/MyCrypto-SelectNetwork.png" /></kbd>
-    <br />
+    <kbd><img src="images/MyCrypto-SelectNetwork.png" /></kbd>&nbsp;
 
 #### 3. Fill in the factory contract address and ABI
 
@@ -112,7 +109,7 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
     > [{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
 
 * Click on Access
-    <kbd><img src="images/MyCrypto-FactoryAddressABI.png" /></kbd>
+    <kbd><img src="images/MyCrypto-FactoryAddressABI.png" /></kbd>&nbsp;
 
 #### 4. Fill in your token contract details
 
@@ -121,19 +118,19 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 * decimals: `2`
 * totalSupply: 100000 (100000 units = 1,000.00 tokens with 2 decimal places)
 
-<kbd><img src="images/MyCrypto-LEMON.png" /></kbd>
+<kbd><img src="images/MyCrypto-LEMON.png" /></kbd>&nbsp;
 
 #### 5. Access your wallet
 
 In this example, I clicked on the MetaMask button:
 
-<kbd><img src="images/MyCrypto-AccessWallet.png" /></kbd>
+<kbd><img src="images/MyCrypto-AccessWallet.png" /></kbd>&nbsp;
 
 #### 6. Wallet accessed
 
 After the wallet is accessed, the MyCrypto screen changes to:
 
-<kbd><img src="images/MyCrypto-WalletAccessed.png" /></kbd>
+<kbd><img src="images/MyCrypto-WalletAccessed.png" /></kbd>&nbsp;
 
 #### 7. Fill in transaction details
 
@@ -143,30 +140,30 @@ After the wallet is accessed, the MyCrypto screen changes to:
 * Gas Limit: `1200000` (manually enter 200,000 without the commas)
 * Click Write
 
-<kbd><img src="images/MyCrypto-ValueGasPriceAndGasLimit.png" /></kbd>
+<kbd><img src="images/MyCrypto-ValueGasPriceAndGasLimit.png" /></kbd>&nbsp;
 
 #### 8. Generate and send the transaction
 
-<kbd><img src="images/MyCrypto-GenerateAndSendTx.png" /></kbd>
+<kbd><img src="images/MyCrypto-GenerateAndSendTx.png" /></kbd>&nbsp;
 
 #### 9. Confirm the transaction in MetaMask
 
-<kbd><img src="images/MetaMask-TxConfirmation-1.png" /></kbd>
+<kbd><img src="images/MetaMask-TxConfirmation-1.png" /></kbd>&nbsp;
 
-<kbd><img src="images/MetaMask-TxConfirmation-2.png" /></kbd>
+<kbd><img src="images/MetaMask-TxConfirmation-2.png" /></kbd>&nbsp;
 
 #### 10. Transaction confirmed
 
 * MyCrypto provides a link to the transaction in EtherScan at the bottom of the page:
     <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd>&nbsp;
 * The transaction [0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2](https://ropsten.etherscan.io/tx/0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2) in EtherScan:
-    <kbd><img src="images/EtherScan-ConfirmedTransaction.png" /></kbd>
+    <kbd><img src="images/EtherScan-ConfirmedTransaction.png" /></kbd>&nbsp;
 * The transaction input data:
-    <kbd><img src="images/EtherScan-TransactionData1.png" /></kbd>
+    <kbd><img src="images/EtherScan-TransactionData1.png" /></kbd>&nbsp;
 * Click on the Decode Input Data to see the token contract deployment data:
-    <kbd><img src="images/EtherScan-TransactionData2.png" /></kbd>
+    <kbd><img src="images/EtherScan-TransactionData2.png" /></kbd>&nbsp;
 * Click on the `ERC-20(LEMON)` link three screens above to see the [token contract transfers](https://ropsten.etherscan.io/token/0x9e458482b817e1238d04c374934f1306498b65b9):
-    <kbd><img src="images/EtherScan-LEMON-TokenTransfers.png" /></kbd>
+    <kbd><img src="images/EtherScan-LEMON-TokenTransfers.png" /></kbd>&nbsp;
 
 <br />
 
