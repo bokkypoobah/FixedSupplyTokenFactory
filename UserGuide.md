@@ -158,8 +158,8 @@ After the wallet is accessed, the MyCrypto screen changes to:
 #### 10. Transaction confirmed
 
 * MyCrypto provides a link to the transaction in EtherScan at the bottom of the page:
-    <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd>\
-    
+    <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd>&nbsp;
+
 * The transaction [0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2](https://ropsten.etherscan.io/tx/0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2) in EtherScan:
     <kbd><img src="images/EtherScan-ConfirmedTransaction.png" /></kbd>
 * The transaction input data:
