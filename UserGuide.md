@@ -195,16 +195,14 @@ We will add the new token contract address to MetaMask so we can execute transfe
     <kbd><img src="images/MetaMask-FrontScreen.png" /></kbd>&nbsp;
 * Click on the triple horizontal bar icon on the top left to show the tokens page
     <kbd><img src="images/MetaMask-TokensAdd.png" /></kbd>&nbsp;
-* Click on the triple horizontal bar icon on the top left to show the tokens page
-    <kbd><img src="images/MetaMask-TokensAdd.png" /></kbd>&nbsp;
-
-
+* Click on ADD TOKEN
+    <kbd><img src="images/MetaMask-AddTokens-1.png" /></kbd>&nbsp;
+* Paste the factory address `0xA550114ee3688601006b8b9f25e64732eF774934` into the Token Contract Address field
+    <kbd><img src="images/MetaMask-AddTokens-2.png" /></kbd>&nbsp;
+* Click Next, then Add
+    <kbd><img src="images/MetaMask-AddTokens-3.png" /></kbd>&nbsp;
 
 <br />
-
-
-
-
 
 
 https://ropsten.etherscan.io/find-similiar-contracts?a=0x9e458482b817e1238d04c374934f1306498b65b9&lvl=5
