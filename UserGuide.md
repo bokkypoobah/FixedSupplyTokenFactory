@@ -132,7 +132,7 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 * symbol: `LEMON`
 * name: `Lemonade 🍋 Stand`
 * decimals: `2`
-* totalSupply: 100000 (100000 units = 1,000.00 tokens with 2 decimal places)
+* totalSupply: `100000` (100000 units = 1,000.00 tokens with 2 decimal places)
 
 <kbd><img src="images/MyCrypto-LEMON.png" /></kbd>&nbsp;
 
@@ -192,11 +192,11 @@ We will add the new token contract address to MetaMask so we can execute transfe
 ### 1. Watch the new token contract in MetaMask
 
 * Click on the MetaMask button in your browser tool bar
-    <kbd><img src="images/MetaMask-FrontScreen.png" /></kbd>
+    <kbd><img src="images/MetaMask-FrontScreen.png" /></kbd>&nbsp;
 * Click on the triple horizontal bar icon on the top left to show the tokens page
-    <kbd><img src="images/MetaMask-TokensAdd.png" /></kbd>
+    <kbd><img src="images/MetaMask-TokensAdd.png" /></kbd>&nbsp;
 * Click on the triple horizontal bar icon on the top left to show the tokens page
-    <kbd><img src="images/MetaMask-TokensAdd.png" /></kbd>
+    <kbd><img src="images/MetaMask-TokensAdd.png" /></kbd>&nbsp;
 
 
 
