@@ -112,7 +112,7 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
     > [{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
 
 * Click on Access
-    <kbd><img src="images/MyCrypto-FactoryAddressABI.png" /></kbd><br />
+    <kbd><img src="images/MyCrypto-FactoryAddressABI.png" /></kbd>
 
 #### 4. Fill in your token contract details
 
@@ -121,19 +121,19 @@ For this exercise, I will be using MyCrypto to interact with the factory contrac
 * decimals: `2`
 * totalSupply: 100000 (100000 units = 1,000.00 tokens with 2 decimal places)
 
-<kbd><img src="images/MyCrypto-LEMON.png" /></kbd><br />
+<kbd><img src="images/MyCrypto-LEMON.png" /></kbd>
 
 #### 5. Access your wallet
 
 In this example, I clicked on the MetaMask button:
 
-<kbd><img src="images/MyCrypto-AccessWallet.png" /></kbd><br />
+<kbd><img src="images/MyCrypto-AccessWallet.png" /></kbd>
 
 #### 6. Wallet accessed
 
 After the wallet is accessed, the MyCrypto screen changes to:
 
-<kbd><img src="images/MyCrypto-WalletAccessed.png" /></kbd><br />
+<kbd><img src="images/MyCrypto-WalletAccessed.png" /></kbd>
 
 #### 7. Fill in transaction details
 
@@ -143,30 +143,30 @@ After the wallet is accessed, the MyCrypto screen changes to:
 * Gas Limit: `1200000` (manually enter 200,000 without the commas)
 * Click Write
 
-<kbd><img src="images/MyCrypto-ValueGasPriceAndGasLimit.png" /></kbd><br />
+<kbd><img src="images/MyCrypto-ValueGasPriceAndGasLimit.png" /></kbd>
 
 #### 8. Generate and send the transaction
 
-<kbd><img src="images/MyCrypto-GenerateAndSendTx.png" /></kbd><br />
+<kbd><img src="images/MyCrypto-GenerateAndSendTx.png" /></kbd>
 
 #### 9. Confirm the transaction in MetaMask
 
-<kbd><img src="images/MetaMask-TxConfirmation-1.png" /></kbd><br />
+<kbd><img src="images/MetaMask-TxConfirmation-1.png" /></kbd>
 
-<kbd><img src="images/MetaMask-TxConfirmation-2.png" /></kbd><br />
+<kbd><img src="images/MetaMask-TxConfirmation-2.png" /></kbd>
 
 #### 10. Transaction confirmed
 
 * MyCrypto provides a link to the transaction in EtherScan at the bottom of the page:
-    <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd><br />
+    <kbd><img src="images/MyCrypto-TransactionHash.png" /></kbd>
 * The [transaction](https://ropsten.etherscan.io/tx/0xa633597b4051fd1c64cc9f0295c5947bf5a4a9a3c18a4e656db17c3da80040c2) in EtherScan:
-    <kbd><img src="images/EtherScan-ConfirmedTransaction.png" /></kbd><br />
+    <kbd><img src="images/EtherScan-ConfirmedTransaction.png" /></kbd>
 * The transaction input data:
-    <kbd><img src="images/EtherScan-TransactionData1.png" /></kbd><br />
+    <kbd><img src="images/EtherScan-TransactionData1.png" /></kbd>
 * Click on the Decode Input Data to see the token contract deployment data:
-    <kbd><img src="images/EtherScan-TransactionData2.png" /></kbd><br />
+    <kbd><img src="images/EtherScan-TransactionData2.png" /></kbd>
 * Click on the `ERC-20(LEMON)` link three screens above to see the [token contract transfers](https://ropsten.etherscan.io/token/0x9e458482b817e1238d04c374934f1306498b65b9):
-    <kbd><img src="images/EtherScan-LEMON-TokenTransfers.png" /></kbd><br />
+    <kbd><img src="images/EtherScan-LEMON-TokenTransfers.png" /></kbd>
 
 <br />
 
@@ -176,7 +176,10 @@ After the wallet is accessed, the MyCrypto screen changes to:
 
 We will add the new token contract address to MetaMask so we can execute transfers of these tokens to other accounts.
 
-### 1. Add new token contract to MetaMask
+### 1. Click on the MetaMask button in your browser tool bar
+
+    <kbd><img src="images/MetaMask-FrontScreen.png" /></kbd>
+
 
 *
 
