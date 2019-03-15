@@ -13,6 +13,8 @@ This guide will assume that you already have MetaMask installed in your browser,
 
 <br />
 
+<hr />
+
 # Testnet Ether Faucets
 
 The Ropsten, Kovan, Rinkeby and Görli testnets have faucets where you can request for some testnet ETH.
@@ -31,6 +33,8 @@ Rinkeby   | https://rinkeby.etherscan.io/ | https://faucet.rinkeby.io/<br />http
 Görli     | https://goerli.etherscan.io/  | https://faucet.goerli.mudit.blog/<br />https://goerli-faucet.slock.it/<br />https://bridge.goerli.com/
 
 <br />
+
+<hr />
 
 ## Factory Contract Details
 
