@@ -79,6 +79,22 @@ The Application Binary Interface (ABI) for this factory's `deployTokenContract(.
 
 > [{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}]
 
+web3 JavaScript code to deploy a new token contract:
+
+```javascript
+var factoryAddress = "0xA550114ee3688601006b8b9f25e64732eF774934";
+var factoryAbi = [{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"}];
+var factory = eth.contract(factoryAbi).at(factoryAddress);
+var symbol = "LEMON";
+var name = "Lemonade 🍋 Stand";
+var decimals = 2;
+var totalSupply = new BigNumber(1000).shift(decimals);
+var fromAccount = "(your account)";
+var fee = web3.toWei("0.123456789", "ether");
+var tx = factory.deployTokenContract(symbol, name, decimals, totalSupply, {from: , value: fee});
+eth.getTransaction(tx);
+```
+
 <br />
 
 <hr />
