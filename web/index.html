@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BokkyPooBah's Fixed Supply Token 👊 Factory</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="BokkyPooBah's Fixed Supply Token 👊 Factory v1.10 (c) Bok Consulting Pty Ltd 2019">
+    <meta name="author" content="BokkyPooBah/bokconsulting.com.au">
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen" />
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
+    <link href="css/app.css" rel="stylesheet" media="screen" />
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bignumber.min.js"></script>
+    <script src="js/web3.js"></script>
+    <script src="js/app.js"></script>
+    <!-- <script src="js/preHFBalances.js"></script> -->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <!-- <link rel="manifest" href="images/manifest.json"> -->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+  </head>
+  <body>
+    <div class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="icon-menu"></i> Menu
+        </button>
+        <a class="navbar-brand logo" href="/">BokkyPooBah's Fixed Supply Token 👊 Factory v1.10</a>
+      </div>
+      <div class="container">
+        <!--
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Decentralised Trustless Exchange Contract Markets">ETH Markets <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/token/1ST"><strong>1ST</strong> <span>First Blood</span></a></li>
+                <li><a href="/token/AMIS"><strong>AMIS</strong> <span>AMIS</span></a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/tokenTraderContracts"><i class="icon-star fa-fw"></i> TokenTrader Contracts</a></li>
+            <li><a href="/tradeHistory"><i class="icon-star fa-fw"></i> Trade History</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Application Programming Interface">API <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                        <li><a href="/api/markets"><i class="icon-star fa-fw"></i> Market Overview</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tokens</li>
+                        <li class="dropdown-header">Contracts</li>
+                        <li class="divider"></li>
+                        <li><a href="/api/factories"><i class="icon-star fa-fw"></i> Factories</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Help">Help <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://github.com/bokkypoobah/TokenTrader/wiki" target="_blank"><i class="icon-star fa-fw"></i> Help</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">TokenTraderFactory</li>
+                        <li class="divider"></li>
+                        <li><a href="https://github.com/bokkypoobah/TokenTrader/wiki/TokenTrader-And-TokenTraderFactory" target="_blank"><i class="icon-star fa-fw"></i> TokenTrader &amp; Factory</a></li>
+                        <li class="divider"></li>
+                    </ul>
+            </li>
+          </ul>
+        </div>
+        -->
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- <h4 class="display-3">Your Ethereum Address</h4> -->
+      <form class="form-inline" method="GET">
+        <!-- <div class="form-group"> -->
+        <div class="row">
+          <div class="col-sm-3 text-right">Network:</div>
+          <div class="col-sm-3"><span id="network">Checking ...</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">Your account:</div>
+          <div class="col-sm-3"><span id="account">Checking ...</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">Your account balance:</div>
+          <div class="col-sm-3"><span id="accountbalance">Checking ...</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">Faucets:</div>
+          <div class="col-sm-8"><span id="faucets">Checking ...</span></div>
+        </div>
+        <!--
+        <div class="row">
+          <div class="col-sm-3 text-right">Mode:</div>
+          <div class="col-sm-3"><span id="mode">(unknown))</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right"><b>Enter Your Ethereum Address:</b></div>
+          <div class="col-sm-8"><input type="text" class="form-control" id="address" name="address" placeholder="0x..." size="48"><button type="submit" class="btn btn-default">Check</button></div>
+        </div>
+        -->
+        <!-- </div> -->
+      </form>
+
+      <br />
+
+      <h4 class="display-3">BokkyPooBah's Fixed Supply Token 👊 Factory v1.10</h4>
+      <div class="row">
+        <div class="col-sm-3 text-right">Address:</div>
+        <div class="col-sm-3"><span id="factoryAddress"></span></div>
+      </div>
+
+      <br />
+
+      <h4 class="display-3">DAO To ETH Refunds</h4>
+      <div class="row">
+        <div class="col-sm-3 text-right">Current Block:</div>
+        <div class="col-sm-3"><span id="ethBlockNumber">0</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3 text-right">DAO To ETH Refund:</div>
+        <div class="col-sm-3"><span id="ethWithdrawalAmount">0</span> ETH</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3 text-right">ExtraBalance Refund:</div>
+        <div class="col-sm-3"><span id="ethExtraBalanceWithdrawalAmount">0</span> ETH</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3 text-right">Account Balance:</div>
+        <div class="col-sm-3"><span id="ethAccountBalance">0</span> ETH <a id="ethexplorer" href="" target="_blank">&#x1f517;</a></div>
+      </div>
+
+      <br />
+
+      <h4 class="display-3">DAO To ETC Refunds</h4>
+      <div class="row">
+        <div class="col-sm-3 text-right">Current Block:</div>
+        <div class="col-sm-3"><span id="etcBlockNumber">0</span></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3 text-right">Already Withdrawn:</div>
+        <div class="col-sm-3"><span id="etcPaidOutAmount">0</span> ETC</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3 text-right">To Withdraw:</div>
+        <div class="col-sm-3"><span id="etcWithdrawalAmount">0</span> ETC</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3 text-right">Account Balance:</div>
+        <div class="col-sm-3"><span id="etcAccountBalance">0</span> ETC <a id="etcexplorer" href="" target="_blank">&#x1f517;</a></div>
+      </div>
+      <br />
+      <!-- <p>URL <span id="url">{url}</span></p> -->
+      <!-- <p>Address <span id="address1">{address1}</span></p> -->
+      <!-- <p>Mode <span id="mode">{mode}</span></p> -->
+      <!-- <p>Block Number <span id="blockNumber">{blockNumber}</span></p> -->
+      <br />
+      <br />
+      <p>See <a href="https://theethereum.wiki/w/index.php/The_DAO_Refunds" target="_blank">https://theethereum.wiki/w/index.php/The_DAO_Refunds</a> for the different methods to claim your refunds.</p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <p>Enjoy! &copy; Bok Consulting Pty Ltd 2019 • Help fund the cost of running this site by donating to <a href="https://etherscan.io/address/0x000001f568875f378bf6d170b790967fe429c81a" target="_blank">0x000001f568875f378bf6d170b790967fe429c81a</a>.</p>
+    </div>
+
+<script type="text/javascript">
+
+var factoryAddress = "0xA550114ee3688601006b8b9f25e64732eF774934";
+var factoryAbi = [{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"symbol","type":"string"},{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"decimals","type":"uint8"},{"indexed":false,"name":"totalSupply","type":"uint256"}],"name":"TokenDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
+
+window.addEventListener('load', async () => {
+    // Modern dapp browsers...
+    if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        try {
+            // Request account access if needed
+            await ethereum.enable();
+            // Acccounts now exposed
+
+            $("#factoryAddress").html('<a href="https://etherscan.io/address/' + factoryAddress + '#code">' + factoryAddress + '</a>');
+
+            // var address = getSearchParameter('address');
+            // $("#mode").html("address: " + address);
+
+            // Network    Network Id   Chain Id
+            // Mainnet             1          1
+            // Ropsten             3          3
+            // Rinkeby             4          4
+            // Kovan              42         42
+            // Görli               5          5
+            setInterval(function () {
+              web3.eth.getAccounts((error, account) => {
+                if (!error) {
+                  address = account[0];
+                  $("#account").html('<a href="https://etherscan.io/address/' + account[0] + '#code">' + account[0] + '</a>');
+                  web3.eth.getBalance(address, function (error, result) {
+                    if (!error) {
+                      var balance = new BigNumber(result).shift(-18);
+                      $("#accountbalance").html(balance.toString() + " ethers");
+                    } else {
+                      $("#accountbalance").html("ERROR " + error);
+                    }
+                  });
+                } else {
+                  address = "error";
+                  $("#account").html('ERROR ' + error);
+                }
+              });
+
+
+              // Testnet   | Explorers                     | Testnet ETH Faucets
+              // :-------- |:----------------------------- |:-------------------------
+              // Ropsten   | https://ropsten.etherscan.io/ | https://faucet.metamask.io/<br />https://twitter.com/BokkyPooBah/status/1099498823699714048
+              // Kovan     | https://kovan.etherscan.io/   | https://faucet.kovan.network/<br />https://github.com/kovan-testnet/faucet<br />https://faucet.kovan.radarrelay.com/
+              // Rinkeby   | https://rinkeby.etherscan.io/ | https://faucet.metamask.io/<br />https://faucet.rinkeby.io/
+              // Görli     | https://goerli.etherscan.io/  | https://faucet.goerli.mudit.blog/<br />https://goerli-faucet.slock.it/<br />https://bridge.goerli.com/
+
+              web3.version.getNetwork((error, netId) => {
+                if (!error) {
+                  switch (netId) {
+                    case "1":
+                      $("#network").html('ETHEREUM Mainnet');
+                      $("#faucets").html('No faucets on Mainnet');
+                      break
+                    case "2":
+                      $("#network").html('Morden (deprecated)');
+                      $("#faucets").html('No faucets on Morden');
+                      break
+                    case "3":
+                      $("#network").html('Ropsten');
+                      $("#faucets").html('<a href="https://faucet.metamask.io/">https://faucet.metamask.io/</a> or <a href="https://twitter.com/BokkyPooBah/status/1099498823699714048">https://twitter.com/BokkyPooBah/status/1099498823699714048</a>');
+                      break
+                    case "4":
+                      $("#network").html('Rinkeby');
+                      $("#faucets").html('<a href="https://faucet.metamask.io/">https://faucet.metamask.io/</a> or <a href="https://faucet.rinkeby.io/">https://faucet.rinkeby.io/</a>');
+                      break
+                    case "42":
+                      $("#network").html('Kovan');
+                      $("#faucets").html('<a href="https://faucet.kovan.network/">https://faucet.kovan.network/</a> or <a href="https://github.com/kovan-testnet/faucet">https://github.com/kovan-testnet/faucet</a>');
+                      break
+                    case "5":
+                      $("#network").html('Görli');
+                      $("#faucets").html('<a href="https://faucet.goerli.mudit.blog/">https://faucet.goerli.mudit.blog/</a> or <a href="https://goerli-faucet.slock.it/">https://goerli-faucet.slock.it/</a>');
+                      break
+                    default:
+                      $("#network").html('Unknown network id ' + netId);
+                  }
+                } else {
+                  $("#network").html("Error " + error);
+                }
+              });
+            }, 5000);
+
+
+            // $("#mode").html(JSON.stringify(await window));
+            // web3.eth.sendTransaction({/ * ... * /});
+        } catch (error) {
+            // User denied account access...
+        }
+        // Legacy dapp browsers...
+    } else if (window.web3) {
+        $("#mode").html("A 2");
+        window.web3 = new Web3(web3.currentProvider);
+        // Acccounts always exposed
+        // web3.eth.sendTransaction({/ * ... * /});
+        // Non-dapp browsers...
+    } else {
+        $("#mode").html("A 3");
+        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+
+});
+
+// $(document).ready(function() {
+
+	// $("#url").html(window.location.href);
+    // var Web3 = require('web3');
+    // var web3 = new Web3();
+    // web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
+    // var blockNumberCurrent = web3.eth.blockNumber;
+	// $("#blockNumber").html(blockNumberCurrent);
+
+/* 	web3.currentProvider.sendAsync({
+        method: "blockNumber",
+        params: [],
+        jsonrpc: "2.0",
+        id: "2"
+    }, function (err, result) {
+        $("#blockNumber").html(err);
+    });
+ */
+    // var ethRpc = "http://localhost:8545";
+    // var ethRpc = "https://refunds.thedao.fund/ethrpc";
+    // var etcRpc = "https://refunds.thedao.fund/etcrpc";
+
+    /*
+    // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+    if (typeof web3 !== 'undefined') {
+      // Use Mist/MetaMask's provider
+      web3js = new Web3(web3.currentProvider);
+      $("#mode").html("A 1");
+    } else {
+      $("#mode").html("A 2");
+      console.log('No web3? You should consider trying MetaMask!')
+      // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+      web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    }
+    */
+
+
+    /*
+     // Checks Web3 support
+    if (typeof web3 !== 'undefined' && typeof Web3 !== 'undefined') {
+        // If there's a web3 library loaded, then make your own web3
+        web3 = new Web3(web3.currentProvider);
+        $("#mode").html("Running in Mist");
+        // var blockNumberCurrent = web3.eth.blockNumber;
+        // $("#blockNumber").html(blockNumberCurrent);
+    } else if (typeof Web3 !== 'undefined') {
+        // If there isn't then set a provider
+        web3 = new Web3(new Web3.providers.HttpProvider(ethRpc));
+        $("#mode").html("Running connected to JSON RPC on " + ethRpc);
+        // var blockNumberCurrent = web3.eth.blockNumber;
+        // web3.eth.blockNumber(function (error, result) {
+        //     $("#blockNumber").html(result);
+        // });
+        // $("#blockNumber").html(blockNumberCurrent);
+        // $("#blockNumber").html("hello");
+        // web3.eth.blockNumber(function (error, result) {
+        	// $("#blockNumber").html(result);
+            // console.log("blockNumber: " + result)
+        // });
+
+    } else if (typeof web3 == 'undefined' && typeof Web3 == 'undefined') {
+    	$("#blockNumber").html("Not available");
+    	return;
+    }
+    */
+
+	// var blockNumberCurrent = web3.eth.blockNumber;
+	// $("#blockNumber").html(blockNumberCurrent);
+/*
+  var address = getSearchParameter('address');
+  console.log("address: " + address);
+
+	if (address != null && address.length == 42) {
+	    $("#address").val(address);
+
+	    $('#ethexplorer').attr('href','https://etherscan.io/address/' + address);
+        $('#etcexplorer').attr('href','https://gastracker.io/addr/' + address);
+
+	    / *var preHFBalance = getPreHardforkBalance(address);
+	    console.log("Pre hard-fork balance: " + preHFBalance);* /
+        // $("#preHFBalance").html(preHFBalance);
+
+	    var ethDetails = getETHDetails(address);
+	    // console.log(JSON.stringify(ethDetails));
+        $("#ethBlockNumber").html(ethDetails.ethBlockNumber);
+        $("#ethWithdrawalAmount").html(ethDetails.ethWithdrawalAmount);
+        $("#ethExtraBalanceWithdrawalAmount").html(ethDetails.ethExtraBalanceWithdrawalAmount);
+        $("#ethAccountBalance").html(ethDetails.ethAccountBalance);
+
+	    var etcDetails = getETCDetails(address);
+	    // console.log(JSON.stringify(etcDetails));
+        $("#preHFDaoBalance").html(etcDetails.preHFDaoBalance);
+        $("#etcBlockNumber").html(etcDetails.etcBlockNumber);
+        $("#etcPaidOutAmount").html(etcDetails.etcPaidOutAmount);
+        $("#etcWithdrawalAmount").html(etcDetails.etcWithdrawalAmount);
+        $("#etcAccountBalance").html(etcDetails.etcAccountBalance);
+	}
+  */
+
+	// var balances = require('./balancesHR.json');
+	// console.table(balances);
+
+    // var blockNumber = web3.eth.getBlockNumber(function (error, result) {
+    // 	console.log("blockNumber: " + result)
+    // });
+
+    // If no accounts are present, show the floating baloon
+    // if (!web3.eth.accounts || web3.eth.accounts.length == 0) {
+    // 	console.log("No accounts");
+        // document.getElementById("vote-support").style.display = "none";
+        // document.getElementById("vote-against").style.display = "none";
+        // document.getElementById("add-account").style.display = "block";
+
+    // }
+
+    // var blockNumber = web3.eth.blockNumber;
+    // console.log("blockNumber: " + blockNumber)
+// });
+</script>
+  </body>
+</html>

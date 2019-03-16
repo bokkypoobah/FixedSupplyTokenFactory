@@ -6,3 +6,4 @@ test/testchain/geth.ipc
 test/testchain/history
 test/contracts
 private
+ipfs
