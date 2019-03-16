@@ -101,6 +101,10 @@
           <div class="col-sm-8"><span id="blockNumber">Checking ...</span></div>
         </div>
         <div class="row">
+          <div class="col-sm-3 text-right">Latest block time:</div>
+          <div class="col-sm-8"><span id="blockTime">Checking ...</span></div>
+        </div>
+        <div class="row">
           <div class="col-sm-3 text-right">Your account:</div>
           <div class="col-sm-8"><span id="account">Checking ...</span></div>
         </div>
@@ -135,21 +139,25 @@
         <br />
 
         <h4 class="display-3">Your New Token Contract Details</h4>
-        <div class="row">
+        <div class="row" id="symbolDiv">
           <div class="col-sm-3 text-right">Symbol:</div>
-          <div class="col-sm-3"><input type="text" class="form-control" id="symbol" name="symbol" placeholder="MYTOKEN" size="12"></div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="symbol" name="symbol" placeholder="e.g. 'BEANIE'" size="12"></div>
+          <span class="help-block" id="symbolNote">Something may have gone wrong</span>
         </div>
-        <div class="row">
+        <div class="row has-error" id="nameDiv">
           <div class="col-sm-3 text-right">Name:</div>
-          <div class="col-sm-3"><input type="text" class="form-control" id="name" name="name" placeholder="My Token 😱" size="36"></div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="name" name="name" placeholder="e.g. 'Beanie Things'" size="36"></div>
+          <span class="help-block" id="nameNote">Something may have gone wrong</span>
         </div>
-        <div class="row">
+        <div class="row has-error" id="decimalsDiv">
           <div class="col-sm-3 text-right">Decimals:</div>
-          <div class="col-sm-3"><input type="text" class="form-control" id="decimals" name="decimals" placeholder="18" size="5"></div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="decimals" name="decimals" placeholder="0..18" size="5"></div>
+          <span class="help-block" id="decimalsNote">Something may have gone wrong</span>
         </div>
-        <div class="row">
+        <div class="row has-error" id="totalSupplyDiv">
           <div class="col-sm-3 text-right">Total Supply:</div>
-          <div class="col-sm-3"><input type="text" class="form-control" id="totalSupply" name="totalSupply" placeholder="1000000" size="27"></div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="totalSupply" name="totalSupply" placeholder=">0 and <= 100 trillion" size="27"></div>
+          <span class="help-block" id="totalSupplyNote">Something may have gone wrong</span>
         </div>
         <div class="row">
           <div class="col-sm-3 text-right">&nbsp</div>
@@ -186,12 +194,52 @@
 var factoryAddress = "0xA550114ee3688601006b8b9f25e64732eF774934";
 var factoryAbi = [{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"symbol","type":"string"},{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"decimals","type":"uint8"},{"indexed":false,"name":"totalSupply","type":"uint256"}],"name":"TokenDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
 
+var symbolNote = "Normally a short uppercase character string like 'BEANIE'";
+var nameNote = "Normally a mixed case character string like 'Beanie Things'";
+var decimalsNote = "A number between 0 and 18, inclusive";
+var totalSupplyNote = "A number greater than 0 and less than or equals to 100 trillion";
+
 window.addEventListener('load', async () => {
+
   var symbol = getSearchParameter('symbol');
+  if (symbol.length == 0 || symbol.length > 64) {
+    $("#symbolDiv").addClass("has-error");
+    $("#symbolNote").html(symbolNote);
+  } else {
+    $("#symbolDiv").removeClass("has-error");
+    $("#symbolNote").html(symbolNote);
+  }
   $("#symbol").val(symbol);
+
   var name = getSearchParameter('name');
+  if (name.length == 0 || name.length > 128) {
+    $("#nameDiv").addClass("has-error");
+    $("#nameNote").html(nameNote);
+  } else {
+    $("#nameDiv").removeClass("has-error");
+    $("#nameNote").html(nameNote);
+  }
   $("#name").val(name);
 
+  var decimalsText = getSearchParameter('decimals');
+  var decimals = decimalsText.length == 0 ? '' : parseInt(decimalsText) || 0;
+  if (decimals != '' && (decimals < 0 || decimals > 18)) {
+    $("#decimalsDiv").addClass("has-error");
+    $("#decimalsNote").html(decimalsNote);
+  } else {
+    $("#decimalsDiv").removeClass("has-error");
+    $("#decimalsNote").html(decimalsNote);
+  }
+  $("#decimals").val(decimals);
+
+  // var span = document.getElementById('nameText');
+  // while(span.firstChild) {
+  //   span.removeChild(span.firstChild);
+  // }
+  // span.appendChild(document.createTextNode("some new content"));
+
+  // $("#symbolDiv").addClass("has-error");
+  // $("#symbolText").html("OK");
 
     // Modern dapp browsers...
     if (window.ethereum) {
@@ -202,29 +250,6 @@ window.addEventListener('load', async () => {
             // Accounts now exposed
 
             $("#factoryAddress").html('<a href="https://etherscan.io/address/' + factoryAddress + '#code">' + factoryAddress + '</a>');
-
-            //
-            // var parseQueryString = function() {
-            //     var str = window.location.search;
-            //     var objURL = {};
-            //     str.replace(
-            //         new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
-            //         function( $0, $1, $2, $3 ){
-            //             objURL[ $1 ] = $3;
-            //         }
-            //     );
-            //     return objURL;
-            // };
-
-            // const params = new URL(window.location.href).searchParams;
-            // const symbol = params.get('symbol');
-            // $("#symbol").val(JSON.stringify(params));
-
-            //Example how to use it:
-            // var params = parseQueryString();
-            // $("#symbol").val(params['symbol']);
-            // $("#name").val(decodeURIComponent(params['name']));
-
 
             setInterval(function () {
               web3.eth.getAccounts((error, account) => {
@@ -260,39 +285,61 @@ window.addEventListener('load', async () => {
               // Görli     | https://goerli.etherscan.io/  | https://faucet.goerli.mudit.blog/<br />https://goerli-faucet.slock.it/<br />https://bridge.goerli.com/
               web3.version.getNetwork((error, netId) => {
                 if (!error) {
+                  var etherScanBlockUrl;
                   switch (netId) {
                     case "1":
                       $("#network").html('ETHEREUM Mainnet');
                       $("#faucets").html('No faucets on Mainnet');
+                      etherScanBlockUrl = "https://etherscan.io/block/";
                       break
                     case "2":
                       $("#network").html('Morden (deprecated)');
                       $("#faucets").html('No faucets on Morden');
+                      etherScanBlockUrl = "error#";
                       break
                     case "3":
                       $("#network").html('Ropsten');
                       $("#faucets").html('<a href="https://faucet.metamask.io/">https://faucet.metamask.io/</a> or <a href="https://twitter.com/BokkyPooBah/status/1099498823699714048">https://twitter.com/BokkyPooBah/status/1099498823699714048</a>');
+                      etherScanBlockUrl = "https://ropsten.etherscan.io/block/";
                       break
                     case "4":
                       $("#network").html('Rinkeby');
                       $("#faucets").html('<a href="https://faucet.metamask.io/">https://faucet.metamask.io/</a> or <a href="https://faucet.rinkeby.io/">https://faucet.rinkeby.io/</a>');
+                      etherScanBlockUrl = "https://rinkeby.etherscan.io/block/";
                       break
                     case "42":
                       $("#network").html('Kovan');
                       $("#faucets").html('<a href="https://faucet.kovan.network/">https://faucet.kovan.network/</a> or <a href="https://github.com/kovan-testnet/faucet">https://github.com/kovan-testnet/faucet</a>');
+                      etherScanBlockUrl = "https://kovan.etherscan.io/block/";
                       break
                     case "5":
                       $("#network").html('Görli');
                       $("#faucets").html('<a href="https://faucet.goerli.mudit.blog/">https://faucet.goerli.mudit.blog/</a> or <a href="https://goerli-faucet.slock.it/">https://goerli-faucet.slock.it/</a>');
+                      etherScanBlockUrl = "https://goerli.etherscan.io/block/";
                       break
                     default:
                       $("#network").html('Unknown network id ' + netId);
+                      etherScanBlockUrl = "error#";
                   }
+                  web3.eth.getBlockNumber((error1, blockNumber) => {
+                    if (!error1) {
+                      $("#blockNumber").html('<a href="'+ etherScanBlockUrl + blockNumber + '">' + blockNumber + '</a>');
+                      web3.eth.getBlock(blockNumber, (error2, block) => {
+                        if (!error2) {
+                          $("#blockTime").html(new Date(block.timestamp * 1000).toUTCString());
+                        } else {
+                          $("#blockTime").html('ERROR ' + error);
+                        }
+                      });
+                    } else {
+                      $("#blockNumber").html('ERROR ' + error);
+                    }
+                  });
                 } else {
                   $("#network").html("Error " + error);
                 }
               });
-            }, 5000);
+            }, 1000);
 
 
             // $("#mode").html(JSON.stringify(await window));
