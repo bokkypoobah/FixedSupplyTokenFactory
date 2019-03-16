@@ -94,15 +94,19 @@
         <!-- <div class="form-group"> -->
         <div class="row">
           <div class="col-sm-3 text-right">Network:</div>
-          <div class="col-sm-3"><span id="network">Checking ...</span></div>
+          <div class="col-sm-8"><span id="network">Checking ...</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">Latest block number:</div>
+          <div class="col-sm-8"><span id="blockNumber">Checking ...</span></div>
         </div>
         <div class="row">
           <div class="col-sm-3 text-right">Your account:</div>
-          <div class="col-sm-3"><span id="account">Checking ...</span></div>
+          <div class="col-sm-8"><span id="account">Checking ...</span></div>
         </div>
         <div class="row">
           <div class="col-sm-3 text-right">Your account balance:</div>
-          <div class="col-sm-3"><span id="accountbalance">Checking ...</span></div>
+          <div class="col-sm-8"><span id="accountbalance">Checking ...</span></div>
         </div>
         <div class="row">
           <div class="col-sm-3 text-right">Faucets:</div>
@@ -119,55 +123,43 @@
         </div>
         -->
         <!-- </div> -->
+
+        <br />
+
+        <h4 class="display-3">BokkyPooBah's Fixed Supply Token 👊 Factory v1.10</h4>
+        <div class="row">
+          <div class="col-sm-3 text-right">Address:</div>
+          <div class="col-sm-3"><span id="factoryAddress"></span></div>
+        </div>
+
+        <br />
+
+        <h4 class="display-3">Your New Token Contract Details</h4>
+        <div class="row">
+          <div class="col-sm-3 text-right">Symbol:</div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="symbol" name="symbol" placeholder="MYTOKEN" size="12"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">Name:</div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="name" name="name" placeholder="My Token 😱" size="36"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">Decimals:</div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="decimals" name="decimals" placeholder="18" size="5"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">Total Supply:</div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="totalSupply" name="totalSupply" placeholder="1000000" size="27"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">&nbsp</div>
+          <div class="col-sm-3"><button type="submit" class="btn btn-default">Deploy</button></div>
+        </div>
       </form>
 
-      <br />
-
-      <h4 class="display-3">BokkyPooBah's Fixed Supply Token 👊 Factory v1.10</h4>
-      <div class="row">
-        <div class="col-sm-3 text-right">Address:</div>
-        <div class="col-sm-3"><span id="factoryAddress"></span></div>
-      </div>
 
       <br />
 
-      <h4 class="display-3">DAO To ETH Refunds</h4>
-      <div class="row">
-        <div class="col-sm-3 text-right">Current Block:</div>
-        <div class="col-sm-3"><span id="ethBlockNumber">0</span></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 text-right">DAO To ETH Refund:</div>
-        <div class="col-sm-3"><span id="ethWithdrawalAmount">0</span> ETH</div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 text-right">ExtraBalance Refund:</div>
-        <div class="col-sm-3"><span id="ethExtraBalanceWithdrawalAmount">0</span> ETH</div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 text-right">Account Balance:</div>
-        <div class="col-sm-3"><span id="ethAccountBalance">0</span> ETH <a id="ethexplorer" href="" target="_blank">&#x1f517;</a></div>
-      </div>
-
-      <br />
-
-      <h4 class="display-3">DAO To ETC Refunds</h4>
-      <div class="row">
-        <div class="col-sm-3 text-right">Current Block:</div>
-        <div class="col-sm-3"><span id="etcBlockNumber">0</span></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 text-right">Already Withdrawn:</div>
-        <div class="col-sm-3"><span id="etcPaidOutAmount">0</span> ETC</div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 text-right">To Withdraw:</div>
-        <div class="col-sm-3"><span id="etcWithdrawalAmount">0</span> ETC</div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3 text-right">Account Balance:</div>
-        <div class="col-sm-3"><span id="etcAccountBalance">0</span> ETC <a id="etcexplorer" href="" target="_blank">&#x1f517;</a></div>
-      </div>
       <br />
       <!-- <p>URL <span id="url">{url}</span></p> -->
       <!-- <p>Address <span id="address1">{address1}</span></p> -->
@@ -175,7 +167,12 @@
       <!-- <p>Block Number <span id="blockNumber">{blockNumber}</span></p> -->
       <br />
       <br />
-      <p>See <a href="https://theethereum.wiki/w/index.php/The_DAO_Refunds" target="_blank">https://theethereum.wiki/w/index.php/The_DAO_Refunds</a> for the different methods to claim your refunds.</p>
+
+      <p>Switch networks in MetaMask.</p>
+      <p>See <a href="https://etherscan.io/tokens" target="_blank">https://etherscan.io/tokens</a> for list of tokens on the Ethereum Mainnet.</p>
+      <br />
+      <br />
+      <br />
       <br />
       <br />
       <br />
@@ -190,25 +187,45 @@ var factoryAddress = "0xA550114ee3688601006b8b9f25e64732eF774934";
 var factoryAbi = [{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"symbol","type":"string"},{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"decimals","type":"uint8"},{"indexed":false,"name":"totalSupply","type":"uint256"}],"name":"TokenDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
 
 window.addEventListener('load', async () => {
+  var symbol = getSearchParameter('symbol');
+  $("#symbol").val(symbol);
+  var name = getSearchParameter('name');
+  $("#name").val(name);
+
+
     // Modern dapp browsers...
     if (window.ethereum) {
         window.web3 = new Web3(ethereum);
         try {
             // Request account access if needed
             await ethereum.enable();
-            // Acccounts now exposed
+            // Accounts now exposed
 
             $("#factoryAddress").html('<a href="https://etherscan.io/address/' + factoryAddress + '#code">' + factoryAddress + '</a>');
 
-            // var address = getSearchParameter('address');
-            // $("#mode").html("address: " + address);
+            //
+            // var parseQueryString = function() {
+            //     var str = window.location.search;
+            //     var objURL = {};
+            //     str.replace(
+            //         new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+            //         function( $0, $1, $2, $3 ){
+            //             objURL[ $1 ] = $3;
+            //         }
+            //     );
+            //     return objURL;
+            // };
 
-            // Network    Network Id   Chain Id
-            // Mainnet             1          1
-            // Ropsten             3          3
-            // Rinkeby             4          4
-            // Kovan              42         42
-            // Görli               5          5
+            // const params = new URL(window.location.href).searchParams;
+            // const symbol = params.get('symbol');
+            // $("#symbol").val(JSON.stringify(params));
+
+            //Example how to use it:
+            // var params = parseQueryString();
+            // $("#symbol").val(params['symbol']);
+            // $("#name").val(decodeURIComponent(params['name']));
+
+
             setInterval(function () {
               web3.eth.getAccounts((error, account) => {
                 if (!error) {
@@ -228,6 +245,12 @@ window.addEventListener('load', async () => {
                 }
               });
 
+              // Network    Network Id   Chain Id
+              // Mainnet             1          1
+              // Ropsten             3          3
+              // Rinkeby             4          4
+              // Kovan              42         42
+              // Görli               5          5
 
               // Testnet   | Explorers                     | Testnet ETH Faucets
               // :-------- |:----------------------------- |:-------------------------
@@ -235,7 +258,6 @@ window.addEventListener('load', async () => {
               // Kovan     | https://kovan.etherscan.io/   | https://faucet.kovan.network/<br />https://github.com/kovan-testnet/faucet<br />https://faucet.kovan.radarrelay.com/
               // Rinkeby   | https://rinkeby.etherscan.io/ | https://faucet.metamask.io/<br />https://faucet.rinkeby.io/
               // Görli     | https://goerli.etherscan.io/  | https://faucet.goerli.mudit.blog/<br />https://goerli-faucet.slock.it/<br />https://bridge.goerli.com/
-
               web3.version.getNetwork((error, netId) => {
                 if (!error) {
                   switch (netId) {
@@ -280,14 +302,13 @@ window.addEventListener('load', async () => {
         }
         // Legacy dapp browsers...
     } else if (window.web3) {
-        $("#mode").html("A 2");
+        $("#network").html("A 2");
         window.web3 = new Web3(web3.currentProvider);
         // Acccounts always exposed
         // web3.eth.sendTransaction({/ * ... * /});
         // Non-dapp browsers...
     } else {
-        $("#mode").html("A 3");
-        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+        $("#network").html('Non-Ethereum browser detected. Consider installing the <a href="https://metamask.io/">MetaMask</a> browser addon!');
     }
 
 });
