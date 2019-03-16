@@ -249,27 +249,7 @@ window.addEventListener('load', async () => {
             await ethereum.enable();
             // Accounts now exposed
 
-            $("#factoryAddress").html('<a href="https://etherscan.io/address/' + factoryAddress + '#code">' + factoryAddress + '</a>');
-
             setInterval(function () {
-              web3.eth.getAccounts((error, account) => {
-                if (!error) {
-                  address = account[0];
-                  $("#account").html('<a href="https://etherscan.io/address/' + account[0] + '#code">' + account[0] + '</a>');
-                  web3.eth.getBalance(address, function (error, result) {
-                    if (!error) {
-                      var balance = new BigNumber(result).shift(-18);
-                      $("#accountbalance").html(balance.toString() + " ethers");
-                    } else {
-                      $("#accountbalance").html("ERROR " + error);
-                    }
-                  });
-                } else {
-                  address = "error";
-                  $("#account").html('ERROR ' + error);
-                }
-              });
-
               // Network    Network Id   Chain Id
               // Mainnet             1          1
               // Ropsten             3          3
@@ -285,45 +265,48 @@ window.addEventListener('load', async () => {
               // Görli     | https://goerli.etherscan.io/  | https://faucet.goerli.mudit.blog/<br />https://goerli-faucet.slock.it/<br />https://bridge.goerli.com/
               web3.version.getNetwork((error, netId) => {
                 if (!error) {
-                  var etherScanBlockUrl;
+                  var etherScanUrl;
                   switch (netId) {
                     case "1":
                       $("#network").html('ETHEREUM Mainnet');
                       $("#faucets").html('No faucets on Mainnet');
-                      etherScanBlockUrl = "https://etherscan.io/block/";
+                      etherScanUrl = "https://etherscan.io/";
                       break
                     case "2":
                       $("#network").html('Morden (deprecated)');
                       $("#faucets").html('No faucets on Morden');
-                      etherScanBlockUrl = "error#";
+                      etherScanUrl = "error#";
                       break
                     case "3":
                       $("#network").html('Ropsten');
                       $("#faucets").html('<a href="https://faucet.metamask.io/">https://faucet.metamask.io/</a> or <a href="https://twitter.com/BokkyPooBah/status/1099498823699714048">https://twitter.com/BokkyPooBah/status/1099498823699714048</a>');
-                      etherScanBlockUrl = "https://ropsten.etherscan.io/block/";
+                      etherScanUrl = "https://ropsten.etherscan.io/";
                       break
                     case "4":
                       $("#network").html('Rinkeby');
                       $("#faucets").html('<a href="https://faucet.metamask.io/">https://faucet.metamask.io/</a> or <a href="https://faucet.rinkeby.io/">https://faucet.rinkeby.io/</a>');
-                      etherScanBlockUrl = "https://rinkeby.etherscan.io/block/";
+                      etherScanUrl = "https://rinkeby.etherscan.io/";
                       break
                     case "42":
                       $("#network").html('Kovan');
                       $("#faucets").html('<a href="https://faucet.kovan.network/">https://faucet.kovan.network/</a> or <a href="https://github.com/kovan-testnet/faucet">https://github.com/kovan-testnet/faucet</a>');
-                      etherScanBlockUrl = "https://kovan.etherscan.io/block/";
+                      etherScanUrl = "https://kovan.etherscan.io/";
                       break
                     case "5":
                       $("#network").html('Görli');
                       $("#faucets").html('<a href="https://faucet.goerli.mudit.blog/">https://faucet.goerli.mudit.blog/</a> or <a href="https://goerli-faucet.slock.it/">https://goerli-faucet.slock.it/</a>');
-                      etherScanBlockUrl = "https://goerli.etherscan.io/block/";
+                      etherScanUrl = "https://goerli.etherscan.io/";
                       break
                     default:
                       $("#network").html('Unknown network id ' + netId);
-                      etherScanBlockUrl = "error#";
+                      etherScanUrl = "error#";
                   }
+
+                  $("#factoryAddress").html('<a href="'+ etherScanUrl + 'address/' + factoryAddress + '#code">' + factoryAddress + '</a>');
+
                   web3.eth.getBlockNumber((error1, blockNumber) => {
                     if (!error1) {
-                      $("#blockNumber").html('<a href="'+ etherScanBlockUrl + blockNumber + '">' + blockNumber + '</a>');
+                      $("#blockNumber").html('<a href="'+ etherScanUrl + 'block/' + blockNumber + '">' + blockNumber + '</a>');
                       web3.eth.getBlock(blockNumber, (error2, block) => {
                         if (!error2) {
                           $("#blockTime").html(new Date(block.timestamp * 1000).toUTCString());
@@ -335,6 +318,25 @@ window.addEventListener('load', async () => {
                       $("#blockNumber").html('ERROR ' + error);
                     }
                   });
+
+                  web3.eth.getAccounts((error, account) => {
+                    if (!error) {
+                      address = account[0];
+                      $("#account").html('<a href="' + etherScanUrl + 'address/' + account[0] + '#code">' + account[0] + '</a>');
+                      web3.eth.getBalance(address, function (error, result) {
+                        if (!error) {
+                          var balance = new BigNumber(result).shift(-18);
+                          $("#accountbalance").html(balance.toString() + " ethers");
+                        } else {
+                          $("#accountbalance").html("ERROR " + error);
+                        }
+                      });
+                    } else {
+                      address = "error";
+                      $("#account").html('ERROR ' + error);
+                    }
+                  });
+
                 } else {
                   $("#network").html("Error " + error);
                 }
