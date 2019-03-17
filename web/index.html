@@ -156,12 +156,12 @@
         </div>
         <div class="row has-error" id="totalSupplyDiv">
           <div class="col-sm-3 text-right">Total Supply:</div>
-          <div class="col-sm-3"><input type="text" class="form-control" id="totalSupply" name="totalSupply" placeholder=">0 and <= 100 trillion" size="27"></div>
+          <div class="col-sm-3"><input type="text" class="form-control" id="totalSupply" name="totalSupply" placeholder=">0 and <= 1 trillion" size="27"></div>
           <span class="help-block" id="totalSupplyNote">Something may have gone wrong</span>
         </div>
         <div class="row">
           <div class="col-sm-3 text-right">&nbsp</div>
-          <div class="col-sm-3"><button type="submit" class="btn btn-default">Deploy</button></div>
+          <div class="col-sm-3"><button type="submit" class="btn btn-default">Check</button></div>
         </div>
       </form>
 
@@ -194,36 +194,106 @@
 var factoryAddress = "0xA550114ee3688601006b8b9f25e64732eF774934";
 var factoryAbi = [{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"symbol","type":"string"},{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"decimals","type":"uint8"},{"indexed":false,"name":"totalSupply","type":"uint256"}],"name":"TokenDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
 
-var symbolNote = "Normally a short uppercase character string like 'BEANIE'";
-var nameNote = "Normally a mixed case character string like 'Beanie Things'";
-var decimalsNote = "A number between 0 and 18, inclusive";
-var totalSupplyNote = "A number greater than 0 and less than or equals to 100 trillion";
+var symbolMaxLength = 3;
+var nameMaxLength = 10;
+var decimalsMax = 18;
+var totalSupplyMax = new BigNumber("1").shift(12);
+
+var symbolNote = "Normally a short uppercase character string like 'BEANIE'. Max length " + symbolMaxLength;
+var nameNote = "Normally a mixed case character string like 'Beanie Things'. Max length " + nameMaxLength;
+var decimalsNote = "A number between 0 and " + decimalsMax + ", inclusive";
+var totalSupplyNote = "A number greater than 0 and less than or equals to " + totalSupplyMax;
 
 window.addEventListener('load', async () => {
 
-  var symbol = getSearchParameter('symbol');
-  if (symbol.length == 0 || symbol.length > 64) {
+  var inputFilled = true;
+  var inputError = false;
+
+  var symbolText = getSearchParameter('symbol');
+  var symbolError = false;
+  if (symbolText.length == 0) {
+    inputFilled = false;
+  } else {
+    if (symbolText.length > symbolMaxLength) {
+      inputError = true;
+      symbolError = true;
+    }
+  }
+
+  var nameText = getSearchParameter('name');
+  var nameError = false;
+  if (nameText.length == 0) {
+    inputFilled = false;
+  } else {
+    if (nameText.length > nameMaxLength) {
+      inputError = true;
+      nameError = true;
+    }
+  }
+
+  var decimalsText = getSearchParameter('decimals');
+  var decimalsError = false;
+  var decimals;
+  if (decimalsText.length == 0) {
+    inputFilled = false;
+  } else {
+    try {
+      decimals = parseInt(decimalsText);
+      if (isNaN(decimals)) {
+        decimals = 999;
+      }
+      if (decimals > decimalsMax) {
+        inputError = true;
+        decimalsError = true;
+      }
+    } catch (e) {
+      decimals = decimalsText;
+      inputError = true;
+      decimalsError = true;
+    }
+  }
+
+  var totalSupplyText = getSearchParameter('totalSupply');
+  var totalSupplyError = false;
+  var totalSupply;
+  if (totalSupplyText.length == 0) {
+    inputFilled = false;
+  } else {
+    try {
+      totalSupply = new BigNumber(totalSupplyText);
+      if (isNaN(totalSupply)) {
+        totalSupply = new BigNumber(999);
+      }
+      if (totalSupply.gt(totalSupplyMax)) {
+        inputError = true;
+        totalSupplyError = true;
+      }
+    } catch (e) {
+      totalSupply = totalSupplyText;
+      inputError = true;
+      totalSupplyError = true;
+    }
+  }
+
+  if (symbolError) {
     $("#symbolDiv").addClass("has-error");
     $("#symbolNote").html(symbolNote);
   } else {
     $("#symbolDiv").removeClass("has-error");
     $("#symbolNote").html(symbolNote);
   }
-  $("#symbol").val(symbol);
+  $("#symbol").val(symbolText);
 
-  var name = getSearchParameter('name');
-  if (name.length == 0 || name.length > 128) {
+  if (nameError) {
     $("#nameDiv").addClass("has-error");
     $("#nameNote").html(nameNote);
   } else {
     $("#nameDiv").removeClass("has-error");
     $("#nameNote").html(nameNote);
   }
-  $("#name").val(name);
+  $("#name").val(nameText);
 
-  var decimalsText = getSearchParameter('decimals');
-  var decimals = decimalsText.length == 0 ? '' : parseInt(decimalsText) || 0;
-  if (decimals != '' && (decimals < 0 || decimals > 18)) {
+  if (decimalsError) {
     $("#decimalsDiv").addClass("has-error");
     $("#decimalsNote").html(decimalsNote);
   } else {
@@ -232,11 +302,14 @@ window.addEventListener('load', async () => {
   }
   $("#decimals").val(decimals);
 
-  // var span = document.getElementById('nameText');
-  // while(span.firstChild) {
-  //   span.removeChild(span.firstChild);
-  // }
-  // span.appendChild(document.createTextNode("some new content"));
+  if (totalSupplyError) {
+    $("#totalSupplyDiv").addClass("has-error");
+    $("#totalSupplyNote").html(totalSupplyNote);
+  } else {
+    $("#totalSupplyDiv").removeClass("has-error");
+    $("#totalSupplyNote").html(totalSupplyNote);
+  }
+  $("#totalSupply").val(totalSupply);
 
   // $("#symbolDiv").addClass("has-error");
   // $("#symbolText").html("OK");
