@@ -93,6 +93,10 @@
       <form class="form-inline" method="GET">
         <!-- <div class="form-group"> -->
         <div class="row">
+          <div class="col-sm-3 text-right">Status:</div>
+          <div class="col-sm-8"><span id="status">This page is still under development</span></div>
+        </div>
+        <div class="row">
           <div class="col-sm-3 text-right">Network:</div>
           <div class="col-sm-8"><span id="network">Checking ...</span></div>
         </div>
@@ -410,8 +414,8 @@ window.addEventListener('load', async () => {
                       $("#account").html('<a href="' + etherScanUrl + 'address/' + account[0] + '#code" target="_blank">' + account[0] + '</a>');
                       web3.eth.getBalance(address, function (error, result) {
                         if (!error) {
-                          var balance = new BigNumber(result).shift(-18);
-                          $("#accountbalance").html(balance.toString() + " ethers");
+                          var balance = new BigNumber(result);
+                          $("#accountbalance").html(balance.shift(-18).toString() + " ethers");
 
                           if (parametersContainKey("deploy")) {
                             if (!txSent) {
@@ -425,14 +429,15 @@ window.addEventListener('load', async () => {
                                   if (balance > minimumFee) {
                                     factory.deployTokenContract(symbolText, nameText, decimals, totalSupply.shift(decimals).toString(), {from: address, gas: gas, value: minimumFee}, function(error, tx) {
                                       if (!error) {
-                                        $("#deployNote").html('Deploying ...' + JSON.stringify(tx));
+                                        $("#deployNote").html('Deployed <a href="'+ etherScanUrl + 'tx/' + tx + '" target="_blank">' + tx + '</a>');
+
                                       } else {
                                         $("#deployNote").html('Deployment cancelled. Click Check again before deploying');
                                         $("#deploy").prop("disabled", true);
                                       }
                                     });
                                   } else {
-                                    $("#deployNote").html('Insufficient funds in your account to pay the minimum fee of ' + minimumFee.shift(-18) + " ethers");
+                                    $("#deployNote").html('Insufficient funds in your account ' + balance.shift(-18) + 'ethers to pay the minimum fee of ' + minimumFee.shift(-18) + " ethers");
                                   }
                                 } else {
                                   $("#deployNote").html('Error retrieving minimum fee');
