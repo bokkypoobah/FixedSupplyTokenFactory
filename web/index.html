@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BokkyPooBah's Fixed Supply Token 👊 Factory</title>
+    <title>BokkyPooBah's Smart Contract Vending Machine</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="BokkyPooBah's Fixed Supply Token 👊 Factory v1.10 (c) Bok Consulting Pty Ltd 2019">
+    <meta name="description" content="BokkyPooBah's Smart Contract Vending Machine (c) Bok Consulting Pty Ltd 2019">
     <meta name="author" content="BokkyPooBah/bokconsulting.com.au">
     <link href="css/bootstrap.css" rel="stylesheet" media="screen" />
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen" />
@@ -43,7 +43,7 @@
           <span class="sr-only">Toggle navigation</span>
           <i class="icon-menu"></i> Menu
         </button>
-        <a class="navbar-brand logo" href="/">BokkyPooBah's Fixed Supply Token 👊 Factory v1.10</a>
+        <a class="navbar-brand logo" href="/">BokkyPooBah's Smart Contract Vending Machine</a>
       </div>
       <div class="container">
         <!--
@@ -374,11 +374,11 @@ window.addEventListener('load', async () => {
                   $("#network").html(network.network);
                   $("#faucets").html(network.faucets);
 
-                  $("#factoryAddress").html('<a href="'+ network.explorer + 'address/' + factoryAddress + '#code" target="_blank">' + factoryAddress + '</a>');
+                  $("#factoryAddress").html(factoryAddress + ' <a href="'+ network.explorer + 'address/' + factoryAddress + '#code" target="_blank">🔗</a>');
 
                   web3.eth.getBlockNumber((error1, blockNumber) => {
                     if (!error1) {
-                      $("#blockNumber").html('<a href="'+ network.explorer + 'block/' + blockNumber + '" target="_blank">' + blockNumber + '</a>');
+                      $("#blockNumber").html(blockNumber + ' <a href="'+ network.explorer + 'block/' + blockNumber + '" target="_blank">🔗</a>');
                       web3.eth.getBlock(blockNumber, (error2, block) => {
                         if (!error2) {
                           $("#blockTime").html(new Date(block.timestamp * 1000).toUTCString());
@@ -394,7 +394,7 @@ window.addEventListener('load', async () => {
                   web3.eth.getAccounts((error, account) => {
                     if (!error) {
                       address = account[0];
-                      $("#account").html('<a href="' + network.explorer + 'address/' + account[0] + '#code" target="_blank">' + account[0] + '</a>');
+                      $("#account").html(account[0] + ' <a href="' + network.explorer + 'address/' + account[0] + '#code" target="_blank">🔗</a>');
                       web3.eth.getBalance(address, function (error, result) {
                         if (!error) {
                           var balance = new BigNumber(result);
@@ -412,7 +412,7 @@ window.addEventListener('load', async () => {
                                   if (balance > minimumFee) {
                                     factory.deployTokenContract(symbolText, nameText, decimals, totalSupply.shift(decimals).toString(), {from: address, gas: gas, value: minimumFee}, function(error, tx) {
                                       if (!error) {
-                                        $("#deployNote").html('Deployed <a href="' + network.explorer + 'tx/' + tx + '" target="_blank">' + tx + '</a>');
+                                        $("#deployNote").html('Deployed ' + tx + ' <a href="' + network.explorer + 'tx/' + tx + '" target="_blank">🔗</a>');
 
                                       } else {
                                         $("#deployNote").html('Deployment cancelled. Click Check again before deploying');
