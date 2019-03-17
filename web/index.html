@@ -161,7 +161,12 @@
         </div>
         <div class="row">
           <div class="col-sm-3 text-right">&nbsp</div>
-          <div class="col-sm-3"><button type="submit" class="btn btn-default">Check</button></div>
+          <div class="col-sm-3"><button type="submit" class="btn btn-default" name="check" id="check">Check</button></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3 text-right">&nbsp</div>
+          <div class="col-sm-3"><button type="submit" class="btn btn-default" name="deploy" id="deploy" disabled>Deploy</button></div>
+          <span class="help-block" id="deployNote"></span>
         </div>
       </form>
 
@@ -203,6 +208,8 @@ var symbolNote = "Normally a short uppercase character string like 'BEANIE'. Max
 var nameNote = "Normally a mixed case character string like 'Beanie Things'. Max length " + nameMaxLength;
 var decimalsNote = "A number between 0 and " + decimalsMax + ", inclusive";
 var totalSupplyNote = "A number greater than 0 and less than or equals to " + totalSupplyMax;
+
+var txSent = false;
 
 window.addEventListener('load', async () => {
 
@@ -311,6 +318,11 @@ window.addEventListener('load', async () => {
   }
   $("#totalSupply").val(totalSupply);
 
+  if (inputFilled && !inputError) {
+    $("#deploy").prop("disabled", false);
+  } else {
+    $("#deploy").prop("disabled", true);
+  }
   // $("#symbolDiv").addClass("has-error");
   // $("#symbolText").html("OK");
 
@@ -400,6 +412,36 @@ window.addEventListener('load', async () => {
                         if (!error) {
                           var balance = new BigNumber(result).shift(-18);
                           $("#accountbalance").html(balance.toString() + " ethers");
+
+                          if (parametersContainKey("deploy")) {
+                            if (!txSent) {
+                              $("#deployNote").html('Deploying ...');
+                              var factory = web3.eth.contract(factoryAbi).at(factoryAddress);
+                              var gas = 1200000;
+                              var data = "0x123456";
+                              factory.minimumFee(function(error, minimumFee) {
+                                if (!error) {
+                                  $("#deployNote").html('Minimum fee ' + minimumFee);
+                                  if (balance > minimumFee) {
+                                    factory.deployTokenContract(symbolText, nameText, decimals, totalSupply.shift(decimals).toString(), {from: address, gas: gas, value: minimumFee}, function(error, tx) {
+                                      if (!error) {
+                                        $("#deployNote").html('Deploying ...' + JSON.stringify(tx));
+                                      } else {
+                                        $("#deployNote").html('Deployment cancelled. Click Check again before deploying');
+                                        $("#deploy").prop("disabled", true);
+                                      }
+                                    });
+                                  } else {
+                                    $("#deployNote").html('Insufficient funds in your account to pay the minimum fee of ' + minimumFee.shift(-18) + " ethers");
+                                  }
+                                } else {
+                                  $("#deployNote").html('Error retrieving minimum fee');
+                                }
+                              });
+                              txSent = true;
+                            }
+                          }
+
                         } else {
                           $("#accountbalance").html("ERROR " + error);
                         }
@@ -409,7 +451,6 @@ window.addEventListener('load', async () => {
                       $("#account").html('ERROR ' + error);
                     }
                   });
-
                 } else {
                   $("#network").html("Error " + error);
                 }
