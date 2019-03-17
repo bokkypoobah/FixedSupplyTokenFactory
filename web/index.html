@@ -200,6 +200,19 @@
 
 <script type="text/javascript">
 
+// network id => settings
+// var networks = {"a": {"b": "c"}};
+
+var networks = {
+  "-1" : { "network": "(unknown)", "explorer": "(unknown)", "faucets": "(unknown)" },
+  "1"  : { "network": "Ethereum Mainnet", "explorer": "https://etherscan.io/", "faucets": "No faucets on Mainnet" },
+  "2"  : { "network": "Morden Testnet (deprecated)", "explorer": "https://morden.etherscan.io/", "faucets": "(deprecated)" },
+  "3"  : { "network": "Ropsten Testnet", "explorer": "https://ropsten.etherscan.io/", "faucets": "<a href=\"https://faucet.metamask.io/\" target=\"_blank\">https://faucet.metamask.io/</a> or <a href=\"https://twitter.com/BokkyPooBah/status/1099498823699714048\" target=\"_blank\">https://twitter.com/BokkyPooBah/status/1099498823699714048</a>" },
+  "4"  : { "network": "Rinkeby Testnet", "explorer": "https://rinkeby.etherscan.io/", "faucets": "<a href=\"https://faucet.metamask.io/\" target=\"_blank\">https://faucet.metamask.io/</a> or <a href=\"https://faucet.rinkeby.io/\" target=\"_blank\">https://faucet.rinkeby.io/</a>" },
+  "42" : { "network": "Kovan Testnet", "explorer": "https://kovan.etherscan.io/", "faucets": "<a href=\"https://faucet.kovan.network/\" target=\"_blank\">https://faucet.kovan.network/</a> or <a href=\"https://github.com/kovan-testnet/faucet\" target=\"_blank\">https://github.com/kovan-testnet/faucet</a>" },
+  "5"  : { "network": "Görli Testnet", "explorer": "https://goerli.etherscan.io/", "faucets": "<a href=\"https://faucet.goerli.mudit.blog/\" target=\"_blank\">https://faucet.goerli.mudit.blog/</a> or <a href=\"https://goerli-faucet.slock.it/\" target=\"_blank\">https://goerli-faucet.slock.it/</a>" },
+};
+
 var factoryAddress = "0xA550114ee3688601006b8b9f25e64732eF774934";
 var factoryAbi = [{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"symbol","type":"string"},{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"decimals","type":"uint8"},{"indexed":false,"name":"totalSupply","type":"uint256"}],"name":"TokenDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
 
@@ -354,48 +367,18 @@ window.addEventListener('load', async () => {
               // Görli     | https://goerli.etherscan.io/  | https://faucet.goerli.mudit.blog/<br />https://goerli-faucet.slock.it/<br />https://bridge.goerli.com/
               web3.version.getNetwork((error, netId) => {
                 if (!error) {
-                  var etherScanUrl;
-                  switch (netId) {
-                    case "1":
-                      $("#network").html('ETHEREUM Mainnet');
-                      $("#faucets").html('No faucets on Mainnet');
-                      etherScanUrl = "https://etherscan.io/";
-                      break
-                    case "2":
-                      $("#network").html('Morden (deprecated)');
-                      $("#faucets").html('No faucets on Morden');
-                      etherScanUrl = "error#";
-                      break
-                    case "3":
-                      $("#network").html('Ropsten');
-                      $("#faucets").html('<a href="https://faucet.metamask.io/" target="_blank">https://faucet.metamask.io/</a> or <a href="https://twitter.com/BokkyPooBah/status/1099498823699714048" target="_blank">https://twitter.com/BokkyPooBah/status/1099498823699714048</a>');
-                      etherScanUrl = "https://ropsten.etherscan.io/";
-                      break
-                    case "4":
-                      $("#network").html('Rinkeby');
-                      $("#faucets").html('<a href="https://faucet.metamask.io/" target="_blank">https://faucet.metamask.io/</a> or <a href="https://faucet.rinkeby.io/" target="_blank">https://faucet.rinkeby.io/</a>');
-                      etherScanUrl = "https://rinkeby.etherscan.io/";
-                      break
-                    case "42":
-                      $("#network").html('Kovan');
-                      $("#faucets").html('<a href="https://faucet.kovan.network/" target="_blank">https://faucet.kovan.network/</a> or <a href="https://github.com/kovan-testnet/faucet" target="_blank">https://github.com/kovan-testnet/faucet</a>');
-                      etherScanUrl = "https://kovan.etherscan.io/";
-                      break
-                    case "5":
-                      $("#network").html('Görli');
-                      $("#faucets").html('<a href="https://faucet.goerli.mudit.blog/" target="_blank">https://faucet.goerli.mudit.blog/</a> or <a href="https://goerli-faucet.slock.it/" target="_blank">https://goerli-faucet.slock.it/</a>');
-                      etherScanUrl = "https://goerli.etherscan.io/";
-                      break
-                    default:
-                      $("#network").html('Unknown network id ' + netId);
-                      etherScanUrl = "error#";
+                  var network = networks[netId];
+                  if (network == null) {
+                    network = networks[-1];
                   }
+                  $("#network").html(network.network);
+                  $("#faucets").html(network.faucets);
 
-                  $("#factoryAddress").html('<a href="'+ etherScanUrl + 'address/' + factoryAddress + '#code" target="_blank">' + factoryAddress + '</a>');
+                  $("#factoryAddress").html('<a href="'+ network.explorer + 'address/' + factoryAddress + '#code" target="_blank">' + factoryAddress + '</a>');
 
                   web3.eth.getBlockNumber((error1, blockNumber) => {
                     if (!error1) {
-                      $("#blockNumber").html('<a href="'+ etherScanUrl + 'block/' + blockNumber + '" target="_blank">' + blockNumber + '</a>');
+                      $("#blockNumber").html('<a href="'+ network.explorer + 'block/' + blockNumber + '" target="_blank">' + blockNumber + '</a>');
                       web3.eth.getBlock(blockNumber, (error2, block) => {
                         if (!error2) {
                           $("#blockTime").html(new Date(block.timestamp * 1000).toUTCString());
@@ -411,7 +394,7 @@ window.addEventListener('load', async () => {
                   web3.eth.getAccounts((error, account) => {
                     if (!error) {
                       address = account[0];
-                      $("#account").html('<a href="' + etherScanUrl + 'address/' + account[0] + '#code" target="_blank">' + account[0] + '</a>');
+                      $("#account").html('<a href="' + network.explorer + 'address/' + account[0] + '#code" target="_blank">' + account[0] + '</a>');
                       web3.eth.getBalance(address, function (error, result) {
                         if (!error) {
                           var balance = new BigNumber(result);
@@ -429,7 +412,7 @@ window.addEventListener('load', async () => {
                                   if (balance > minimumFee) {
                                     factory.deployTokenContract(symbolText, nameText, decimals, totalSupply.shift(decimals).toString(), {from: address, gas: gas, value: minimumFee}, function(error, tx) {
                                       if (!error) {
-                                        $("#deployNote").html('Deployed <a href="'+ etherScanUrl + 'tx/' + tx + '" target="_blank">' + tx + '</a>');
+                                        $("#deployNote").html('Deployed <a href="' + network.explorer + 'tx/' + tx + '" target="_blank">' + tx + '</a>');
 
                                       } else {
                                         $("#deployNote").html('Deployment cancelled. Click Check again before deploying');
@@ -599,6 +582,9 @@ window.addEventListener('load', async () => {
     // var blockNumber = web3.eth.blockNumber;
     // console.log("blockNumber: " + blockNumber)
 // });
+function processInput(i) {
+  return ":" + i + ":" + i + ":";
+}
 </script>
   </body>
 </html>
