@@ -1,12 +1,12 @@
 pragma solidity ^0.5.4;
 
 // ----------------------------------------------------------------------------
-// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.10
+// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.20-pre-release
 //
 // A factory to conveniently deploy your own source code verified fixed supply
 // token contracts
 //
-// Factory deployment address: 0xA550114ee3688601006b8b9f25e64732eF774934
+// Factory deployment address: 0x{something}
 //
 // https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
@@ -33,6 +33,7 @@ library SafeMath {
 // Owned contract, with token recovery
 // ----------------------------------------------------------------------------
 contract Owned {
+    bool initialised;
     address payable public owner;
     address public newOwner;
 
@@ -44,8 +45,9 @@ contract Owned {
     }
 
     function init(address _owner) public {
-        require(owner == address(0));
+        require(!initialised);
         owner = address(uint160(_owner));
+        initialised = true;
     }
     function transferOwnership(address _newOwner) public onlyOwner {
         newOwner = _newOwner;
