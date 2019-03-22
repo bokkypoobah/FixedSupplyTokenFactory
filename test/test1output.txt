@@ -21,9 +21,9 @@ TEST3RESULTS=test3results.txt
 TEST4OUTPUT=test4output.txt
 TEST4RESULTS=test4results.txt
 
-CURRENTTIME = '1552525946' 'Thu Mar 14 12:12:26 2019'
-START_DATE  = '1552525991' 'Thu Mar 14 12:13:11 2019'
-END_DATE    = '1552526066' 'Thu Mar 14 12:14:26 2019'
+CURRENTTIME = '1553230865' 'Fri Mar 22 16:01:05 2019'
+START_DATE  = '1553230910' 'Fri Mar 22 16:01:50 2019'
+END_DATE    = '1553230985' 'Fri Mar 22 16:03:05 2019'
 --- Differences ../contracts//*.sol *.sol ---
 
 solc, the solidity compiler commandline interface
@@ -32,7 +32,7 @@ Welcome to the Geth JavaScript console!
 
 instance: Geth/v1.8.23-stable-c9427004/darwin-amd64/go1.11.5
 coinbase: 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e
-at block: 8729 (Thu, 14 Mar 2019 12:12:27 AEDT)
+at block: 5514 (Fri, 22 Mar 2019 16:01:05 AEDT)
  datadir: /Users/bok/Projects/FixedSupplyTokenFactory/test/testchain
  modules: admin:1.0 clique:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 shh:1.0 txpool:1.0 web3:1.0
 
@@ -121,222 +121,18 @@ undefined
 ... 
 undefined
 > 
-DATA: var tokenFactoryAddress="0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a";
-DATA: var tokenFactoryAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_owner","type":"address"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"symbol","type":"string"},{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"decimals","type":"uint8"},{"indexed":false,"name":"totalSupply","type":"uint256"}],"name":"TokenDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
+DATA: var tokenFactoryAddress="0x12322cf0575d3ce515765d134d7dd9d2725530ae";
+DATA: var tokenFactoryAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_minimumFee","type":"uint256"}],"name":"setMinimumFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"minimumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numberOfChildren","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"children","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"newAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"totalSupply","type":"uint256"}],"name":"deployTokenContract","outputs":[{"name":"token","type":"address"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newAddress","type":"address"}],"name":"deprecateFactory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isChild","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_newAddress","type":"address"}],"name":"FactoryDeprecated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldFee","type":"uint256"},{"indexed":false,"name":"newFee","type":"uint256"}],"name":"MinimumFeeUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"token","type":"address"},{"indexed":false,"name":"symbol","type":"string"},{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"decimals","type":"uint8"},{"indexed":false,"name":"totalSupply","type":"uint256"}],"name":"TokenDeployed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"}];
 DATA: var tokenFactory=eth.contract(tokenFactoryAbi).at(tokenFactoryAddress);
-RESULT: factoryContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
-undefined
-> 
-RESULT: tokenContract=#0 []
-undefined
-> 
-undefined
-> 
-{
-  abi: [{
-      constant: false,
-      inputs: [{...}, {...}],
-      name: "recoverTokens",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      constant: true,
-      inputs: [],
-      name: "name",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [{...}, {...}],
-      name: "approve",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      constant: true,
-      inputs: [],
-      name: "totalSupply",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [{...}],
-      name: "init",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [{...}, {...}, {...}],
-      name: "transferFrom",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      constant: true,
-      inputs: [],
-      name: "decimals",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-  }, {
-      constant: true,
-      inputs: [{...}],
-      name: "balanceOf",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [],
-      name: "acceptOwnership",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      constant: true,
-      inputs: [],
-      name: "owner",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-  }, {
-      constant: true,
-      inputs: [],
-      name: "symbol",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [{...}, {...}, {...}, {...}, {...}],
-      name: "init",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [{...}, {...}],
-      name: "transfer",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [{...}, {...}, {...}],
-      name: "approveAndCall",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      constant: true,
-      inputs: [],
-      name: "newOwner",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-  }, {
-      constant: true,
-      inputs: [{...}, {...}],
-      name: "allowance",
-      outputs: [{...}],
-      payable: false,
-      stateMutability: "view",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [{...}],
-      name: "transferOwnership",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function"
-  }, {
-      payable: true,
-      stateMutability: "payable",
-      type: "fallback"
-  }, {
-      anonymous: false,
-      inputs: [{...}, {...}],
-      name: "OwnershipTransferred",
-      type: "event"
-  }, {
-      anonymous: false,
-      inputs: [{...}, {...}, {...}],
-      name: "Transfer",
-      type: "event"
-  }, {
-      anonymous: false,
-      inputs: [{...}, {...}, {...}],
-      name: "Approval",
-      type: "event"
-  }],
-  address: undefined,
-  transactionHash: null,
-  Approval: function(),
-  OwnershipTransferred: function(),
-  Transfer: function(),
-  acceptOwnership: function(),
-  allEvents: function(),
-  allowance: function(),
-  approve: function(),
-  approveAndCall: function(),
-  balanceOf: function(),
-  decimals: function(),
-  init: function(),
-  name: function(),
-  newOwner: function(),
-  owner: function(),
-  recoverTokens: function(),
-  symbol: function(),
-  totalSupply: function(),
-  transfer: function(),
-  transferFrom: function(),
-  transferOwnership: function()
-}
-> 
-Error: new BigNumber() not a base 16 number: 
-    at L (bignumber.js:3:2876)
-    at bignumber.js:3:8435
-    at a (bignumber.js:3:389)
-    at web3.js:1110:23
-    at web3.js:1634:20
-    at web3.js:826:16
-    at map (<native code>)
-    at web3.js:825:12
-    at web3.js:4080:18
-
-> 
-undefined
-> 
-> 
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.010080725000000000           0.000000000000000000 Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.010080725000000000           0.000000000000000000 Deployer
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.010087910000000000           0.000000000000000000 Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.010087910000000000           0.000000000000000000 Deployer
 RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.000000000000000000 User1
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
 RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
 RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 User4
-RESULT:  6 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000           0.000000000000000000 TokenFactory
+RESULT:  6 0x12322cf0575d3ce515765d134d7dd9d2725530ae        0.000000000000000000           0.000000000000000000 TokenFactory
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 RESULT:                                                                                     0.000000000000000000 Total Token Balances
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
@@ -346,24 +142,18 @@ undefined
 RESULT: PASS Deploy Group #1 - TokenFactory - TokenFactory
 1
 > 
-RESULT: tokenFactoryTx status=0x1 Success gas=4000000 gasUsed=2016145 costETH=0.010080725 costUSD=1.37007133475 @ ETH/USD=135.91 gasPrice=5 gwei block=8735 txIx=0 txId=0xa408ef14f8527ee47af97a0fe2823f7c3c3181f474e87014d810d4a882d3f905 @ 1552525953 Thu, 14 Mar 2019 01:12:33 UTC
+RESULT: tokenFactoryTx status=0x1 Success gas=4000000 gasUsed=2017582 costETH=0.01008791 costUSD=1.3710478481 @ ETH/USD=135.91 gasPrice=5 gwei block=5520 txIx=0 txId=0x3dc5fbe352feafe5f27c97b007ad95b3a313a0605cbda7140d4a19cf1f2156c4 @ 1553230871 Fri, 22 Mar 2019 05:01:11 UTC
 undefined
 > 
 RESULT: 
 undefined
 > 
-RESULT: factoryContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
+RESULT: factoryContractAddress=0x12322cf0575d3ce515765d134d7dd9d2725530ae
 RESULT: factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 RESULT: factory.newOwner=0x0000000000000000000000000000000000000000
 RESULT: factory.minimumFee=0.1 ETH
 RESULT: factory.newAddress=0x0000000000000000000000000000000000000000
 RESULT: factory.numberOfChildren=0
-undefined
-> 
-RESULT: 
-undefined
-> 
-RESULT: tokenContractAddress=undefined
 undefined
 > 
 RESULT: 
@@ -395,14 +185,14 @@ undefined
 ... 
 undefined
 > 
-RESULT: factoryContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
-RESULT: get TokenDeployed 0 #8737 {"decimals":"18","name":"Test","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","token":"0x161447c0b19ee70f1f7163a2a39023a284170a0f","totalSupply":"1e+27"}
+RESULT: factoryContractAddress=0x12322cf0575d3ce515765d134d7dd9d2725530ae
+RESULT: get TokenDeployed 0 #5522 {"decimals":"18","name":"Test","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","token":"0x33efe995b51d3e318f5038e978415e740cff4772","totalSupply":"1e+27"}
 undefined
 > 
-RESULT: tokenContract=#1 ["0x161447c0b19ee70f1f7163a2a39023a284170a0f"]
+RESULT: tokenContract=#1 ["0x33efe995b51d3e318f5038e978415e740cff4772"]
 undefined
 > 
-"0x161447c0b19ee70f1f7163a2a39023a284170a0f"
+"0x33efe995b51d3e318f5038e978415e740cff4772"
 > 
 {
   abi: [{
@@ -436,14 +226,6 @@ undefined
       outputs: [{...}],
       payable: false,
       stateMutability: "view",
-      type: "function"
-  }, {
-      constant: false,
-      inputs: [{...}],
-      name: "init",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
       type: "function"
   }, {
       constant: false,
@@ -561,7 +343,7 @@ undefined
       name: "Approval",
       type: "event"
   }],
-  address: "0x161447c0b19ee70f1f7163a2a39023a284170a0f",
+  address: "0x33efe995b51d3e318f5038e978415e740cff4772",
   transactionHash: null,
   Approval: function(),
   OwnershipTransferred: function(),
@@ -589,17 +371,26 @@ undefined
 > 
 undefined
 > 
+DATA: var tokenAddress="0x33efe995b51d3e318f5038e978415e740cff4772";
+undefined
+> 
+DATA: var tokenAbi=[{"constant":false,"inputs":[{"name":"token","type":"address"},{"name":"tokens","type":"uint256"}],"name":"recoverTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"symbol","type":"string"},{"name":"name","type":"string"},{"name":"decimals","type":"uint8"},{"name":"fixedSupply","type":"uint256"}],"name":"init","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}];
+undefined
+> 
+DATA: var token=eth.contract(tokenAbi).at(tokenAddress);
+undefined
+> 
 > 
 RESULT:  # Account                                             EtherBalanceChange                          Token Name
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
-RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.015436345000000000           0.000000000000000000 Miner
-RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        9.989919275000000000           0.000000000000000000 Deployer
-RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976      -10.005355620000000000  1000000000.000000000000000000 User1
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.015444360000000000           0.000000000000000000 Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        9.989912080000000000           0.000000000000000000 Deployer
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976      -10.005356440000000000  1000000000.000000000000000000 User1
 RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.000000000000000000 User2
 RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
 RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 User4
-RESULT:  6 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000           0.000000000000000000 TokenFactory
-RESULT:  7 0x161447c0b19ee70f1f7163a2a39023a284170a0f        0.000000000000000000           0.000000000000000000 Token 'TEST' 'Test'
+RESULT:  6 0x12322cf0575d3ce515765d134d7dd9d2725530ae        0.000000000000000000           0.000000000000000000 TokenFactory
+RESULT:  7 0x33efe995b51d3e318f5038e978415e740cff4772        0.000000000000000000           0.000000000000000000 Token 'TEST' 'Test'
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
 RESULT:                                                                            1000000000.000000000000000000 Total Token Balances
 RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
@@ -609,34 +400,117 @@ undefined
 RESULT: PASS Deploy Group #1 - Deploy Second Token - Token
 1
 > 
-RESULT: deployToken_1Tx status=0x1 Success gas=2000000 gasUsed=1071124 costETH=0.00535562 costUSD=0.7278823142 @ ETH/USD=135.91 gasPrice=5 gwei block=8737 txIx=0 txId=0xa6e964f4441d78926919e61ab7b7898e138ee545e859f11cea7c383b929b313b @ 1552525955 Thu, 14 Mar 2019 01:12:35 UTC
+RESULT: deployToken_1Tx status=0x1 Success gas=2000000 gasUsed=1071290 costETH=0.00535645 costUSD=0.7279951195 @ ETH/USD=135.91 gasPrice=5 gwei block=5522 txIx=0 txId=0xf663dc003fe8da3ec3ef3f25c9aa9d8da0fed22b178b4f9f4139d08c8ffa1716 @ 1553230873 Fri, 22 Mar 2019 05:01:13 UTC
 undefined
 > 
 RESULT: 
 undefined
 > 
-RESULT: factoryContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
+RESULT: factoryContractAddress=0x12322cf0575d3ce515765d134d7dd9d2725530ae
 RESULT: factory.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 RESULT: factory.newOwner=0x0000000000000000000000000000000000000000
 RESULT: factory.minimumFee=0.1 ETH
 RESULT: factory.newAddress=0x0000000000000000000000000000000000000000
 RESULT: factory.numberOfChildren=1
-RESULT: factory.children(0)=0x161447c0b19ee70f1f7163a2a39023a284170a0f
-RESULT: TokenDeployed 0 #8737 {"decimals":"18","name":"Test","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","token":"0x161447c0b19ee70f1f7163a2a39023a284170a0f","totalSupply":"1e+27"}
+RESULT: factory.children(0)=0x33efe995b51d3e318f5038e978415e740cff4772
+RESULT: TokenDeployed 0 #5522 {"decimals":"18","name":"Test","owner":"0xa11aae29840fbb5c86e6fd4cf809eba183aef433","symbol":"TEST","token":"0x33efe995b51d3e318f5038e978415e740cff4772","totalSupply":"1e+27"}
 undefined
 > 
 RESULT: 
 undefined
 > 
-RESULT: tokenContractAddress=Token 'TEST' 'Test':0x1614
+RESULT: tokenContractAddress=Token 'TEST' 'Test':0x33ef
 RESULT: token.owner/new=User1:0xa22a/Null:0x0000
 RESULT: token.details='TEST' 'Test' 18 dp
 RESULT: token.totalSupply=1000000000
-RESULT: token.Transfer 0 #8737 from=Null:0x0000 to=User1:0xa22a tokens=1000000000
+RESULT: token.Transfer 0 #5522 from=Null:0x0000 to=User1:0xa22a tokens=1000000000
 undefined
 > 
 RESULT: 
 undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: ---------- Test second init ----------
+undefined
+> 
+undefined
+> 
+RESULT: user2: 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0
+undefined
+> 
+RESULT: symbol: TEST2
+undefined
+> 
+RESULT: name: Test 2
+undefined
+> 
+RESULT: decimals: 18
+undefined
+> 
+RESULT: totalSupply: 1.000000001e+27
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                          Token Name
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e        0.015577440000000000           0.000000000000000000 Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        9.989912080000000000           0.000000000000000000 Deployer
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976      -10.005356440000000000  1000000000.000000000000000000 User1
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0       -0.000133080000000000           0.000000000000000000 User2
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.000000000000000000 User3
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.000000000000000000 User4
+RESULT:  6 0x12322cf0575d3ce515765d134d7dd9d2725530ae        0.000000000000000000           0.000000000000000000 TokenFactory
+RESULT:  7 0x33efe995b51d3e318f5038e978415e740cff4772        0.000000000000000000           0.000000000000000000 Token 'TEST' 'Test'
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT:                                                                            1000000000.000000000000000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- ------------------------------ ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Test second init - expecting init() to fail
+1
+> 
+RESULT: testSecondInit_1Tx status=0x0 Failure gas=2000000 gasUsed=26616 costETH=0.00013308 costUSD=0.0180869028 @ ETH/USD=135.91 gasPrice=5 gwei block=5525 txIx=0 txId=0xebcb39c0a0f1ae4f860a5600530855c8964cbc776fa696077bf6ff4474bf5dab @ 1553230876 Fri, 22 Mar 2019 05:01:16 UTC
+undefined
+> 
+RESULT: 
+undefined
+> 
+RESULT: tokenContractAddress=Token 'TEST' 'Test':0x33ef
+RESULT: token.owner/new=User1:0xa22a/Null:0x0000
+RESULT: token.details='TEST' 'Test' 18 dp
+RESULT: token.totalSupply=1000000000
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
 > 
 > 
 > 

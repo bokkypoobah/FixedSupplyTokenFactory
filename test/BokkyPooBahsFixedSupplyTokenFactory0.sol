@@ -1,12 +1,12 @@
 pragma solidity ^0.5.4;
 
 // ----------------------------------------------------------------------------
-// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.20-pre-release
+// BokkyPooBah's Fixed Supply Token 👊 + Factory v1.20
 //
 // A factory to conveniently deploy your own source code verified fixed supply
 // token contracts
 //
-// Factory deployment address: 0x{something}
+// Factory deployment address:
 //
 // https://github.com/bokkypoobah/FixedSupplyTokenFactory
 //
@@ -44,7 +44,7 @@ contract Owned {
         _;
     }
 
-    function init(address _owner) internal {
+    function init(address _owner) public {
         require(!initialised);
         owner = address(uint160(_owner));
         initialised = true;
@@ -193,6 +193,7 @@ contract FixedSupplyToken is TokenInterface, Owned {
 //   name           name
 //   decimals       number of decimal places for the token contract
 //   totalSupply    the fixed token total supply
+//   uiFeeAccount   address for fee sharing
 //
 // For example, deploying a FixedSupplyToken contract with a `totalSupply`
 // of 1,000.000000000000000000 tokens:
@@ -200,6 +201,7 @@ contract FixedSupplyToken is TokenInterface, Owned {
 //   name           "My Token"
 //   decimals       18
 //   initialSupply  10000000000000000000000 = 1,000.000000000000000000 tokens
+//   uiFeeAccount   0x{UI fee account}
 //
 // The TokenDeployed() event is logged with the following parameters:
 //   owner          the account that execute this transaction
@@ -208,6 +210,7 @@ contract FixedSupplyToken is TokenInterface, Owned {
 //   name           name
 //   decimals       number of decimal places for the token contract
 //   totalSupply    the fixed token total supply
+//   uiFeeAccount   the UI fee account
 // ----------------------------------------------------------------------------
 contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
     using SafeMath for uint;
@@ -219,7 +222,7 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
 
     event FactoryDeprecated(address _newAddress);
     event MinimumFeeUpdated(uint oldFee, uint newFee);
-    event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply);
+    event TokenDeployed(address indexed owner, address indexed token, string symbol, string name, uint8 decimals, uint totalSupply, address uiFeeAccount);
 
     constructor () public {
         super.init(msg.sender);
@@ -236,7 +239,7 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
         emit MinimumFeeUpdated(minimumFee, _minimumFee);
         minimumFee = _minimumFee;
     }
-    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply) public payable returns (FixedSupplyToken token) {
+    function deployTokenContract(string memory symbol, string memory name, uint8 decimals, uint totalSupply, address payable uiFeeAccount) public payable returns (FixedSupplyToken token) {
         require(msg.value >= minimumFee);
         require(decimals <= 27);
         require(totalSupply > 0);
@@ -244,9 +247,14 @@ contract BokkyPooBahsFixedSupplyTokenFactory is Owned {
         token.init(msg.sender, symbol, name, decimals, totalSupply);
         isChild[address(token)] = true;
         children.push(address(token));
-        emit TokenDeployed(owner, address(token), symbol, name, decimals, totalSupply);
+        emit TokenDeployed(owner, address(token), symbol, name, decimals, totalSupply, uiFeeAccount);
         if (msg.value > 0) {
-            owner.transfer(msg.value);
+            if (uiFeeAccount == address(0) || uiFeeAccount == owner) {
+                owner.transfer(msg.value);
+            } else {
+                uiFeeAccount.transfer(msg.value / 2);
+                owner.transfer(msg.value - msg.value / 2);
+            }
         }
     }
     function () external payable {

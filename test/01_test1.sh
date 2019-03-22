@@ -94,20 +94,11 @@ var tokenFactory = tokenFactoryContract.new({from: deployer, data: tokenFactoryB
 );
 while (txpool.status.pending > 0) {
 }
-var tokenContract = getTokenContractDeployed();
-console.log("RESULT: tokenContract=#" + tokenContract.length + " " + JSON.stringify(tokenContract));
-tokenAddress = tokenContract[0];
-token = web3.eth.contract(tokenAbi).at(tokenAddress);
-addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'");
-addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
-
 printBalances();
 failIfTxStatusError(tokenFactoryTx, deployGroup1Message + " - TokenFactory");
 printTxData("tokenFactoryTx", tokenFactoryTx);
 console.log("RESULT: ");
 printFactoryContractDetails();
-console.log("RESULT: ");
-printTokenContractDetails();
 console.log("RESULT: ");
 
 
@@ -117,7 +108,7 @@ var symbol = "TEST";
 var name = "Test";
 var decimals = 18;
 var totalSupply = new BigNumber("1000000000").shift(decimals);
-var feeInEthers = new BigNumber(10).shift(18);
+var feeInEthers = new BigNumber("9.99999999").shift(18);
 // -----------------------------------------------------------------------------
 console.log("RESULT: ---------- " + deployGroup2Message + " ----------");
 var deployToken_1Tx = tokenFactory.deployTokenContract(symbol, name, decimals, totalSupply, {from: user1, value: feeInEthers, gas: 2000000, gasPrice: defaultGasPrice});
@@ -129,6 +120,9 @@ tokenAddress = tokenContract[0];
 token = web3.eth.contract(tokenAbi).at(tokenAddress);
 addAccount(tokenAddress, "Token '" + token.symbol() + "' '" + token.name() + "'");
 addTokenContractAddressAndAbi(tokenAddress, tokenAbi);
+console.log("DATA: var tokenAddress=\"" + tokenAddress + "\";");
+console.log("DATA: var tokenAbi=" + JSON.stringify(tokenAbi) + ";");
+console.log("DATA: var token=eth.contract(tokenAbi).at(tokenAddress);");
 
 printBalances();
 failIfTxStatusError(deployToken_1Tx, deployGroup2Message + " - Token");
@@ -138,6 +132,36 @@ printFactoryContractDetails();
 console.log("RESULT: ");
 printTokenContractDetails();
 console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var testSecondInitMessage = "Test second init";
+var symbol = "TEST2";
+var name = "Test 2";
+var decimals = 18;
+var totalSupply = new BigNumber("1000000001").shift(decimals);
+// Simulate error by commenting out in Owned:init(...) either of the two lines:
+//   require(!initialised);
+//   initialised = true;
+// -----------------------------------------------------------------------------
+console.log("RESULT: ---------- " + testSecondInitMessage + " ----------");
+// function init(address tokenOwner, string memory symbol, string memory name, uint8 decimals, uint fixedSupply)
+console.log("RESULT: user2: " + user2);
+console.log("RESULT: symbol: " + symbol);
+console.log("RESULT: name: " + name);
+console.log("RESULT: decimals: " + decimals);
+console.log("RESULT: totalSupply: " + totalSupply.toString());
+var testSecondInit_1Tx = token.init(user2, symbol, name, decimals, totalSupply.toString(), {from: user2, value: 0, gas: 2000000, gasPrice: defaultGasPrice});
+while (txpool.status.pending > 0) {
+}
+printBalances();
+passIfTxStatusError(testSecondInit_1Tx, testSecondInitMessage + " - expecting init() to fail");
+printTxData("testSecondInit_1Tx", testSecondInit_1Tx);
+console.log("RESULT: ");
+printTokenContractDetails();
+console.log("RESULT: ");
+
+
 
 
 EOF
